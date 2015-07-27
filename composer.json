@@ -1,11 +1,12 @@
 {
-	"name": "laravel/laravel",
-	"description": "The Laravel Framework.",
-	"keywords": ["framework", "laravel"],
+	"name": "hospital register system",
+	"description": "hospital register system",
+	"keywords": ["hospital", "register"],
 	"license": "MIT",
 	"type": "project",
 	"require": {
-		"laravel/framework": "4.2.*"
+		"laravel/framework": "4.2.*",
+		"cartalyst/sentry": "2.1.*"
 	},
 	"autoload": {
 		"classmap": [
@@ -33,5 +34,14 @@
 	"config": {
 		"preferred-install": "dist"
 	},
-	"minimum-stability": "stable"
+	"minimum-stability": "stable",
+	"repositories": [
+        {
+        	"type": "composer", 
+        	"url": "https://toran.reimu.io/repo/packagist/" 
+        },
+        {
+        	"packagist": false
+        }
+    ]
 }

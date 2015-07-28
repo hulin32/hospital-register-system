@@ -21,11 +21,12 @@ class CreateDoctorsTable extends Migration {
 			$table->text( 'description' )->nullable();
 			$table->boolean( 'is_chief' )->default( false );
 			$table->boolean( 'is_consultable' )->default( true );
-			$table->integer( 'hospital_id' )->unsigned();
+			$table->integer( 'department_id' )->unsigned();
+			$table->timestamps();
 
-			$table->index( 'hospital_id' );
-			$table->foreign( 'hospital_id' )
-				  ->references( 'id' )->on( 'hospitals' )
+			$table->index( 'department_id' );
+			$table->foreign( 'department_id' )
+				  ->references( 'id' )->on( 'departments' )
 				  ->onDelete( 'cascade' )
 				  ->onUpdate( 'cascade' );
 		});

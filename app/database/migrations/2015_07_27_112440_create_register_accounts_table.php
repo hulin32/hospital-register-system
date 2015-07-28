@@ -24,9 +24,17 @@ class CreateRegisterAccountsTable extends Migration {
 			$table->string( 'id_card' );
 			$table->string( 'emergency_name' );
 			$table->string( 'emergency_phone' );
+			$table->integer( 'user_id' )->unsigned();
+			$table->timestamps();
 
 			$table->index( 'id_card' );
 			$table->index( 'phone' );
+
+			$table->index( 'user_id' );
+			$table->foreign( 'user_id' )
+				  ->references( 'id' )->on( 'users' )
+				  ->onDelete( 'cascade' )
+				  ->onUpdate( 'cascade' );
 		});
 	}
 

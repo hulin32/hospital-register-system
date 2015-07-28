@@ -21,10 +21,18 @@ class CreateRegisterRecordsTable extends Migration {
 			$table->text( 'advice' );
 			$table->date( 'return_date' );
 			$table->integer( 'doctor_id' )->unsigned();
+			$table->integer( 'account_id' )->unsigned();
+			$table->timestamps();
 
 			$table->index( 'doctor_id' );
 			$table->foreign( 'doctor_id' )
 				  ->references( 'id' )->on( 'doctors' )
+				  ->onDelete( 'cascade' )
+				  ->onUpdate( 'cascade' );
+
+			$table->index( 'account_id' );
+			$table->foreign( 'account_id' )
+				  ->references( 'id' )->on( 'register_accounts' )
 				  ->onDelete( 'cascade' )
 				  ->onUpdate( 'cascade' );
 		});
@@ -37,7 +45,7 @@ class CreateRegisterRecordsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop( '' );
+		Schema::drop( 'register_records' );
 	}
 
 }

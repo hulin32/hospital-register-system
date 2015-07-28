@@ -19,6 +19,7 @@ class CreatePeriodsTable extends Migration {
 			$table->integer( 'total')->unsigned();
 			$table->integer( 'current' )->unsigned();
 			$table->integer( 'schedule_id' )->unsigned();
+			$table->timestamps();
 
 			$table->index( 'schedule_id' );
 			$table->foreign( 'schedule_id' )

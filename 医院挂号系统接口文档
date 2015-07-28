@@ -9,6 +9,7 @@ GET
     response:
         {
             "error_code": 0,
+            "name": "海口妇幼保健院"
             "photo": "/image/1111.jpg",         // 图片链接
             "description":   ""                 // 介绍
         }

@@ -5,10 +5,14 @@
             @section('title')
             @show
         </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
         @section('css')
         <link rel="stylesheet" type="text/css" href="/dist/css/common.css" />
         <link rel="stylesheet" type="text/css" href="/dist/css/base.css" />
         @show
+        
+        <script src="/dis/js/base.js" type="text/javascript"></script>
     </head>
     
     <body>

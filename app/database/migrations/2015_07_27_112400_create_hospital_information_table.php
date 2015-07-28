@@ -18,8 +18,9 @@ class CreateHospitalInformationTable extends Migration {
 			$table->string( 'image' );
 			$table->datetime( 'time' );
 			$table->text( 'content' );
-			$table->boolean( 'is_new' )->default( false );
+			$table->boolean( 'is_new' )->default( true );
 			$table->integer( 'hospital_id' )->unsigned();
+			$table->timestamps();
 
 			$table->index( 'hospital_id' );
 			$table->foreign( 'hospital_id' )

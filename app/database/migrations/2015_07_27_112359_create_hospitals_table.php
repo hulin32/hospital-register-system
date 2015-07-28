@@ -25,6 +25,7 @@ class CreateHospitalsTable extends Migration {
 			$table->text( 'description' )->nullable();
 			$table->text( 'traffic_intro' )->nullable();
 			$table->text( 'traffic_guide' )->nullable();
+			$table->timestamps();
 
 			$table->index( 'name' );
 		});

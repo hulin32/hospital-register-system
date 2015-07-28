@@ -17,6 +17,7 @@ class CreateSchedulesTable extends Migration {
 			$table->date( 'date' );
 			$table->integer( 'period' );
 			$table->integer( 'doctor_id' )->unsigned();
+			$table->timestamps();
 
 			$table->index( 'doctor_id' );
 

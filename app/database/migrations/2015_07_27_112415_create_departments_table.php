@@ -19,6 +19,7 @@ class CreateDepartmentsTable extends Migration {
 			$table->string( 'icon' );
 			$table->text( 'description' );
 			$table->integer( 'hospital_id' )->unsigned();
+			$table->timestamps();
 
 			$table->index( 'hospital_id' );
 			$table->foreign( 'hospital_id' )

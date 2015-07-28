@@ -1,0 +1,442 @@
+
+
+// 医院介绍
+GET 
+    /hospital/introduction
+    request:
+        hospital_id: 0                          // default: 0
+        return_type: "json"                     // "json"
+    response:
+        {
+            "error_code": 0,
+            "photo": "/image/1111.jpg",         // 图片链接
+            "description":   ""                 // 介绍
+        }
+
+// 医院交通指引
+GET 
+    /hospital/traffic-guide
+    request:
+        hospital_id: 0
+        return_type: "json"
+    response:
+        {
+            "error_code": 0,
+            "longtitude": 113.1111，            // 经度
+            "latitude": 26.222,                 // 纬度
+            "traffic_intro": "",
+            "traffic_guide": "",
+            "phone":  020-11111                 // 电话
+        }
+
+// 医院资讯 - 列表
+GET 
+    /hospital/information/preview
+    request:
+        hospital_id                             // default: 0
+        page                                    // 1
+        news_per_page                           // 10
+        return_type: "json"
+    response:
+        // return type must be json
+        {
+            "error_code": 0,
+            "total": 123,
+            "news_list":
+            [
+                {
+                    "id": 0,
+                    "title": "",
+                    "image": "/image/1.jpg",
+                    "is_new": true,
+                    "time":                     // timestamp
+                },
+                {
+                    "id": 1,
+                    "title": "",
+                    "image": "",
+                    "is_new": false,
+                    "time":                     // timestamp
+                }
+            ]
+        }
+
+// 医院资讯 - 详细内容
+GET 
+    /hospital/information/detail
+    request:
+        news_id: 11
+        return_type: "json"
+    response:
+        {
+            "error_code": 0,
+            "news":
+            {
+                "title": "",                    
+                "image": "",
+                "is_new": false,                // 是否新发布
+                "time": ,                       // timestamp
+                "content":                      // 内容
+            }
+        }
+
+// 医院科室列表
+GET 
+    /hospital/department/list
+    request:
+        hospital_id: 0
+        return_type: "json"
+    response:
+        {
+            "error_code": 0,
+            "departments":
+            [
+                {
+                    "id": 0
+                    "name": "妇科",
+                    "icon": "image/icon/1.jpg"  //
+                }，
+                {
+                    "id": 1
+                    "name": "儿科",
+                    "icon": "image/icon/2.jpg"
+                }
+            ]
+        }
+
+// 医院科室详细介绍
+GET 
+    /hospital/department/detail                 //
+    request:
+        hospital_id: 0
+        department_id: 5
+        return_type: "json"
+    response:
+        {
+            "error_code": 0,
+            "title": "",
+            "photo": "",
+            "content": ""
+        }
+
+// 发送手机验证码
+GET 
+    /user/send-verification-code
+    request:
+        telephone: 13580501456
+        return_type: "json"
+    response:
+        {
+            "error_code": 0,                    // 0 - ok, 1 - 手机号码不正确
+            "message": ""
+        }
+
+// 验证手机验证码
+POST
+    /user/check-veritication-code
+    request:
+        verification_code: 123123
+    response:
+        {
+            "error_code": 0,
+            "message": ""
+        }
+
+// 用户注册
+POST 
+    /user/register
+    request:
+        account: "",
+        password: "",
+        real_name: "",
+        gender: "",                             // 0 - 男，1 - 女, 2 - 未知
+        telephone: "",
+        return_type: "json"
+    response:
+        {
+            error_code: 0,                      //
+            "message": "" 
+        }
+
+// 获取挂号记录
+GET
+    /user/record/get-records: user_id
+    request:
+        page: 11
+        records_per_page: 20
+        return_type: "json"
+    response:
+        {
+            "error_code": 0,
+            "total": 123
+            "records": 
+            [
+                {
+                    "id": 0,
+                    "time": ,
+                    "department": ,
+                    "doctor":
+                    {
+                        "name",
+                        "title"
+                    },
+                    "status": 0,                // 0 - 未就诊, 1 - 已就诊, 2 - 需复诊
+                    "advice":                   // 医嘱
+                    "return_time": 
+                }
+            ]
+        }
+
+// 取消挂号
+POST
+    /user/record/cancel: user_id
+    request:
+        record_id: 111
+        return_type: "json"
+    response:
+        {
+            "error_code": 0,
+            "message": ""
+        }
+
+// 增加复诊时间
+POST
+    /user/record/add-return-time: user_id
+    request:
+        record_id: 
+        return_type: "json"
+        time: 
+    response:
+        {
+            "error_code": 0,
+            "message"
+        }
+
+// 获取挂号账户列表
+GET
+    /user/register-account/get-accounts: user_id
+    request:
+        page: 1
+        accounts_per_page: 20
+        return_type: "json"
+    response:
+        {
+            "error_code": 0,
+            "total": 123
+            "accounts":
+            [
+                {
+                    "id": 0,
+                    "name": "hyy",
+                    "phone": 13580501456
+                },
+                {
+                    "id": 1,
+                    "name": "hyy",
+                    "phone": 13580501456
+                }
+            ]
+        }
+
+// 获取挂号账户详细信息
+GET 
+    /user/register-account/detail: user_id
+    request:
+        account_id:
+        return_type: "json"
+    response:
+        {
+            "error_code": 0,
+            "account": {
+                "name": "张雨",
+                "gender": 1,
+                "age": 27,
+                "weight": 50,
+                "blood_type": "O",
+                "type": "美眉",
+                "id_card": 1231313123131,
+                "phone": 13555555555,
+                "emergency_name": "hyy",
+                "emergency_phone": 13580501456
+            }
+        }
+
+// 修改挂号账户信息
+POST
+    /user/register-account/modify: user_id
+    request:
+        name: 
+        gender:
+        age:
+        weight:
+        blood_type:
+        type:
+        id_card:
+        emergency_name:
+        emergency_phone:
+        return_type: "json"
+    response:
+        {
+            "error_code": 0,
+            "message": ""
+        }
+
+// 添加挂号账户
+POST
+    /user/register-account/add-account: user_id
+    request:
+        name: 
+        gender:
+        age:
+        weight:
+        blood_type:
+        type:
+        id_card:
+        emergency_name:
+        emergency_phone:
+        return_type: "json"
+    response:
+        {
+            "error_code": 0,
+            "message": "",
+            "resigter_account_id": 111
+        }
+
+// 获取评论
+GET
+    /user/comment/get-comments: user_id
+    request:
+        page: 1
+        comments_per_page: 20
+    response:
+    {
+        "error_code": 0,
+        "total": 123
+        comments:
+        [
+            {
+                "doctor":
+                {
+                    "name": "",
+                    "title": "",
+                    "hospital": "",
+                    "department": ""
+                },
+                "content": ""
+            },
+            {
+                "doctor":
+                {
+                    "name": "",
+                    "title": "",
+                    "hospital": "",
+                    "department": ""
+                },
+                "content": ""
+            }
+        ]
+    }
+
+// 添加评论
+POST
+    /user/comment/add-comment: user_id
+    request:
+        doctor_id:
+        content:
+    response:
+        {
+            "error_code": 0,
+            "message": ""
+        }
+
+// 添加反馈意见
+POST
+    /user/feedback/add-feedback: user_id
+    request:
+        title:
+        content:
+    response:
+        {
+            "error_code": 0,
+            "message": ""
+        }
+
+// 获取医生信息
+GET
+    /register/get-doctors: user_id
+    request:
+        department_id:
+    response:
+        {
+            "error_code": 0,
+            "doctors":
+            [
+                {
+                    "id": 0,
+                    "name": "hyy",
+                    "title": "主任医师" 
+                },
+                {
+                    "id": 1,
+                    "name": "hyy",
+                    "title": "副主任医师" 
+                }
+            ]
+        }
+
+// 获取可预约的时间段
+GET
+    /register/get-schedule: user_id
+    request:
+        doctor_id: 
+        latest: 7
+    response:
+        {
+            "error_code": 0,
+            "schedules":
+            [
+                {
+                    "id": 0,
+                    "date": "2015-07-28",
+                    "period": 0,                // 0 - 上午, 1 - 下午, 2 - 晚上
+                    "is_full"
+                },
+                {
+                    "id": 1,
+                    "date": "2015-07-28",
+                    "period": 1,
+                    "is_full"
+                }
+            ]
+        }
+
+// 获取相应时间段的挂号信息
+GET
+    /register/get-period: user_id
+    request:
+        schedule_id
+    response:
+        {
+            "error_code": 0,
+            "periods":
+            [
+                {
+                    "start": "10:30",
+                    "end": "12:00",
+                    "total": 10,
+                    "current": 2
+                }
+            ]
+        }
+
+// 添加挂号记录
+POST
+    /register/add-record: user_id
+    request:
+        period_id
+    response:
+        {
+            "error_code": 0,
+            "message": ""
+        }
+

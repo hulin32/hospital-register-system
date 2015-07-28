@@ -1,0 +1,61 @@
+
+@import "../define.less";
+
+#base;
+
+.title{
+    position: relative;
+}
+
+.title .setting-btn{
+    display: block;
+    position: absolute;
+    height: 15px * @scale;
+    top: 0px;
+    right: 0px;
+}
+
+.setting-btn img{
+    height: 100%;
+}
+
+.user-info-wrap{
+    margin-top: 32px * @scale;
+}
+
+.head-portrait-wrap{
+    float: right;
+    width: 38%;
+    border: @border-style #adadad @border-size;
+    border-radius: 5px * @scale;
+    margin-top: 4px * @scale;
+    padding: 6px * @scale;
+}
+
+.head-portrait{
+    display: block;
+    width: 100%;
+}
+
+.info-item{
+    font-size: @font-size;
+    line-height: 28px * @scale;
+    margin-top: 12px * @scale;
+    border-bottom: @border-style #dbdbdb @border-size;
+}
+
+.info-item .key{
+    color: #787878;
+}
+
+.info-item .value{
+    color: #adadad;
+}
+
+.user-info-wrap .user-info-left{
+    float: left;
+}
+
+.user-info-wrap .user-info-bottom{
+    clear: both;
+}

@@ -1,0 +1,25 @@
+{
+    "name": "hospital_register_system",
+    "version": "0.1.0",
+    "description": "",
+    "main": "index.php",
+    "scripts": {
+        "start": "grunt"
+    },
+    "author": "hyy",
+    "license": "MIT",
+    "devDependencies": {
+        "grunt": "^0.4.5",
+        "grunt-browserify": "*",
+        "grunt-contrib-clean": "^0.6.0",
+        "grunt-contrib-connect": "*",
+        "grunt-contrib-less": "^0.11.4",
+        "grunt-contrib-uglify": "^0.6.0",
+        "grunt-contrib-watch": "^0.6.1",
+        "grunt-contrib-copy": "~0.5.0",
+        "grunt-contrib-cssmin": "~0.5.0",
+        "grunt-css-import": "~0.1.6",
+        "coffeeify": "~0.6.0",
+        "stringify": "^2.2.0"
+  }
+}

@@ -8,3 +8,7 @@ composer.lock
 Thumbs.db
 
 /app/config/database.php
+/public/dist
+/public/node_modules
+*.log
+/~*

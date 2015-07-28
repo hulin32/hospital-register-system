@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function()
+Route::group(array('prefix' => 'hospital'), function()
 {
-	return View::make('hello');
+	Route::get('introduction', 'HospitalController@introduction');
 });

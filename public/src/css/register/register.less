@@ -1,0 +1,98 @@
+
+@import "../define.less";
+
+#base;
+
+.desc-top{
+    position: relative;
+    margin-top: 15px * @scale;
+    width: 100%;
+}
+
+.desc-top div{
+    float: left;
+}
+
+.desc-top .desc-name{
+    font-size: 16px * @scale;
+    line-height: 16px * @scale;
+    vertical-align: middle;
+}
+
+.desc-top .desc-level{
+    padding: 1px;
+    font-size: 9px * @scale;
+    vertical-align: -5px;
+    margin: 7px 11px 5px;
+    color: white;
+    background-color: @green-ft;
+}
+
+.desc-wrap{
+    width: 100%;
+}
+
+.desc-wrap .desc-body{
+    width: 100%;
+    margin-top: 10px * @scale;
+    margin-bottom: 32px *@scale;
+}
+
+.desc-wrap .desc-left{
+    width: 24%;
+    float: left;
+    padding-left: 2%;
+    padding-top: 4%;
+}
+
+.desc-left .logo{
+    width: 77%;
+}
+
+.desc-wrap .desc-main{
+    width: 70%;
+    float: left;
+    font-size: 10px * @scale;
+}
+
+.desc-main p{
+    margin-bottom: 3px * @scale + 1px;
+}
+
+.desc-wrap .sub-tt{
+    font-size: 11px * @scale;
+    line-height: 1px * @scale;
+    color: #3b3b3b;
+    text-align: center;
+}
+
+.section-wrap{
+    width: 100%;
+    border: none;
+    border-top: @border-style @grey-78 @border-size;
+}
+
+.section-wrap .sec-top{
+    text-align: center;
+    font-size: 11px * @scale;
+}
+
+.section-list{
+    width: 103.41%;
+    margin-top: 60px;
+    margin-left: -3.41%;
+}
+
+.section-list .section-item{
+    float: left;
+    width: 33.33%;
+    margin-bottom: 12px * @scale;    
+}
+
+.section-item .btn{
+    width: 90%;
+    font-size: @font-size;
+    line-height: 30px * @scale;
+    display: block;
+    margin-left: 10%;
+}

@@ -1,0 +1,79 @@
+
+@import "../define.less";
+
+#base;
+
+.record-wrap{
+    margin-top: 16px * @scale;
+    padding-top: 6px * @scale;
+    padding-bottom: 21px * @scale;
+    border: @border-style #ababab @border-size;
+}
+
+.record-wrap .record-item{
+    margin-left: 2px * @scale;
+}
+
+.record-item .item-wrap{
+    display: inline-block;
+    border-bottom: @border-style #ababab @border-size;
+    line-height: @font-size;
+    height: 16px * @scale;
+    padding-top: 16px * @scale;
+}
+
+.item-wrap{
+}
+
+.item-wrap .item-key{
+    display: inline-block;
+    float: left;
+    color: #787878;
+    width: 56px * @scale;
+    text-align: justify;
+}
+
+.colon{
+    display: inline-block;
+    float: left;
+}
+
+.item-key:after{
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    content:'';
+}
+
+.item-wrap .item-value{
+    color: #3b3b3b;
+    font-size: 12px * @scale;
+    display: inline-block;
+    float: left;
+}
+
+.item-wrap .btn{
+    display: inline-block;
+    position: relative;
+    top: -6px * @scale;
+    font-size: 12px * @scale;
+    line-height: 20px * @scale;
+    min-width: 65px * @scale;
+    border-radius: 8px * @scale;
+}
+
+.cancel-wrap{
+    margin-top: 3px * @scale;
+}
+
+.cancel{
+    display: block;
+    float: right;
+    position: relative;
+    width: 21%;
+    font-size: 12px * @scale;
+    line-height: 20px * @scale;
+    color: #fa9f43;
+    border-color: #fa9f43;
+}

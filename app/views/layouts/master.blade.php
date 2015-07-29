@@ -12,7 +12,7 @@
         <link rel="stylesheet" type="text/css" href="/dist/css/base.css" />
         @show
         
-        <script src="/dis/js/base.js" type="text/javascript"></script>
+        <script src="/dist/js/base.js" type="text/javascript"></script>
     </head>
     
     <body>

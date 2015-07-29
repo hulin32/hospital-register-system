@@ -24,8 +24,8 @@ module.exports = (grunt)->
             compile:
                 options:
                     livereload: 1337
-                files: ['src/**/*.less']
-                tasks: ['less']            
+                files: ['src/**/*.less', 'src/**/*.js']
+                tasks: ['less', 'copy']            
 
         less:
             components:

@@ -28,11 +28,15 @@
     var design_width = 320;
     var max_design_scale = 1.0;
     var screen_width = window.screen.width;
+    var devicePixelRatio = window.devicePixelRatio;
 
-    if ( browser.versions.android ){
-        design_width *= 3;
-    }else if ( browser.versions.ios ){
+    design_width *= 3;
+    
+    if ( browser.versions.ios ){
+        design_width /= devicePixelRatio;
     }
+
+    alert( 'Screen width: ' + screen_width + ', devicePixelRatio: ' + devicePixelRatio );
 
     var initial_scale = screen_width / ( design_width * devicePixelRatio );
     var maximum_scale = screen_width * max_design_scale / ( design_width * devicePixelRatio );
@@ -43,5 +47,6 @@
 
     document.write( meta_screen_adjust_info );
     
-    //alert( meta_screen_adjust_info );
+    alert( meta_screen_adjust_info );
+
 })();

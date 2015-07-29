@@ -16,7 +16,7 @@ GET
 
 // 医院交通指引
 GET 
-    /hospital/traffic-guide
+    /hospital/traffic_guide
     request:
         hospital_id: 0
         return_type: "json"
@@ -122,7 +122,7 @@ GET
 
 // 发送手机验证码
 GET 
-    /user/send-verification-code
+    /user/send_verification_code
     request:
         telephone: 13580501456
         return_type: "json"
@@ -134,7 +134,7 @@ GET
 
 // 验证手机验证码
 POST
-    /user/check-verification-code
+    /user/check_verification_code
     request:
         verification_code: 123123
     response:
@@ -186,7 +186,7 @@ POST
 
 // 获取挂号记录
 GET
-    /user/record/get-records: user_id
+    /user/record/get_records: user_id
     request:
         page: 11
         records_per_page: 20
@@ -215,7 +215,7 @@ GET
 
 // 添加挂号记录
 POST
-    /user/record/add-record: user_id
+    /user/record/add_record: user_id
     request:
         period_id
     response:
@@ -238,7 +238,7 @@ POST
 
 // 增加复诊时间
 POST
-    /user/record/add-return-time: user_id
+    /user/record/add_return_time: user_id
     request:
         record_id: 
         return_type: "json"
@@ -251,7 +251,7 @@ POST
 
 // 获取挂号账户列表
 GET
-    /user/register-account/get-accounts: user_id
+    /user/register_account/get_accounts: user_id
     request:
         page: 1
         accounts_per_page: 20
@@ -277,7 +277,7 @@ GET
 
 // 获取挂号账户详细信息
 GET 
-    /user/register-account/detail: user_id
+    /user/register_account/detail: user_id
     request:
         account_id:
         return_type: "json"
@@ -300,7 +300,7 @@ GET
 
 // 修改挂号账户信息
 POST
-    /user/register-account/modify: user_id
+    /user/register_account/modify: user_id
     request:
         name: 
         gender:
@@ -320,7 +320,7 @@ POST
 
 // 添加挂号账户
 POST
-    /user/register-account/add-account: user_id
+    /user/register_account/add_account: user_id
     request:
         name: 
         gender:
@@ -341,7 +341,7 @@ POST
 
 // 获取评论
 GET
-    /user/comment/get-comments: user_id
+    /user/comment/get_comments: user_id
     request:
         page: 1
         comments_per_page: 20
@@ -376,7 +376,7 @@ GET
 
 // 添加评论
 POST
-    /user/comment/add-comment: user_id
+    /user/comment/add_comment: user_id
     request:
         doctor_id:
         content:
@@ -388,7 +388,7 @@ POST
 
 // 添加反馈意见
 POST
-    /user/feedback/add-feedback: user_id
+    /user/feedback/add_feedback: user_id
     request:
         title:
         content:
@@ -400,7 +400,7 @@ POST
 
 // 获取医生信息
 GET
-    /register/get-doctors: user_id
+    /register/get_doctors: user_id
     request:
         department_id:
     response:
@@ -423,7 +423,7 @@ GET
 
 // 获取可预约的时间段
 GET
-    /register/get-schedule: user_id
+    /register/get_schedule: user_id
     request:
         doctor_id: 
         latest: 7
@@ -449,7 +449,7 @@ GET
 
 // 获取相应时间段的挂号信息
 GET
-    /register/get-periods: user_id
+    /register/get_periods: user_id
     request:
         schedule_id
     response:

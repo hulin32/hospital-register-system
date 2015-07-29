@@ -1,11 +1,11 @@
 <?php
 
-class HospitalController extends BaseController{
+class HospitalController extends HospitalBasedController{
     
     public function introduction(){
 
-        $hospital_id = Input::get( 'hospital_id', 1 );
-        $hospital_info = Hospital::find( $hospital_id );
+        //$hospital_id = Input::get( 'hospital_id', 1 );
+        $hospital_info = Hospital::find( $this->hospital_id );
 
         if ( $hospital_info ){
             $data = array(
@@ -15,13 +15,12 @@ class HospitalController extends BaseController{
             );
         }
 
-        $return_type = Input::get( 'return_type', '' );
-
         // For json response
-        if ( $return_type == 'json' ){
+        if ( $this->return_type == 'json' ){
 
             if ( isset( $data ) ){
                 $data['error_code'] = 0;
+                $data['description'] = strip_tags( $data['description'] );
 
                 return Response::json( $data );
             }
@@ -34,6 +33,7 @@ class HospitalController extends BaseController{
                 ]);
             }
         }
+
         // For html response
         else{
             if ( isset( $data ) ){
@@ -46,7 +46,10 @@ class HospitalController extends BaseController{
 
     public function traffic_guide(){
         $hospital_id = Input::get( 'hospital_id', 1 );
-
+        $hospital_info = Hospital::find( $hospital_id );
         
+        if ( $hospital_info ){
+            $data = array();
+        }
     }
 }

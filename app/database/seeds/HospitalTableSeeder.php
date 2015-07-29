@@ -36,7 +36,9 @@ class HospitalTableSeeder extends Seeder {
                                 </p>',
             'traffic_guide' => '<p>
                                     经过解放东分院的公交车有：2路、4路、5路、8路、25路、26路。
-                                </p>'
+                                </p>',
+            'longtitude' => 113.3,
+            'latitude' => 26.6
         ));
     }
 }

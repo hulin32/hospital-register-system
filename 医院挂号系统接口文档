@@ -134,7 +134,7 @@ GET
 
 // 验证手机验证码
 POST
-    /user/check-veritication-code
+    /user/check-verification-code
     request:
         verification_code: 123123
     response:
@@ -143,7 +143,32 @@ POST
             "message": ""
         }
 
+// 用户登陆
+GET
+    /user/login
+    request:
+    response:
+        <return html>
+
+POST
+    /user/login
+    request:
+        login_arttr: 
+        password:
+    response:
+        {
+            "error_code": 0,
+            "message": ""
+        }
+
 // 用户注册
+GET 
+    /user/register
+    request:
+
+    response:
+        <return html>
+
 POST 
     /user/register
     request:
@@ -155,7 +180,7 @@ POST
         return_type: "json"
     response:
         {
-            error_code: 0,                      //
+            "error_code": 0,                      //
             "message": "" 
         }
 
@@ -186,6 +211,17 @@ GET
                     "return_time": 
                 }
             ]
+        }
+
+// 添加挂号记录
+POST
+    /user/record/add-record: user_id
+    request:
+        period_id
+    response:
+        {
+            "error_code": 0,
+            "message": ""
         }
 
 // 取消挂号
@@ -413,7 +449,7 @@ GET
 
 // 获取相应时间段的挂号信息
 GET
-    /register/get-period: user_id
+    /register/get-periods: user_id
     request:
         schedule_id
     response:
@@ -430,14 +466,5 @@ GET
             ]
         }
 
-// 添加挂号记录
-POST
-    /register/add-record: user_id
-    request:
-        period_id
-    response:
-        {
-            "error_code": 0,
-            "message": ""
-        }
+
 

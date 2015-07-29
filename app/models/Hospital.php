@@ -21,7 +21,9 @@ class Hospital extends \Eloquent {
         'specialty',
         'description',
         'traffic_intro',
-        'traffic_guide'
+        'traffic_guide',
+        'longtitude',
+        'latitude'
     );
 
     public function information(){

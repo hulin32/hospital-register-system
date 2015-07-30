@@ -82,7 +82,7 @@ php artisan config:publish cartalyst/sentry
 ```
 然后到app/config/packages/cartalyst/sentry/目录下，
 修改config.php文件中'login_attribute'字段:
-```php
+``` php
 'login_attribute' => 'phone'
 ```
 

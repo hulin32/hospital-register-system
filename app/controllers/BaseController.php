@@ -31,12 +31,12 @@ class BaseController extends Controller {
 		return !$this->error_code;
 	}
 
-	public function set_error_message( $index, $message ){
-		$this->error_messages[ $index ] = $message;
+	public function set_return_type( $return_type ){
+		$this->return_type = $return_type;
 	}
 
-	public function get_error_message( $index ){
-		return $this->error_messages[ $index ];
+	public function get_return_type(){
+		return $this->return_type;
 	}
 
 	public function set_template( $template ){
@@ -53,6 +53,14 @@ class BaseController extends Controller {
 
 	public function get_error_code( ){
 		return $this->error_code;
+	}
+
+	public function set_error_message( $index, $message ){
+		$this->error_messages[ $index ] = $message;
+	}
+
+	public function get_error_message( $index ){
+		return $this->error_messages[ $index ];
 	}
 
 	public function set_postprocess_function( $type, $func ){
@@ -109,7 +117,6 @@ class BaseController extends Controller {
 		 * 
 		 */
 		if ( $this->return_type == 'json' ){
-			$result = array( 'error_code' => $this->error_code );
 
 			$data = $this->call_preprocess_function( 'json', $data );
 
@@ -117,7 +124,10 @@ class BaseController extends Controller {
 				$data['error_code'] = $this->error_code;
 				$result = $data;
 			}else{
-				$result['message'] = $this->error_messages[ $this->error_code ];
+				$result = array(
+					'error_code' => $this->error_code,
+					'message' 	 => $this->error_messages[ $this->error_code ]
+				);
 			}
 
 			return Response::json( $this->call_postprocess_function( 'json', $result ) );
@@ -137,8 +147,6 @@ class BaseController extends Controller {
 
 		return $data;
 	}
-
-
 
 	/**
 	 * Setup the layout used by the controller.

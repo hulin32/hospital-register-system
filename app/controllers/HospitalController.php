@@ -83,6 +83,8 @@ class HospitalController extends HospitalBasedController{
                 $result['app_id'] = $app_id;
                 $result['sign_package'] = $sign_package;
             }
+
+            return $result;
         });
 
         return $this->response( $data );

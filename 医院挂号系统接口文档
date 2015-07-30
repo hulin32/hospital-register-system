@@ -34,14 +34,17 @@ GET
 GET 
     /hospital/information/preview
     request:
-        hospital_id                             // default: 0
+        hospital_id                             // default: 1
         page                                    // 1
         news_per_page                           // 10
         return_type: "json"
     response:
         // return type must be json
         {
-            "error_code": 0,
+            "error_code": 0,                          // 0 - ok
+                                                         1 - 无资讯
+                                                         2 - 页码从1开始
+                                                         3 - 页码超过最后一页
             "total": 123,
             "news_list":
             [
@@ -50,14 +53,14 @@ GET
                     "title": "",
                     "image": "/image/1.jpg",
                     "is_new": true,
-                    "time":                     // timestamp
+                    "created_at":                     // timestamp
                 },
                 {
                     "id": 1,
                     "title": "",
                     "image": "",
                     "is_new": false,
-                    "time":                     // timestamp
+                    "created_at":                     // timestamp
                 }
             ]
         }
@@ -67,6 +70,7 @@ GET
     /hospital/information/detail
     request:
         news_id: 11
+        hospital_id: 1
         return_type: "json"
     response:
         {

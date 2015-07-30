@@ -8,7 +8,7 @@ class HospitalBasedController extends BaseController {
 
     public function __construct(){
         parent::__construct();
-        $this->hospital_id = Input::get( 'hospital_id', self::$default_hospital_id );
+        $this->hospital_id = (int)Input::get( 'hospital_id', self::$default_hospital_id );
     }
 
     public function get_hospital_info(){

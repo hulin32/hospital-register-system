@@ -26,7 +26,7 @@ class HospitalController extends HospitalBasedController{
         // For html response
         $this->set_template( 'hospital.introduction' );
         
-        // Callback function to remove html tags in value of key 'description'
+        // Post process function to remove html tags in value of key 'description'
         $this->set_postprocess_function( 'json', function( $result, $is_status_ok ){
             if ( $is_status_ok ){
                 $result['description'] = strip_tags( $result['description'] );
@@ -38,15 +38,6 @@ class HospitalController extends HospitalBasedController{
     }
 
     public function traffic_guide(){
-    
-        require_once "WeixinSDK.php";
-        require_once "SaeDataStorageWrapper.php";
-
-        $app_id = Config::get('weixin.app_id');
-        $app_secret = Config::get('weixin.app_secret');
-
-        $wx = new JSSDK( $appId, $appSecret, new SaeDataStorageWrapper() );
-        $sign_package = $wx->getSignPackage();
 
         $hospital_info = $this->get_hospital_info();
 
@@ -62,10 +53,7 @@ class HospitalController extends HospitalBasedController{
             $this->set_error_code( 1 );
         }
 
-        // For html response
-        $this->set_template( 'hospital.traffic_guide' );
-
-        // Callback function:
+        // Post process function:
         //     Remove html tags in value of keys 'traffic_intro' and 'traffic_guide'
         $this->set_postprocess_function( 'json', function( $result, $is_status_ok ){
             if ( $is_status_ok ){
@@ -74,6 +62,27 @@ class HospitalController extends HospitalBasedController{
             }
 
             return $result;
+        });
+
+        // For html response
+        $this->set_template( 'hospital.traffic_guide' );
+
+        // Preprocess function:
+        //     Get weixin access token and javascript api ticket
+        $this->set_preprocess_function( 'html', function( $result, $is_status_ok ){
+            if ( $is_status_ok ){
+                require_once "WeixinSDK.php";
+                require_once "DataStorageWrapper.php";
+
+                $app_id = Config::get('weixin.app_id');
+                $app_secret = Config::get('weixin.app_secret');
+
+                $wx = new WeixinSDK( $app_id, $app_secret, new DataStorageWrapper() );
+                $sign_package = $wx->getSignPackage();
+
+                $result['app_id'] = $app_id;
+                $result['sign_package'] = $sign_package;
+            }
         });
 
         return $this->response( $data );

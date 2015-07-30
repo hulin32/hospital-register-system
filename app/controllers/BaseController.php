@@ -134,6 +134,8 @@ class BaseController extends Controller {
 
 			return View::make( $this->template, $this->call_postprocess_function( 'html', $data ) );
 		}
+
+		return $data;
 	}
 
 

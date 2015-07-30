@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('HospitalTableSeeder');
 		$this->call('HospitalInformationTableSeeder');
 		$this->call('DepartmentTableSeeder');
+		$this->call('TitleTableSeeder');
 		$this->call('DoctorTableSeeder');
 		$this->call('RegisterAccountTableSeeder');
 		$this->call('RegisterRecordTableSeeder');

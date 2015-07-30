@@ -21,89 +21,89 @@ class DoctorTableSeeder extends Seeder {
         Doctor::create(array(
             'name' => '葛菲',
             'photo' => '/images/hospital/doc_pic.png',
-            'title' => '主任医师',
             'specialty' => $common_specialty,
             'description' => $common_description,
             'is_chief' => true,
             'is_consultable' => true,
-            'department_id' => 1
+            'department_id' => 1,
+            'title_id' => 1
         ));
 
         Doctor::create(array(
             'name' => '王磊',
             'photo' => '/images/hospital/doc.png',
-            'title' => '副主任医师',
             'specialty' => $common_specialty,
             'description' => $common_description,
             'is_chief' => false,
             'is_consultable' => false,
-            'department_id' => 1
+            'department_id' => 1,
+            'title_id' => 2
         ));
 
         Doctor::create(array(
             'name' => '葛天',
             'photo' => '/images/hospital/doc_pic.png',
-            'title' => '主任医师',
             'specialty' => $common_specialty,
             'description' => $common_description,
             'is_chief' => true,
             'is_consultable' => true,
-            'department_id' => 2
+            'department_id' => 2,
+            'title_id' => 1
         ));
 
         Doctor::create(array(
             'name' => '张三',
             'photo' => '/images/hospital/doc.png',
-            'title' => '副主任医师',
             'specialty' => $common_specialty,
             'description' => $common_description,
             'is_chief' => false,
             'is_consultable' => true,
-            'department_id' => 2
+            'department_id' => 2,
+            'title_id' => 2
         ));
 
         Doctor::create(array(
             'name' => '李四',
             'photo' => '/images/hospital/doc.png',
-            'title' => '主任医师',
             'specialty' => $common_specialty,
             'description' => $common_description,
             'is_chief' => true,
             'is_consultable' => true,
-            'department_id' => 6
+            'department_id' => 6,
+            'title_id' => 1
         ));
 
         Doctor::create(array(
             'name' => '王五',
             'photo' => '/images/hospital/doc.png',
-            'title' => '副主任医师',
             'specialty' => $common_specialty,
             'description' => $common_description,
             'is_chief' => false,
             'is_consultable' => true,
-            'department_id' => 6
+            'department_id' => 6,
+            'title_id' => 2
         ));
 
         Doctor::create(array(
             'name' => '嘉丽',
             'photo' => '/images/hospital/doc_pic.png',
-            'title' => '主任医师',
             'specialty' => $common_specialty,
             'description' => $common_description,
             'is_chief' => true,
             'is_consultable' => false,
-            'department_id' => 8
+            'department_id' => 8,
+            'title_id' => 1
         ));
 
         Doctor::create(array(
             'name' => '阿登',
             'photo' => '/images/hospital/doc.png',
-            'title' => '主任医师',
             'specialty' => $common_specialty,
             'description' => $common_description,
             'is_chief' => false,
             'is_consultable' => true,
-            'department_id' => 8
+            'department_id' => 8,
+            'title_id' => 2
         ));
     }
 }

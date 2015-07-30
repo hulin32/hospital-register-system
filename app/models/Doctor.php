@@ -36,4 +36,8 @@ class Doctor extends \Eloquent {
     public function department(){
         return $this->belongsTo( 'Department' );
     }
+
+    public function title(){
+        return $this->belongsTo( 'Title' );
+    }
 }

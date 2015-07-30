@@ -203,15 +203,14 @@ GET
                             "id": 0,
                             "time": ,
                             "department": ,
+                            "status": 0,                // 0 - 未就诊, 1 - 已就诊, 2 - 需复诊
+                            "advice":                   // 医嘱
+                            "return_time": ,
                             "doctor":
                             {
                                 "name",
                                 "title"
-                            },
-                            "status": 0,                // 0 - 未就诊, 1 - 已就诊, 2 - 需复诊
-                            "advice":                   // 医嘱
-                            "return_time": 
-                            "account":
+                            }
                         }
                     ]
                 },
@@ -262,13 +261,10 @@ POST
 GET
     /user/register_account/get_accounts: user_id
     request:
-        page: 1
-        accounts_per_page: 20
         return_type: "json"
     response:
         {
             "error_code": 0,
-            "total": 123
             "accounts":
             [
                 {
@@ -337,6 +333,7 @@ POST
         weight:
         blood_type:
         type:
+        phone: 
         id_card:
         emergency_name:
         emergency_phone:
@@ -424,12 +421,18 @@ GET
                 {
                     "id": 0,
                     "name": "hyy",
-                    "title": "主任医师" 
+                    "title": "主任医师",
+                    "can_be_registered": true,
+                    "can_be_commented": true,
+                    "is_consultable": false
                 },
                 {
                     "id": 1,
                     "name": "hyy",
-                    "title": "副主任医师" 
+                    "title": "副主任医师",
+                    "can_be_register": false,
+                    "can_be_commented": true,
+                    "is_consultable": false
                 }
             ]
         }
@@ -449,7 +452,7 @@ GET
                 {
                     "id": 0,
                     "date": "2015-07-28",
-                    "period": 0,                // 0 - 上午, 1 - 下午, 2 - 晚上
+                    "period": 0,                // 0 - 上午, 1 - 下午
                     "is_full"
                 },
                 {

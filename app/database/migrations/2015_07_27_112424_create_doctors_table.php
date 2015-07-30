@@ -16,13 +16,19 @@ class CreateDoctorsTable extends Migration {
 			$table->increments( 'id' );
 			$table->string( 'name' );
 			$table->string( 'photo' );
-			$table->string( 'title' );
 			$table->string( 'specialty' )->nullable();
 			$table->text( 'description' )->nullable();
 			$table->boolean( 'is_chief' )->default( false );
 			$table->boolean( 'is_consultable' )->default( true );
+			$table->integer( 'title_id')->unsigned();
 			$table->integer( 'department_id' )->unsigned();
 			$table->timestamps();
+
+			$table->index( 'title_id' );
+			$table->foreign( 'title_id' )
+				  ->references( 'id' )->on( 'titles' )
+				  ->onDelete( 'cascade' )
+				  ->onUpdate( 'cascade' );
 
 			$table->index( 'department_id' );
 			$table->foreign( 'department_id' )

@@ -21,10 +21,10 @@
             
             wx.config( {
                 debug: false,
-                appId: '<?php echo $appId; ?>',
-                timestamp: '<?php echo $signPackage["timestamp"]; ?>',
-                nonceStr: '<?php echo $signPackage["nonce_str"]; ?>',
-                signature: '<?php echo $signPackage["signature"]; ?>',
+                appId: '{{{ $app_id }}}',
+                timestamp: '{{{ $sign_package["timestamp"] }}}',
+                nonceStr: '{{{ $sign_package["nonce_str"] }}}',
+                signature: '{{{ $sign_package["signature"] }}}',
                 jsApiList: [
                     "getLocation"
                 ]

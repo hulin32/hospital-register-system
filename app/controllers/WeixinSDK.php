@@ -1,6 +1,6 @@
 <?php
 
-class JSSDK{
+class WeixinSDK{
 
     private $appId;
     private $appSecret;
@@ -49,10 +49,10 @@ class JSSDK{
 
     private function getJsApiTicket() {
 
-        if ( $this->dataWrapper->get( "jsapi_ticket_expire_time" ) < time() ) {
-            $ticket = $this->getJsApiTicketFromWx();
-        } else {
-            $ticket = $this->dataWrapper->get( "jsapi_ticket" );
+        $ticket = $this->dataWrapper->get( 'jsapi_ticket_expire_time' );
+
+        if ( empty( $ticket ) ){
+            $ticket = $this->getJsApiTicketFromWx();s
         } 
 
         return $ticket;
@@ -68,7 +68,6 @@ class JSSDK{
         $ticket = $res->ticket;
         
         if ( $ticket ) {
-            $this->dataWrapper->set( "jsapi_ticket_expire_time", time() + 7000 );
             $this->dataWrapper->set( "jsapi_ticket", $ticket );
         }
 
@@ -76,13 +75,12 @@ class JSSDK{
     }
 
     private function getAccessToken() {
-          
-        if ( $this->dataWrapper->get( "access_token_expire_time" ) < time() ) {
+        $access_token = $this->dataWrapper->get( 'access_token' );          
+
+        if ( empty( $access_token ) ) {
             // 如果是企业号用以下URL获取access_token
             // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
             $access_token = $this->getAccessTokenFromWx();
-        } else {
-            $access_token = $this->dataWrapper->get( "access_token" );
         }
 
         return $access_token;
@@ -94,7 +92,6 @@ class JSSDK{
         $access_token = $res->access_token;
         
         if ( $access_token ) {
-            $this->dataWrapper->set( "access_token_expire_time", time() + 7000 );
             $this->dataWrapper->set( "access_token", $access_token );
         }
 

@@ -125,7 +125,6 @@ GET
     /user/send_verification_code
     request:
         telephone: 13580501456
-        return_type: "json"
     response:
         {
             "error_code": 0,                    // 0 - ok, 1 - 手机号码不正确
@@ -144,6 +143,7 @@ POST
         }
 
 // 用户登陆
+// web端用
 GET
     /user/login
     request:
@@ -153,8 +153,9 @@ GET
 POST
     /user/login
     request:
-        login_arttr: 
-        password:
+        login_arttr: <phone or account> 
+        password: "123123"
+        return_type: "json"
     response:
         {
             "error_code": 0,
@@ -162,10 +163,10 @@ POST
         }
 
 // 用户注册
+// web端用
 GET 
     /user/register
     request:
-
     response:
         <return html>
 
@@ -188,27 +189,34 @@ POST
 GET
     /user/record/get_records: user_id
     request:
-        page: 11
-        records_per_page: 20
         return_type: "json"
     response:
         {
             "error_code": 0,
-            "total": 123
-            "records": 
+            "register_account": 
             [
                 {
-                    "id": 0,
-                    "time": ,
-                    "department": ,
-                    "doctor":
-                    {
-                        "name",
-                        "title"
-                    },
-                    "status": 0,                // 0 - 未就诊, 1 - 已就诊, 2 - 需复诊
-                    "advice":                   // 医嘱
-                    "return_time": 
+                    "id": 123,
+                    "name": "fuck",
+                    "records": [
+                        {
+                            "id": 0,
+                            "time": ,
+                            "department": ,
+                            "doctor":
+                            {
+                                "name",
+                                "title"
+                            },
+                            "status": 0,                // 0 - 未就诊, 1 - 已就诊, 2 - 需复诊
+                            "advice":                   // 医嘱
+                            "return_time": 
+                            "account":
+                        }
+                    ]
+                },
+                {
+                    ..
                 }
             ]
         }
@@ -218,6 +226,7 @@ POST
     /user/record/add_record: user_id
     request:
         period_id
+        return_type: "json"
     response:
         {
             "error_code": 0,
@@ -345,6 +354,7 @@ GET
     request:
         page: 1
         comments_per_page: 20
+        return_type: json
     response:
     {
         "error_code": 0,
@@ -380,6 +390,7 @@ POST
     request:
         doctor_id:
         content:
+        return_type:
     response:
         {
             "error_code": 0,
@@ -392,6 +403,7 @@ POST
     request:
         title:
         content:
+        return_type: 
     response:
         {
             "error_code": 0,
@@ -403,6 +415,7 @@ GET
     /register/get_doctors: user_id
     request:
         department_id:
+        return_type:
     response:
         {
             "error_code": 0,
@@ -427,6 +440,7 @@ GET
     request:
         doctor_id: 
         latest: 7
+        return_type:
     response:
         {
             "error_code": 0,
@@ -452,6 +466,7 @@ GET
     /register/get_periods: user_id
     request:
         schedule_id
+        return_type: "json"
     response:
         {
             "error_code": 0,

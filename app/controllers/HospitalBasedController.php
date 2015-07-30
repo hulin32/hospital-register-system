@@ -10,4 +10,10 @@ class HospitalBasedController extends BaseController {
         parent::__construct();
         $this->hospital_id = Input::get( 'hospital_id', self::$default_hospital_id );
     }
+
+    public function get_hospital_info(){
+        $hospital_info = Hospital::find( $this->hospital_id );
+
+        return $hospital_info ? $hospital_info : Hospital::find( self::$default_hospital_id );
+    }
 }

@@ -25,7 +25,7 @@ Route::group(array('prefix' => 'hospital'), function()
 
     // 诊室模块
     Route::group(array('prefix' => 'department'), function(){
-        Route::get('list', 'DepartmentController@list');
+        Route::get('overview', 'DepartmentController@overview');
         Route::get('detail', 'DepartmentController@detail');
     });
 });

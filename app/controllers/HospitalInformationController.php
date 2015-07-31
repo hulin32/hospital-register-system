@@ -50,6 +50,6 @@ class HospitalInformationController extends HospitalBasedController{
                    ));
         }
 
-        return Response::json(array( 'error_code' => 2, 'message' => 'Not found' ));
+        return Response::json(array( 'error_code' => 1, 'message' => 'Not found' ));
     }
 }

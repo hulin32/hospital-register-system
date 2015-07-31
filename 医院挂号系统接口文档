@@ -4,47 +4,47 @@
 GET 
     /hospital/introduction
     request:
-        hospital_id: 0                          // default: 0
-        return_type: "json"                     // "json"
+        hospital_id: 1                                  // default: 1
+        return_type: "json"                             // "json"
     response:
         {
             "error_code": 0,
             "name": "海口妇幼保健院"
-            "photo": "/image/1111.jpg",         // 图片链接
-            "description":   ""                 // 介绍
+            "photo": "/image/1111.jpg",                 // 图片链接
+            "description":   ""                         // 介绍
         }
 
 // 医院交通指引
 GET 
     /hospital/traffic_guide
     request:
-        hospital_id: 0
+        hospital_id: 1
         return_type: "json"
     response:
         {
             "error_code": 0,
-            "longtitude": 113.1111，            // 经度
-            "latitude": 26.222,                 // 纬度
-            "traffic_intro": "",
+            "longtitude": 113.1111，                    // 经度
+            "latitude": 26.222,                         // 纬度
+            "traffic_intro": "",    
             "traffic_guide": "",
-            "phone":  020-11111                 // 电话
+            "phone":  020-11111                         // 电话
         }
 
 // 医院资讯 - 列表
 GET 
     /hospital/information/preview
     request:
-        hospital_id                             // default: 1
-        page                                    // 1
-        news_per_page                           // 10
+        hospital_id                                     // default: 1
+        page                                            // 1
+        news_per_page                                   // 10
         return_type: "json"
     response:
         // return type must be json
         {
-            "error_code": 0,                          // 0 - ok
-                                                         1 - 无资讯
-                                                         2 - 页码从1开始
-                                                         3 - 页码超过最后一页
+            "error_code": 0,                            // 0 - ok
+                                                           1 - 无资讯
+                                                           2 - 页码从1开始
+                                                           3 - 页码超过最后一页
             "total": 123,
             "news_list":
             [
@@ -53,14 +53,14 @@ GET
                     "title": "",
                     "image": "/image/1.jpg",
                     "is_new": true,
-                    "created_at":                     // 
+                    "created_at":                       // 
                 },
                 {
                     "id": 1,
                     "title": "",
                     "image": "",
                     "is_new": false,
-                    "created_at":                     // 
+                    "created_at":                       // 
                 }
             ]
         }
@@ -74,32 +74,34 @@ GET
         return_type: "json"
     response:
         {
-            "error_code": 0,
+            "error_code": 0,                            // 0 - ok
+                                                        // 1 - Not found
             "news":
             {
                 "title": "",                    
                 "image": "",
-                "is_new": false,                // 是否新发布
-                "created_at": ,                       // 
-                "content":                      // 内容
+                "is_new": false,                        // 是否新发布
+                "created_at": ,                         // 
+                "content":                              // 内容
             }
         }
 
 // 医院科室列表
 GET 
-    /hospital/department/list
+    /hospital/department/overview
     request:
-        hospital_id: 0
+        hospital_id: 1
         return_type: "json"
     response:
         {
-            "error_code": 0,
+            "error_code": 0,                            // 0 - ok
+                                                        // 1 - Not found
             "departments":
             [
                 {
                     "id": 0
                     "name": "妇科",
-                    "icon": "image/icon/1.jpg"  //
+                    "icon": "image/icon/1.jpg"  
                 }，
                 {
                     "id": 1
@@ -111,9 +113,9 @@ GET
 
 // 医院科室详细介绍
 GET 
-    /hospital/department/detail                 //
+    /hospital/department/detail                 
     request:
-        hospital_id: 0
+        hospital_id: 1
         department_id: 5
         return_type: "json"
     response:
@@ -258,7 +260,7 @@ POST
     response:
         {
             "error_code": 0,
-            "message"
+            "message": ""
         }
 
 // 获取挂号账户列表
@@ -457,13 +459,13 @@ GET
                     "id": 0,
                     "date": "2015-07-28",
                     "period": 0,                // 0 - 上午, 1 - 下午
-                    "is_full"
+                    "is_full": false
                 },
                 {
                     "id": 1,
                     "date": "2015-07-28",
                     "period": 1,
-                    "is_full"
+                    "is_full": true
                 }
             ]
         }

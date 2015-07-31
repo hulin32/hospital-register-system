@@ -36,7 +36,7 @@
         design_width /= devicePixelRatio;
     }
 
-    alert( 'Screen width: ' + screen_width + ', devicePixelRatio: ' + devicePixelRatio );
+    //alert( 'Screen width: ' + screen_width + ', devicePixelRatio: ' + devicePixelRatio );
 
     var initial_scale = screen_width / ( design_width * devicePixelRatio );
     var maximum_scale = screen_width * max_design_scale / ( design_width * devicePixelRatio );
@@ -45,8 +45,9 @@
                                   initial_scale + ', maximum-scale=' + maximum_scale + 
                                   ', user-scalable=' + user_scalable + '" />';
 
-    document.write( meta_screen_adjust_info );
+    $('head').append( meta_screen_adjust_info );
+    //document.write( meta_screen_adjust_info );
     
-    alert( meta_screen_adjust_info );
+    //alert( meta_screen_adjust_info );
 
 })();

@@ -35,7 +35,7 @@ module.exports = (grunt)->
                     'dist/css/hospital/introduction.css': ['src/css/hospital/introduction.less']
                     'dist/css/hospital/traffic_guide.css': ['src/css/hospital/traffic_guide.less']
                     'dist/css/hospital/department/detail.css': ['src/css/hospital/department/detail.less']
-                    'dist/css/hospital/department/list.css': ['src/css/hospital/department/list.less']
+                    'dist/css/hospital/department/overview.css': ['src/css/hospital/department/overview.less']
                     'dist/css/hospital/usage.css': ['src/css/hospital/usage.less']
                     'dist/css/register/register.css': ['src/css/register/register.less']
                     'dist/css/register/final.css': ['src/css/register/final.less']

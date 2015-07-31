@@ -2,11 +2,13 @@
 
 class BaseController extends Controller {
 
-	protected $error_code;
+	protected $data;
 
 	protected $template;
 
 	protected $return_type;
+
+	protected $error_code;
 
 	protected $error_messages;
 
@@ -17,6 +19,7 @@ class BaseController extends Controller {
 	protected static $default_return_type = 'html';
 
 	public function __construct(){
+		$this->data = array();
 		$this->error_code = 0;
 		$this->error_messages = array( 0 => 'ok' );
 
@@ -29,6 +32,14 @@ class BaseController extends Controller {
 
 	public function is_status_ok(){
 		return !$this->error_code;
+	}
+
+	public function set_data( $data ){
+		$this->data = $data;
+	}
+
+	public function get_data(){
+		return $this->data;
 	}
 
 	public function set_return_type( $return_type ){
@@ -79,6 +90,13 @@ class BaseController extends Controller {
 		return $this->preprocess_functions[ $type ];
 	}
 
+	/**
+	 * Call preprocess function 
+	 *
+	 * @var 	$type 	string
+	 * @var 	$data   arary
+	 * @return  array
+	 */
 	protected function call_preprocess_function( $type, $data ){
 	
 		if ( array_key_exists( $type, $this->preprocess_functions ) ){
@@ -92,10 +110,17 @@ class BaseController extends Controller {
 		return $data;
 	}
 
+	/**
+	 * Call post process function 
+	 *
+	 * @var 	$type 	string
+	 * @var 	$data   arary
+	 * @return  array
+	 */
 	protected function call_postprocess_function( $type, $data ){
 		
-		if ( array_key_exists( $type, $this->preprocess_functions ) ){
-			$func = $this->preprocess_functions[ $type ];
+		if ( array_key_exists( $type, $this->postprocess_functions ) ){
+			$func = $this->postprocess_functions[ $type ];
 			
 			if ( is_callable( $func ) ){
 				return $func( $data, $this->is_status_ok() );	
@@ -106,11 +131,14 @@ class BaseController extends Controller {
 	}
 
 	/**
-	 * Create response with parameter 'data'
+	 * Create response with data
 	 *
-	 * @return json or html
+	 * @var 	$data array
+	 * @return  mix
 	 */
-	public function response( $data ){
+	public function response( ){
+
+		$data = $this->data;
 		
 		/**
 		 * For json response
@@ -137,7 +165,7 @@ class BaseController extends Controller {
 		 * For html response
 		 * Not any procedure. Just call preprocess and post process functions.
 		 */
-		else if ( $this->return_type = 'html' ){
+		else if ( $this->return_type == 'html' ){
 			$this->call_preprocess_function( 'html', $data );
 
 			//$result = $this->is_status_ok() ? $data : $this->error_messages[ $this->error_code ];

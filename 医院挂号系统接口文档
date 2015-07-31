@@ -115,13 +115,12 @@ GET
 GET 
     /hospital/department/detail                 
     request:
-        hospital_id: 1
         department_id: 5
         return_type: "json"
     response:
         {
             "error_code": 0,
-            "title": "",
+            "name": "",
             "photo": "",
             "content": ""
         }
@@ -133,7 +132,7 @@ GET
         telephone: 13580501456
     response:
         {
-            "error_code": 0,                    // 0 - ok, 1 - 手机号码不正确
+            "error_code": 0,                                // 0 - ok, 1 - 手机号码不正确
             "message": ""
         }
 
@@ -182,12 +181,12 @@ POST
         account: "",
         password: "",
         real_name: "",
-        gender: "",                             // 0 - 男，1 - 女, 2 - 未知
+        gender: "",                                         // 0 - 男，1 - 女, 2 - 未知
         telephone: "",
         return_type: "json"
     response:
         {
-            "error_code": 0,                      //
+            "error_code": 0,                                //
             "message": "" 
         }
 
@@ -209,8 +208,8 @@ GET
                             "id": 0,
                             "created_at": ,
                             "department": ,
-                            "status": 0,                // 0 - 未就诊, 1 - 已就诊, 2 - 需复诊
-                            "advice":                   // 医嘱
+                            "status": 0,                    // 0 - 未就诊, 1 - 已就诊, 2 - 需复诊
+                            "advice":                       // 医嘱
                             "return_time": ,
                             "doctor":
                             {
@@ -428,6 +427,8 @@ GET
                     "id": 0,
                     "name": "hyy",
                     "title": "主任医师",
+                    "photo": "/images/...",
+                    "specialty":                                    // 特长
                     "can_be_registered": true,
                     "can_be_commented": true,
                     "is_consultable": false
@@ -436,6 +437,8 @@ GET
                     "id": 1,
                     "name": "hyy",
                     "title": "副主任医师",
+                    "specialty":                                    // 特长
+                    "photo": "/images/...",
                     "can_be_register": false,
                     "can_be_commented": true,
                     "is_consultable": false
@@ -458,7 +461,7 @@ GET
                 {
                     "id": 0,
                     "date": "2015-07-28",
-                    "period": 0,                // 0 - 上午, 1 - 下午
+                    "period": 0,                                    // 0 - 上午, 1 - 下午
                     "is_full": false
                 },
                 {
@@ -489,6 +492,3 @@ GET
                 }
             ]
         }
-
-
-

@@ -7,7 +7,7 @@ class UserController extends BaseController{
     }
 
     public function check_verification_code(){
-
+        
     }
 
     public function register_get(){
@@ -19,7 +19,7 @@ class UserController extends BaseController{
     }
 
     public function login_get(){
-
+        
     }
 
     public function login_post(){

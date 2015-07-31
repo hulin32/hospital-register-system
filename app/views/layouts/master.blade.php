@@ -12,7 +12,6 @@
         <link rel="stylesheet" type="text/css" href="/dist/css/base.css" />
         @show
         
-        <script src="/dist/js/base.js" type="text/javascript"></script>
     </head>
     
     <body>
@@ -30,6 +29,8 @@
         @show
 
         @section('js')
+            <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+            <script src="/dist/js/base.js" type="text/javascript"></script>
         @show
     </body>
 </html>

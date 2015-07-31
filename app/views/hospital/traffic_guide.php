@@ -29,6 +29,7 @@
                     "getLocation"
                 ]
             });
+            
             wx.ready(function(){
                 wx.getLocation({
                     type: 'wgs84',

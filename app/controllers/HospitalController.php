@@ -68,9 +68,6 @@ class HospitalController extends HospitalBasedController{
             //     Get weixin access token and javascript api ticket
             $this->set_preprocess_function( 'html', function( $result, $status ){
                 if ( $status ){
-                    require_once "WeixinSDK.php";
-                    require_once "DataStorageWrapper.php";
-
                     $app_id = Config::get('weixin.app_id');
                     $app_secret = Config::get('weixin.app_secret');
 
@@ -94,4 +91,5 @@ class HospitalController extends HospitalBasedController{
 
         return View::make( 'hospital.usage' );
     }
+    
 }

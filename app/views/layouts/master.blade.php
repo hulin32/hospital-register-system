@@ -28,8 +28,11 @@
         @section('body-bottom')
         @show
 
-        @section('js')
+        @section('js-lib')
             <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        @show
+
+        @section('js-common')
             <script src="/dist/js/base.js" type="text/javascript"></script>
         @show
     </body>

@@ -9,6 +9,14 @@
     <link rel="stylesheet" type="text/css" href="/dist/css/hospital/department/detail.css" />
 @stop
 
+@section('js-lib')
+    @parent
+@stop
+
+@section('js-common')
+    @parent
+@stop
+
 @section('body-title')
     科室介绍
 @stop

@@ -9,6 +9,14 @@
     <link rel="stylesheet" type="text/css" href="/dist/css/hospital/introduction.css" />
 @stop
 
+@section('js-lib')
+    @parent
+@stop
+
+@section('js-common')
+    @parent
+@stop
+
 @section('body-title')
     医院简介
 @stop

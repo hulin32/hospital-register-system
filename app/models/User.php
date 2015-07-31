@@ -41,7 +41,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		'phone',
 		'activated',
 		'activated_at'
-	)
+	);
 
 	public function comments(){
 		return $this->hasMany( 'Comment' );

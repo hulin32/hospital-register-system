@@ -34,6 +34,7 @@ Route::group(array('prefix' => 'hospital'), function()
 //用户模块
 Route::group(array('prefix' => 'user'), function(){
     
+    Route::get('check_phone', 'UserController@check_phone');
     Route::get('check_verification_code', 'UserController@check_verification_code');
     Route::post('send_verification_code', 'UserController@send_verification_code');
 

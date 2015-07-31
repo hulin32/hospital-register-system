@@ -9,7 +9,12 @@
     <link rel="stylesheet" type="text/css" href="/dist/css/hospital/department/overview.css" />
 @stop
 
-@section('js')
+@section('js-lib')
+    @parent
+@stop
+
+@section('js-common')
+    @parent
 @stop
 
 @section('body-title')

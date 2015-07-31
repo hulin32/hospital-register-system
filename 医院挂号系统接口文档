@@ -53,14 +53,14 @@ GET
                     "title": "",
                     "image": "/image/1.jpg",
                     "is_new": true,
-                    "created_at":                     // timestamp
+                    "created_at":                     // 
                 },
                 {
                     "id": 1,
                     "title": "",
                     "image": "",
                     "is_new": false,
-                    "created_at":                     // timestamp
+                    "created_at":                     // 
                 }
             ]
         }
@@ -80,7 +80,7 @@ GET
                 "title": "",                    
                 "image": "",
                 "is_new": false,                // 是否新发布
-                "time": ,                       // timestamp
+                "created_at": ,                       // 
                 "content":                      // 内容
             }
         }
@@ -205,7 +205,7 @@ GET
                     "records": [
                         {
                             "id": 0,
-                            "time": ,
+                            "created_at": ,
                             "department": ,
                             "status": 0,                // 0 - 未就诊, 1 - 已就诊, 2 - 需复诊
                             "advice":                   // 医嘱

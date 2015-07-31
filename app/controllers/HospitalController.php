@@ -89,4 +89,9 @@ class HospitalController extends HospitalBasedController{
 
         return $this->response();
     }
+
+    public function usage(){
+
+        return View::make( 'hospital.usage' );
+    }
 }

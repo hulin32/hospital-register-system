@@ -16,6 +16,7 @@ Route::group(array('prefix' => 'hospital'), function()
 {
 	Route::get('introduction', 'HospitalController@introduction');
     Route::get('traffic_guide', 'HospitalController@traffic_guide');
+    Route::get('usage', 'HospitalController@usage');
 
     // 资讯模块
     Route::group(array('prefix' => 'information'), function(){

@@ -41,6 +41,7 @@ class UserController extends BaseController{
             }
 
             Session::put( 'verification_code', $code );
+            Session::put( 'verification_code_expire', time() + 60 );
 
             return Response::json(array( 'error_code' => 0, 'message' => '验证码已经发送' ));
         }
@@ -69,12 +70,28 @@ class UserController extends BaseController{
 
     public function check_verification_code(){
 
+        /**
+         * Check if call this method directly
+         */
         if ( !Session::has( 'verification_code' ) ){
-            return Response::json(array( 'error_code' => 3, 'message' => '请重新获取验证码' ));
+            
+            return Response::json(array( 'error_code' => 3, 'message' => '请先获取验证码' ));
+        }
+
+        /**
+         * Check expire time
+         */
+        else if ( Session::( 'verification_code_expire' ) < time() ){
+
+            // clear session
+            Session::forget( 'verification_code' );
+            Session::forget( 'verification_code_expire' );
+
+            return Response::json(array( 'error_code' => 4, 'message' => '请重新获取验证码' ));
         }
 
         $input_code = Input::get( 'verification_code' );
-        $session_code = Session::get( 'verification_code' );
+        $session_code = Session::pull( 'verification_code' );
 
         $validator = Validator::make(
             array( 'code' => $input_code ),
@@ -135,7 +152,6 @@ class UserController extends BaseController{
     }
 
     public function user_center(){
-
     }
 
 }

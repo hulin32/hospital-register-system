@@ -108,7 +108,7 @@ class BaseController extends Controller {
 			$func = $this->preprocess_functions[ $type ];
 			
 			if ( is_callable( $func ) ){
-				return $func( $data, $this->is_status_ok() );	
+				return $func( $data );	
 			}
 		}
 
@@ -151,7 +151,7 @@ class BaseController extends Controller {
 		 */
 		if ( $this->return_type == 'json' ){
 
-			$data = $this->call_preprocess_function( 'json', $data );
+			$data = $this->call_preprocess_function( $this->return_type, $data );
 
 			if ( $this->is_status_ok() ){
 				$data['error_code'] = $this->error_code;
@@ -163,7 +163,7 @@ class BaseController extends Controller {
 				);
 			}
 
-			return Response::json( $this->call_postprocess_function( 'json', $result ) );
+			return Response::json( $this->call_postprocess_function( $this->return_type, $result ) );
 		}
 
 		/**
@@ -171,11 +171,12 @@ class BaseController extends Controller {
 		 * Not any procedure. Just call preprocess and post process functions.
 		 */
 		else if ( $this->return_type == 'html' ){
-			$this->call_preprocess_function( 'html', $data );
+
+			$data = $this->call_preprocess_function( $this->return_type, $data );
 
 			//$result = $this->is_status_ok() ? $data : $this->error_messages[ $this->error_code ];
 
-			return View::make( $this->template, $this->call_postprocess_function( 'html', $data ) );
+			return View::make( $this->template, $this->call_postprocess_function( $this->return_type, $data ) );
 		}
 
 		return $data;

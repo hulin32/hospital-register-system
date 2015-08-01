@@ -104,15 +104,19 @@ class UserController extends BaseController{
                 'phone' => Input::get( 'phone' ),
                 'password' => Input::get( 'password' )
             ), false);
+
         }catch( Cartalyst\Sentry\Users\LoginRequiredException $e ){
 
             return Response::json(array( 'error_code' => 1, 'message' => '请输入手机号码' ));
+
         }catch( Cartalyst\Sentry\Users\PasswordRequiredException $e ){
 
             return Response::json(array( 'error_code' => 2, 'message' => '请输入密码' ));
+
         }catch( Cartalyst\Sentry\Users\UserNotFoundException $e ){
 
             return Response::json(array( 'error_code' => 3, 'message' => '不存在该用户' ));
+
         }catch( Cartalyst\Sentry\Users\WrongPasswordException $e ){
 
             return Response::json(array( 'error_code' => 4, 'message' => '密码错误' ));

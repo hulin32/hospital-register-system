@@ -15,8 +15,7 @@ Laravel 框架对系统环境有如下要求：
 =======
 #### 修改配置文件
 * 首先，将app/config目录下的database.php.example重命名为database.php，并将里面有关数据库的设置修改为自己本地的数据库设置
-* 然后，将该目录下的weixin.php.example重命名为weixin.php，并
-设置你的app_id和app_secret
+* 然后，将该目录下的weixin.php.example重命名为weixin.php，并设置你的app_id和app_secret
 ```ruby
 cp app/config/database.php.example app/config/database.php
 # edit your database password

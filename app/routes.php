@@ -43,6 +43,8 @@ Route::group(array('prefix' => 'user'), function(){
     Route::get('login', 'UserController@login_get');
     Route::post('login', 'UserController@login_post');
 
+    Route::get('center', 'UserController@user_center');        // add to document
+
     // 挂号记录模块
     Route::group(array('prefix' => 'record', 'before' => 'auth.user.is_in'), function(){
         Route::get('get_records', 'RegisterRecordController@get_records');

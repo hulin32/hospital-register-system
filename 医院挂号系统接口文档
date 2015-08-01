@@ -162,7 +162,7 @@ GET
 POST
     /user/login
     request:
-        login_arttr: <phone or account> 
+        phone: 13580501456
         password: "123123"
         return_type: "json"
     response:

@@ -17,7 +17,6 @@ class UserController extends BaseController{
     }
 
     public function send_verification_code(){
-        Session_start();
 
         $code  =  '';   //验证码
         while( strlen( $code ) < 6 ){
@@ -41,7 +40,7 @@ class UserController extends BaseController{
                 return Response::json(array( 'error_code' => 3, 'message' => '验证码发送失败' ));
             }
 
-            $_SESSION['verification_code'] = $code;
+            Session::put( 'verification_code', $code );
 
             return Response::json(array( 'error_code' => 0, 'message' => '验证码已经发送' ));
         }
@@ -69,10 +68,13 @@ class UserController extends BaseController{
     }
 
     public function check_verification_code(){
-        Session_start();
+
+        if ( !Session::has( 'verification_code' ) ){
+            return Response::json(array( 'error_code' => 3, 'message' => '请重新获取验证码' ));
+        }
 
         $input_code = Input::get( 'verification_code' );
-        $session_code = $_SESSION[ 'verification_code' ];
+        $session_code = Session::get( 'verification_code' );
 
         $validator = Validator::make(
             array( 'code' => $input_code ),
@@ -90,19 +92,46 @@ class UserController extends BaseController{
         return Response::json(array( 'error_code' => 0, 'message' => '验证码正确' ));
     }
 
+    public function login_get(){
+        
+        return View::make( 'user.login' );
+    }
+
+    public function login_post(){
+
+        try{
+            Sentry::authenticate(array(
+                'phone' => Input::get( 'phone' ),
+                'password' => Input::get( 'password' )
+            ), false);
+        }catch( Cartalyst\Sentry\Users\LoginRequiredException $e ){
+
+            return Response::json(array( 'error_code' => 1, 'message' => '请输入手机号码' ));
+        }catch( Cartalyst\Sentry\Users\PasswordRequiredException $e ){
+
+            return Response::json(array( 'error_code' => 2, 'message' => '请输入密码' ));
+        }catch( Cartalyst\Sentry\Users\UserNotFoundException $e ){
+
+            return Response::json(array( 'error_code' => 3, 'message' => '不存在该用户' ));
+        }catch( Cartalyst\Sentry\Users\WrongPasswordException $e ){
+
+            return Response::json(array( 'error_code' => 4, 'message' => '密码错误' ));
+        }
+
+        return Response::json(array( 'error_code' => 0, 'message' => '登陆成功' ));
+    }
+
     public function register_get(){
 
+        return View::make( 'user.register.index' );
     }
 
     public function register_post(){
 
     }
 
-    public function login_get(){
-        
-    }
-
-    public function login_post(){
+    public function user_center(){
 
     }
+
 }

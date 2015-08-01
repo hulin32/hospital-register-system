@@ -66,12 +66,17 @@ class BaseController extends Controller {
 		return $this->error_code;
 	}
 
-	public function set_error_message( $index, $message ){
-		$this->error_messages[ $index ] = $message;
+	public function set_error_message( $code, $message ){
+		$this->error_messages[ $code ] = $message;
 	}
 
-	public function get_error_message( $index ){
-		return $this->error_messages[ $index ];
+	public function get_error_message( $code ){
+		return $this->error_messages[ $code ];
+	}
+
+	public function set_error_code_and_message( $code, $message ){
+		$this->error_code = $code;
+		$this->error_messages[ $code ] = $message;
 	}
 
 	public function set_postprocess_function( $type, $func ){

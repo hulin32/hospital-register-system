@@ -5,6 +5,7 @@
 @stop
 
 @section('css')
+    @parent
     <link rel="stylesheet" type="text/css" href="/dist/css/user/login.css" />
 @stop
 
@@ -17,12 +18,12 @@
 @stop
 
 @section('body-title')
-    <a class="register" href="user_register.php">注册</a>
+    <a class="register" href="/user/register.php">注册</a>
 @stop
 
 @section('body-main')
-    <form class="login-form" method="post" action="user_center.php">
-        <input class="input-blk form-blk" placeholder="用户名/健康卡/身份证" name="login_voucher" type="text">
+    <form class="login-form" method="post" action="/user/login">
+        <input class="input-blk form-blk" placeholder="手机号码" name="phone" type="text">
         <input class="input-blk form-blk" placeholder="密码" name="password" type="password">
         <div class="form-mdl form-blk clearfix">
             <input class="checkbox" type="checkbox">

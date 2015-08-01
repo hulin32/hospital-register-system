@@ -368,24 +368,30 @@ GET
         comments:
         [
             {
+                "id": 1
+                "content": ""
                 "doctor":
                 {
+                    "id": 123
                     "name": "",
+                    "photo": "",
                     "title": "",
                     "hospital": "",
                     "department": ""
                 },
-                "content": ""
             },
             {
+                "id": 1
+                "content": ""
                 "doctor":
                 {
+                    "id": 123
                     "name": "",
                     "title": "",
+                    "photo": "",
                     "hospital": "",
                     "department": ""
                 },
-                "content": ""
             }
         ]
     }

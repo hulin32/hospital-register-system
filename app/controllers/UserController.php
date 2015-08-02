@@ -40,6 +40,7 @@ class UserController extends BaseController{
                 return Response::json(array( 'error_code' => 3, 'message' => '验证码发送失败' ));
             }
 
+            Session::put( 'telephone' );
             Session::put( 'verification_code', $code );
             Session::put( 'verification_code_expire', time() + 60 );
 
@@ -74,7 +75,7 @@ class UserController extends BaseController{
          * Check if call this method directly
          */
         if ( !Session::has( 'verification_code' ) ){
-            
+
             return Response::json(array( 'error_code' => 3, 'message' => '请先获取验证码' ));
         }
 
@@ -84,6 +85,7 @@ class UserController extends BaseController{
         else if ( Session::( 'verification_code_expire' ) < time() ){
 
             // clear session
+            Session::forget( 'telephone' );
             Session::forget( 'verification_code' );
             Session::forget( 'verification_code_expire' );
 
@@ -149,9 +151,44 @@ class UserController extends BaseController{
 
     public function register_post(){
 
+        if ( !Session::has( 'telephone' ) ){
+            return Response::json(array( 'error_code' => 1, 'message' => '请先验证手机号' ));
+        }
+
+        if ( !Input::has( 'account' ) ){
+            return Response::json(array( 'error_code' => 2, 'message' => '请输入用户名' ));
+        }    
+
+        if ( !Input::has( 'password' ) ){
+            return Response::json(array( 'error_code' => 3, 'message' => '请输入密码'));
+        }
+
+        if ( !Input::has( 'real_name' ) ){
+            return Response::json(array( 'error_code' => 4, 'message' => '请输入真实姓名' ));
+        }
+
+        $telephone = Session::get( 'telephone' );
+        $account   = Input::get( 'account' );
+        $password  = Input::get( 'password' );
+        $real_name = Input::get( 'real_name' );
+        
+        if ( User::where( 'account', $account )->first() ){
+            return Response::json(array( 'error_code' => 5, 'message' => '该用户名已存在' ));
+        }
+
+        Sentry::create(array(
+            'account' => $account,
+            'password' => $password,
+            'real_name' => $real_name,
+            'phone' => $telephone,
+            'activated' => true
+        ));
+
+        return Response::json(array( 'error_code' => 0, 'message' => '注册成功' ));
     }
 
     public function user_center(){
+        
     }
 
 }

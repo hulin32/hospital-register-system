@@ -35,8 +35,9 @@ class MigrationCartalystSentryInstallUsers extends Migration {
 			
 			$table->string("account");
 			$table->string('password');
-			$table->integer("gender");
 			$table->string('phone');
+			$table->string('real_name');
+			$table->integer("gender")->nullable();
 
 			$table->text('permissions')->nullable();
 			$table->boolean('activated')->default(0);
@@ -45,8 +46,6 @@ class MigrationCartalystSentryInstallUsers extends Migration {
 			$table->timestamp('last_login')->nullable();
 			$table->string('persist_code')->nullable();
 			$table->string('reset_password_code')->nullable();
-			$table->string('first_name')->nullable();
-			$table->string('last_name')->nullable();
 
 			$table->timestamps();
 

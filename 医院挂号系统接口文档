@@ -200,6 +200,14 @@ POST
             "message": "" 
         }
 
+// 用户中心
+// for web
+GET
+    /user/center: user_id
+    request:
+    return:
+        <html page>
+
 // 获取挂号记录
 GET
     /user/record/get_records: user_id
@@ -375,7 +383,8 @@ GET
         [
             {
                 "id": 1
-                "content": ""
+                "content": "",
+                "created_at": ""
                 "doctor":
                 {
                     "id": 123
@@ -388,7 +397,8 @@ GET
             },
             {
                 "id": 1
-                "content": ""
+                "content": "",
+                "created_at": ""
                 "doctor":
                 {
                     "id": 123

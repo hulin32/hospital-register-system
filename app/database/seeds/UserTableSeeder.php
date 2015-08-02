@@ -10,48 +10,54 @@ class UserTableSeeder extends Seeder {
         Sentry::createUser(array(
             'account' => 'hyuyuan',
             'password' => '58085088',
-            'gender' => 1,
+            'real_name' => '黄裕源',
             'phone' => '13580501456',
+            'gender' => 1,
             'activated' => 1
         ));
 
         Sentry::createUser(array(
             'account' => 'Cobb',
             'password' => '123456',
-            'gender' => 1,
+            'real_name' => '李四',
             'phone' => '13512341234',
+            'gender' => 1,
             'activated' => 1
         ));
 
         Sentry::createUser(array(
             'account' => 'Alies',
             'password' => '123123',
-            'gender' => 2,
+            'real_name' => '小李子',
             'phone' => '18511112222',
+            'gender' => 2,
             'activated' => 1
         ));
 
         Sentry::createUser(array(
             'account' => 'adeng',
             'password' => '8888888',
-            'gender' => 2,
+            'real_name' => '阿登',
             'phone' => '18899990000',
+            'gender' => 2,
             'activated' => 1
         ));
 
         Sentry::createUser(array(
             'account' => 'hulin',
             'password' => 'abcdefg',
-            'gender' => 1,
+            'real_name' => '胡琳',
             'phone' => '13250502288',
+            'gender' => 1,
             'activated' => 1
         ));
 
         Sentry::createUser(array(
             'account' => 'jiali',
             'password' => 'bcd123',
-            'gender' => 2,
+            'real_name' => '袁嘉丽',
             'phone' => '13322225555',
+            'gender' => 2,
             'activated' => 1
         ));
     }

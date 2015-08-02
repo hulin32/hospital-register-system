@@ -208,7 +208,7 @@ GET
     return:
         <html page>
 
-// 获取挂号记录
+// 获取指定用户挂号记录
 GET
     /user/record/get_records: user_id
     request:
@@ -226,7 +226,9 @@ GET
                             "id": 0,
                             "created_at": ,
                             "department": ,
-                            "status": 0,                    // 0 - 未就诊, 1 - 已就诊, 2 - 需复诊
+                            "status": 0,                    // 0 - 未就诊
+                                                            // 1 - 已就诊
+                                                            // 2 - 需复诊
                             "advice":                       // 医嘱
                             "return_time": ,
                             "doctor":
@@ -440,7 +442,7 @@ POST
 
 // 获取医生信息
 GET
-    /register/get_doctors: user_id
+    /doctor/get_doctors: user_id
     request:
         department_id:
         return_type:
@@ -472,9 +474,20 @@ GET
             ]
         }
 
+// 获取指定医生的评论记录
+GET
+    /doctor/get_comments: user_id
+    request:
+        doctor_id:
+        return_type:
+    response:
+        {
+            "error_code":
+        }
+
 // 获取可预约的时间段
 GET
-    /register/get_schedule: user_id
+    /doctor/get_schedule: user_id
     request:
         doctor_id: 
         latest: 7
@@ -501,7 +514,7 @@ GET
 
 // 获取相应时间段的挂号信息
 GET
-    /register/get_periods: user_id
+    /doctor/get_periods: user_id
     request:
         schedule_id
         return_type: "json"

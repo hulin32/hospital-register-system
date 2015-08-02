@@ -54,7 +54,7 @@ Route::group(array('prefix' => 'user'), function(){
     });
 
     // 挂号账户模块
-    Route::group(array('prefix' => 'register-account', 'before' => 'auth.user.is_in'), function(){
+    Route::group(array('prefix' => 'register_account', 'before' => 'auth.user.is_in'), function(){
         Route::get('get_accounts', 'RegisterAccountController@get_accounts');
         Route::get('detail', 'RegisterAccountController@detail');
         Route::post('modify', 'RegisterAccountController@modify');
@@ -73,8 +73,8 @@ Route::group(array('prefix' => 'user'), function(){
     });
 });
 
-// 挂号模块
-Route::group(array('prefix' => 'register', 'before' => 'auth.user.is_in'), function(){
+// 医生模块
+Route::group(array('prefix' => 'doctor', 'before' => 'auth.user.is_in'), function(){
     Route::get('get_doctors', 'DoctorController@get_doctors');
     Route::get('get_schedules', 'ScheduleController@get_schedules');
     Route::get('get_periods', 'PeriodController@get_periods');

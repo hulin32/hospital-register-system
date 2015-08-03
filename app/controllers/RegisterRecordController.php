@@ -5,24 +5,27 @@ class RegisterRecordController extends BaseController{
     public function get_records(){
         $this->set_template( 'user.record' );
 
-        $register_accounts = User::find( Sentry::getUser()->id )->register_accounts()->get();
+        $register_accounts = User::find( Sentry::getUser()->id )
+                                   ->register_accounts()
+                                   ->with( 'records' )->get();
 
         $data = array( 'register_accounts' => array() );
 
         foreach( $register_accounts as $register_account ){
-            $origin_records = RegisterAccount::find( $register_account->id )->records()->get();
+            $origin_records = $register_account->records;
             $result_records = array();
 
             foreach ( $origin_records as $record ){
                 $doctor     = RegisterRecord::find( $record->id )->doctor()->first();
-                $department = $doctor->department()->first(); 
+                $department = $doctor->department()->first();
                 $result_records[]  = array(
                     'id'            =>  $record->id,
                     'status'        =>  $record->status,
                     'advice'        =>  $record->advice,
                     'date'          =>  $record->date,
-                    'start_time'    =>  $record->start_time,
-                    'end_time'      =>  $record->end_time,
+                    'start'         =>  $record->start_time,
+                    'end'           =>  $record->end_time,
+                    'period'        =>  $record->period ? '下午' : '上午',
                     'return_time'   =>  $record->return_time,
                     'department'    =>  $department->name,
                     'doctor'        =>  array( 'name' => $doctor['name'], 'title' => $doctor['title'] )

@@ -230,8 +230,9 @@ GET
                                                             // 2 - 需复诊
                             "advice": ,                     // 医嘱
                             "date": "2015-07-28",
-                            "start_time": "09:00",
-                            "end_time": "10:00",
+                            "start": "09:00",
+                            "end": "10:00",
+                            "period": "上午" or "下午"
                             "return_time": "2015-08-01",
                             "doctor":
                             {

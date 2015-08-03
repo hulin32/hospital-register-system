@@ -8,8 +8,9 @@ class RegisterRecordTableSeeder extends Seeder {
 
         RegisterRecord::create(array(
             'date' => '2015-07-02',
-            'start_time' => '8:30',
-            'end_time' => '9:30',
+            'start' => '8:30',
+            'end' => '9:30',
+            'period' => 0,
             'status' => 0,
             'advice' => '',
             'return_date' => '2015-08-02',
@@ -19,8 +20,9 @@ class RegisterRecordTableSeeder extends Seeder {
 
         RegisterRecord::create(array(
             'date' => '2015-07-15',
-            'start_time' => '14:30',
-            'end_time' => '14:50',
+            'start' => '14:30',
+            'end' => '14:50',
+            'period' => 1,
             'status' => 1,
             'advice' => '多喝水',
             'return_date' => '2015-07-20',
@@ -30,8 +32,9 @@ class RegisterRecordTableSeeder extends Seeder {
 
         RegisterRecord::create(array(
             'date' => '2015-07-20',
-            'start_time' => '16:30',
-            'end_time' => '18:30',
+            'start' => '16:30',
+            'end' => '18:30',
+            'period' => 1,
             'status' => 2,
             'advice' => '多吃药',
             'return_date' => '2015-08-20',
@@ -41,8 +44,9 @@ class RegisterRecordTableSeeder extends Seeder {
 
         RegisterRecord::create(array(
             'date' => '2015-07-28',
-            'start_time' => '8:00',
-            'end_time' => '12:00',
+            'start' => '8:00',
+            'end' => '12:00',
+            'period' => 0,
             'status' => 1,
             'advice' => '多运动',
             'return_date' => '2015-08-01',

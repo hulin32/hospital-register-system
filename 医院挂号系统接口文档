@@ -224,13 +224,19 @@ GET
                     "records": [
                         {
                             "id": 0,
-                            "created_at": ,
                             "department": ,
                             "status": 0,                    // 0 - 未就诊
                                                             // 1 - 已就诊
                                                             // 2 - 需复诊
                             "advice":                       // 医嘱
                             "return_time": ,
+                            "schedule":[
+                                "date": "2015-02-02"
+                                "period":                   // 0 - 上午
+                                                            // 1 - 下午
+                                "start": "09:30",
+                                "end": "10:29"
+                            ]
                             "doctor":
                             {
                                 "name",

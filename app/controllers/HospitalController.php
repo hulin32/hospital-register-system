@@ -64,7 +64,7 @@ class HospitalController extends HospitalBasedController{
                 return $result;
             });
 
-            // Preprocess function:
+            // Post function:
             //     Get weixin access token and javascript api ticket
             $this->set_postprocess_function( 'html', function( $result, $status ){
                 if ( $status ){

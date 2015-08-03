@@ -6,7 +6,7 @@
 
 @section('css')
     @parent
-    <link rel="stylesheet" type="text/css" href="/dist/css/user/register/index.css" />
+    <link rel="stylesheet" type="text/css" href="/dist/css/user/center.css" />
 @stop
 
 @section('js-lib')
@@ -20,14 +20,14 @@
 @section('body-title')
     我的账户
     <a class="setting-btn" href="user_setting.php">
-        <img src="icon/setting.png">
+        <img src="/images/icons/setting.png">
     </a>
 @stop
 
 @section('body-main')
     <div class="user-info-wrap clearfix">
         <div class="head-portrait-wrap">
-            <img class="head-portrait" src="/images/icons/head_portrait.png">
+            <img class="head-portrait" src="/images/users/head_portrait.png">
         </div>
         <p class="info-item">
             <span class="key">姓 名：</span>

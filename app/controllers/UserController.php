@@ -82,7 +82,7 @@ class UserController extends BaseController{
         /**
          * Check expire time
          */
-        else if ( Session::( 'verification_code_expire' ) < time() ){
+        else if ( Session::get( 'verification_code_expire' ) < time() ){
 
             // clear session
             Session::forget( 'telephone' );
@@ -188,7 +188,9 @@ class UserController extends BaseController{
     }
 
     public function user_center(){
-        
+        $register_account = RegisterAccount::where( 'user_id', Sentry::getUser()->id )->first();
+
+        return View::make( 'user.center', array( 'account' => $register_account ) );
     }
 
 }

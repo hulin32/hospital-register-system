@@ -63,6 +63,7 @@ class RegisterRecordController extends BaseController{
 
     public function add_record(){
 
+        $account_id     = Input::get( 'account_id' );
         $period_id      = Input::get( 'period_id' );
         $period         = Period::find( $period_id );
         $schedule       = $period->schedule;
@@ -70,15 +71,25 @@ class RegisterRecordController extends BaseController{
         if ( !isset( $period ) ){
             return Response::json(array( 'error_code' => 1, 'message' => '无该时间段，请重新选择' ));
         }
+
+        $user_id = Session::get( 'user.id' );
         
-        if ( !Input::get( 'account_id' ) ){
-            $accounts = User::find( Session::get( 'user.id' ) )->register_accounts();
+        // 无 account_id 参数，则选择该用户默认挂号账户
+        if ( !Input::has( 'account_id' ) ){
+            $accounts = User::find( $user_id )->register_accounts();
 
             if ( !isset( $accounts ) ){
                 return Response::json(array( 'error_code' => 2, 'message' => '请先申请挂号账户' ));
             }
             
             $account_id = $accounts->first()->id;
+        }else{
+            $account_id = Input::get( 'account_id' );
+            $account    = RegisterAccount::find( $account_id )->where( 'user_id', $user_id )->first();
+
+            if ( !isset( $account ) ){
+                return Response::json(array( 'error_code' => 3, 'message' => '不存在该挂号账户' ));
+            }
         }
 
         RegisterRecord::create(array(

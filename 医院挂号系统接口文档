@@ -225,9 +225,7 @@ GET
                         {
                             "id": 0,
                             "department": ,
-                            "status": 0,                    // 0 - 未就诊
-                                                            // 1 - 已就诊
-                                                            // 2 - 需复诊
+                            "status": "未就诊" or "已就诊" or "需复诊",                    
                             "advice": ,                     // 医嘱
                             "date": "2015-07-28",
                             "start": "09:00",
@@ -252,7 +250,8 @@ GET
 POST
     /user/record/add_record: user_id
     request:
-        period_id
+        account_id:
+        period_id: 
         return_type: "json"
     response:
         {

@@ -141,6 +141,8 @@ class UserController extends BaseController{
             return Response::json(array( 'error_code' => 4, 'message' => '密码错误' ));
         }
 
+        Session::put( 'user.id', Sentry::getUser()->id );
+
         return Response::json(array( 'error_code' => 0, 'message' => '登陆成功' ));
     }
 
@@ -188,7 +190,7 @@ class UserController extends BaseController{
     }
 
     public function user_center(){
-        $register_account = RegisterAccount::where( 'user_id', Sentry::getUser()->id )->first();
+        $register_account = RegisterAccount::where( 'user_id', Session::get( 'user.id' ) )->first();
 
         return View::make( 'user.center', array( 'account' => $register_account ) );
     }

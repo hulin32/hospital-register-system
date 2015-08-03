@@ -12,8 +12,9 @@ class RegisterRecord extends \Eloquent {
 
     protected $fillable = array(
         'date',
-        'start_time',
-        'end_time',
+        'start',
+        'end',
+        'period',
         'status',
         'advice',
         'return_date',

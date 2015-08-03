@@ -15,11 +15,12 @@ class CreateRegisterRecordsTable extends Migration {
 		Schema::create( 'register_records', function( $table ){
 			$table->increments( 'id' );
 			$table->date( 'date' );
-			$table->time( 'start_time' );
-			$table->time( 'end_time' );
+			$table->time( 'start' );
+			$table->time( 'end' );
+			$table->integer( 'period' );
 			$table->integer( 'status' );
-			$table->text( 'advice' );
-			$table->date( 'return_date' );
+			$table->text( 'advice' )->nullable();
+			$table->date( 'return_date' )->nullable();
 			$table->integer( 'doctor_id' )->unsigned();
 			$table->integer( 'account_id' )->unsigned();
 			$table->timestamps();

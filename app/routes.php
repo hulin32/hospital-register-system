@@ -63,7 +63,7 @@ Route::group(array('prefix' => 'user'), function(){
 
     // 评论模块
     Route::group(array('prefix' => 'comment', 'before' => 'auth.user.is_in'), function(){
-        Route::get('get_comments', 'CommentController@get_comments');
+        Route::get('get_comments', 'CommentController@get_user_comments');
         Route::post('add_comment', 'CommentController@add_comment');
     });
 
@@ -75,6 +75,7 @@ Route::group(array('prefix' => 'user'), function(){
 
 // 医生模块
 Route::group(array('prefix' => 'doctor', 'before' => 'auth.user.is_in'), function(){
+    Route::get('get_comments', 'CommentController@get_doctor_comments');
     Route::get('get_doctors', 'DoctorController@get_doctors');
     Route::get('get_schedules', 'ScheduleController@get_schedules');
     Route::get('get_periods', 'PeriodController@get_periods');

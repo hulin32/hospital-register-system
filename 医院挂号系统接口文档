@@ -216,7 +216,7 @@ GET
     response:
         {
             "error_code": 0,
-            "register_account": 
+            "register_accounts": 
             [
                 {
                     "id": 123,
@@ -228,15 +228,11 @@ GET
                             "status": 0,                    // 0 - 未就诊
                                                             // 1 - 已就诊
                                                             // 2 - 需复诊
-                            "advice":                       // 医嘱
-                            "return_time": ,
-                            "schedule":[
-                                "date": "2015-02-02"
-                                "period":                   // 0 - 上午
-                                                            // 1 - 下午
-                                "start": "09:30",
-                                "end": "10:29"
-                            ]
+                            "advice": ,                     // 医嘱
+                            "date": "2015-07-28",
+                            "start_time": "09:00",
+                            "end_time": "10:00",
+                            "return_time": "2015-08-01",
                             "doctor":
                             {
                                 "name",

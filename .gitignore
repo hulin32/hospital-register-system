@@ -12,4 +12,5 @@ Thumbs.db
 /public/dist
 /public/node_modules
 *.log
+.bashrc
 /~*

@@ -49,7 +49,8 @@ Route::group(array('prefix' => 'user'), function(){
     Route::group(array('prefix' => 'record', 'before' => 'auth.user.is_in'), function(){
         Route::get('get_records', 'RegisterRecordController@get_records');
         Route::post('add_record', 'RegisterRecordController@add_record');
-        Route::get('add_return_time', 'RegisterRecordController@add_return_time');
+        Route::post('add_return_date', 'RegisterRecordController@add_return_date');
+        Route::post('modify_status', 'RegisterRecordController@modify_status');
         Route::post('cancel', 'RegisterRecordController@cancel');
     });
 

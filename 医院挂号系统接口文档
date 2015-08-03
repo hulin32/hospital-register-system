@@ -271,13 +271,13 @@ POST
             "message": ""
         }
 
-// 增加复诊时间
+// 复诊时间
 POST
-    /user/record/add_return_time: user_id
+    /user/record/add_return_date: user_id
     request:
         record_id: 
         return_type: "json"
-        time: 
+        date: 
     response:
         {
             "error_code": 0,
@@ -334,6 +334,7 @@ GET
 POST
     /user/register_account/modify: user_id
     request:
+        account_id: 
         name: 
         gender:
         age:

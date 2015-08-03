@@ -58,7 +58,7 @@ Route::group(array('prefix' => 'user'), function(){
     Route::group(array('prefix' => 'register_account', 'before' => 'auth.user.is_in'), function(){
         Route::get('get_accounts', 'RegisterAccountController@get_accounts');
         Route::get('detail', 'RegisterAccountController@detail');
-        Route::post('modify', 'RegisterAccountController@modify');
+        Route::get('modify', 'RegisterAccountController@modify');
         Route::post('add_account', 'RegisterAccountController@add_account');
     });
 

@@ -233,7 +233,7 @@ GET
                             "start": "09:00",
                             "end": "10:00",
                             "period": "上午" or "下午"
-                            "return_time": "2015-08-01",
+                            "return_date": "2015-08-01",
                             "doctor":
                             {
                                 "name",

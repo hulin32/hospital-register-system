@@ -9,4 +9,8 @@ class CommentController extends BaseController{
     public function add_comments(){
 
     }
+
+    public function delete_comments(){
+        
+    }
 }

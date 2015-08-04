@@ -16,20 +16,20 @@ class CreateRegisterAccountsTable extends Migration {
 			$table->increments( 'id' );
 			$table->string( 'name' );
 			$table->integer( 'age' );
-			$table->integer( 'weight' );
 			$table->integer( 'gender' );
+			$table->float( 'weight' );
 			$table->string( 'blood_type' );
-			$table->string( 'type' )->nullable();
 			$table->string( 'phone' );
 			$table->string( 'id_card' );
-			$table->string( 'emergency_name' );
-			$table->string( 'emergency_phone' );
+			$table->string( 'type' )->nullable();
+			$table->string( 'emergency_name' )->nullable();
+			$table->string( 'emergency_phone' )->nullable();
 			$table->integer( 'user_id' )->unsigned();
 			$table->timestamps();
 
-			$table->index( 'id_card' );
 			$table->index( 'phone' );
-
+			$table->unique( 'id_card' );
+			
 			$table->index( 'user_id' );
 			$table->foreign( 'user_id' )
 				  ->references( 'id' )->on( 'users' )

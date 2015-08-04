@@ -59,7 +59,7 @@ Route::group(array('prefix' => 'user'), function(){
         Route::get('get_accounts', 'RegisterAccountController@get_accounts');
         Route::get('detail', 'RegisterAccountController@detail');
         Route::get('modify', 'RegisterAccountController@modify');
-        Route::post('add_account', 'RegisterAccountController@add_account');
+        Route::get('add_account', 'RegisterAccountController@add_account');
     });
 
     // 评论模块

@@ -7,7 +7,7 @@ Laravel 框架对系统环境有如下要求：
 
 * PHP >= 5.4
 * MCrypt PHP 扩展
-* 需要为 app/storage 目录下的文at件设置写权限。
+* 需要为 app/storage 目录下的文件设置写权限。
 * 从 PHP 5.5 版本开始，针对某些操作系统的安装包需要你自己手工安装 PHP 的 JSON 扩展模块。如果你使用的是 Ubuntu，可以通过,  apt-get install php5-json 命令直接安装。
 * Laravel框架通过设置 public/.htaccess 文件去除链接中的index.php。 如果你你的服务器使用的是 Apache，请确保开启 mod_rewrite 模块。
 

@@ -12,12 +12,12 @@ class Comment extends \Eloquent {
 
     protected $fillable = array(
         'content',
-        'user_id',
+        'record_id',
         'doctor_id'
     );
 
-    public function user(){
-        return $this->belongsTo( 'User' );
+    public function record(){
+        return $this->belongsTo( 'RegisterRecord', 'record_id', 'id' );
     }
 
     public function doctor(){

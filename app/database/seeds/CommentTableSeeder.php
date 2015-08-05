@@ -8,25 +8,25 @@ class CommentTableSeeder extends Seeder {
 
         Comment::create(array(
             'content' => '这医生好帅哦，虽然没阿登帅',
-            'user_id' => 4,
+            'record_id' => 4,
             'doctor_id' => 4
         ));
 
         Comment::create(array(
             'content' => '这医生好帅哦，虽然没阿登帅',
-            'user_id' => 3,
+            'record_id' => 3,
             'doctor_id' => 5
         ));
 
         Comment::create(array(
             'content' => '这医生好帅哦，虽然没阿登帅',
-            'user_id' => 2,
+            'record_id' => 2,
             'doctor_id' => 6
         ));
 
         Comment::create(array(
             'content' => '这医生好帅哦，虽然没阿登帅',
-            'user_id' => 1,
+            'record_id' => 1,
             'doctor_id' => 7
         ));
     }

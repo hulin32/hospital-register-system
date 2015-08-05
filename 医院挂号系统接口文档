@@ -318,7 +318,7 @@ GET
 
 // 修改挂号账户信息
 POST
-    /user/register_account/modify: user_id
+    /user/register_account/modify_account: user_id
     request:
         account_id: 
         name: 

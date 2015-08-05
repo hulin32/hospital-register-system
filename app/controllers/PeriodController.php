@@ -10,7 +10,11 @@ class PeriodController extends BaseController(){
 
     }
 
-    public function delete_period(){
+    public function modify_period(){
         
+    }
+
+    public function delete_period(){
+
     }
 }

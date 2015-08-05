@@ -10,7 +10,11 @@ class ScheduleController extends BaseController{
 
     }
 
-    public function delete_schedule(){
+    public function modify_schedule(){
         
+    }
+
+    public function delete_schedule(){
+
     }
 }

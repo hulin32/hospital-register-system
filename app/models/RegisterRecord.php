@@ -29,4 +29,8 @@ class RegisterRecord extends \Eloquent {
     public function register_account(){
         return $this->belongsTo( 'RegisterAccount', 'account_id', 'id' );
     }
+
+    public function comment(){
+        return $this->hasOne( 'Comment' );
+    }
 }

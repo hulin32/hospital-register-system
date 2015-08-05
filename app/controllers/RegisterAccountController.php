@@ -27,7 +27,7 @@ class RegisterAccountController extends BaseController{
         return Response::json(array( 'error_code' => 0, 'account' => $account ));
     }
 
-    public function modify(){
+    public function modify_account(){
 
         $inputs = Input::all();
         $account = RegisterAccount::find( $inputs['account_id'] )

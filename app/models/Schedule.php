@@ -16,6 +16,10 @@ class Schedule extends \Eloquent {
         'doctor_id'
     );
 
+    public function periods(){
+        return $this->hasMany( 'Period' );
+    }
+
     public function doctor(){
         return $this->belongsTo( 'Doctor' );
     }

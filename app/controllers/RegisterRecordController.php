@@ -14,7 +14,7 @@ class RegisterRecordController extends BaseController{
 
     public function get_records(){
 
-        $register_accounts = User::find( Session::get( 'user_id' ) )
+        $register_accounts = User::find( Session::get( 'user.id' ) )
                                    ->register_accounts()
                                    ->with( 'records' )->get();
 

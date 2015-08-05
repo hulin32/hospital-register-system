@@ -13,7 +13,8 @@ class Comment extends \Eloquent {
     protected $fillable = array(
         'content',
         'record_id',
-        'doctor_id'
+        'doctor_id',
+        'user_id'
     );
 
     public function record(){
@@ -22,5 +23,9 @@ class Comment extends \Eloquent {
 
     public function doctor(){
         return $this->belongsTo( 'Doctor' );
+    }
+
+    public function user(){
+        return $this->belongsTo( 'User');
     }
 }

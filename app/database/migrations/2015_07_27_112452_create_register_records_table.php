@@ -23,18 +23,27 @@ class CreateRegisterRecordsTable extends Migration {
 			$table->date( 'return_date' )->nullable();
 			$table->integer( 'doctor_id' )->unsigned();
 			$table->integer( 'account_id' )->unsigned();
+			$table->integer( 'user_id' )->unsigned();
 			$table->timestamps();
+
+			$table->index( 'user_id' );
+			$table->foreign( 'user_id' )
+				  ->references( 'id' )
+				  ->on( 'users' )
+				  ->onDelete( 'cascade' )
+				  ->onUpdate( 'cascade' );
 
 			$table->index( 'doctor_id' );
 			$table->foreign( 'doctor_id' )
-				  ->references( 'id' )->on( 'doctors' )
+				  ->references( 'id' )
+				  ->on( 'doctors' )
 				  ->onDelete( 'cascade' )
 				  ->onUpdate( 'cascade' );
 
 			$table->index( 'account_id' );
 			$table->foreign( 'account_id' )
-				  ->references( 'id' )->on( 'register_accounts' )
-				  ->onDelete( 'cascade' )
+				  ->references( 'id' )
+				  ->on( 'register_accounts' )
 				  ->onUpdate( 'cascade' );
 		});
 	}
@@ -46,7 +55,7 @@ class CreateRegisterRecordsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop( 'register_records' );
+		Schema::dropIfExists( 'register_records' );
 	}
 
 }

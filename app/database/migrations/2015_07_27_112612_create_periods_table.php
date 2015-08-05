@@ -23,7 +23,8 @@ class CreatePeriodsTable extends Migration {
 
 			$table->index( 'schedule_id' );
 			$table->foreign( 'schedule_id' )
-				  ->references( 'id' )->on( 'schedules' )
+				  ->references( 'id' )
+				  ->on( 'schedules' )
 				  ->onDelete('cascade')
 				  ->onUpdate('cascade');
 		});
@@ -36,7 +37,7 @@ class CreatePeriodsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop( 'periods' );
+		Schema::dropIfExists( 'periods' );
 	}
 
 }

@@ -23,7 +23,8 @@ class CreateDepartmentsTable extends Migration {
 
 			$table->index( 'hospital_id' );
 			$table->foreign( 'hospital_id' )
-				  ->references( 'id' )->on( 'hospitals' )
+				  ->references( 'id' )
+				  ->on( 'hospitals' )
 				  ->onDelete( 'cascade' )
 				  ->onUpdate( 'cascade' );
 		});
@@ -36,7 +37,7 @@ class CreateDepartmentsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop( 'departments' );
+		Schema::dropIfExists( 'departments' );
 	}
 
 }

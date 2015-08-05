@@ -15,22 +15,31 @@ class CreateCommentsTable extends Migration {
 		Schema::create( 'comments', function( $table ){
 			$table->increments( 'id' );
 			$table->text( 'content' );
+			$table->integer( 'user_id' )->unsigned();
 			$table->integer( 'record_id' )->unsigned();
 			$table->integer( 'doctor_id' )->unsigned();
 			$table->timestamps();
 
+			$table->index( 'user_id' );
+			$table->foreign( 'user_id' )
+				  ->references( 'id' )
+				  ->on( 'users' )
+				  ->onDelete( 'cascade' )
+				  ->onUpdate( 'cascade' );
+
 			$table->index( 'record_id');
-			$table->index( 'doctor_id' );
-
 			$table->foreign( 'record_id' )
-				  ->references( 'id' )->on( 'register_records' )
-				  ->onDelete('cascade')
-				  ->onUpdate('cascade');
+				  ->references( 'id' )
+				  ->on( 'register_records' )
+				  ->onDelete( 'cascade' )
+				  ->onUpdate( 'cascade' );
 
+			$table->index( 'doctor_id' );
 			$table->foreign( 'doctor_id' )
-				  ->references( 'id' )->on( 'doctors' )
-				  ->onDelete('cascade')
-				  ->onUpdate('cascade');
+				  ->references( 'id' )
+				  ->on( 'doctors' )
+				  ->onDelete( 'cascade' )
+				  ->onUpdate( 'cascade' );
 		});
 	}
 
@@ -41,7 +50,7 @@ class CreateCommentsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop( 'comments' );
+		Schema::dropIfExists( 'comments' );
 	}
 
 }

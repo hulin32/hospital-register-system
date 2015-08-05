@@ -21,7 +21,8 @@ class CreateFeedbacksTable extends Migration {
 
 			$table->index( 'user_id' );
 			$table->foreign( 'user_id' )
-				  ->references( 'id' )->on( 'users' )
+				  ->references( 'id' )
+				  ->on( 'users' )
 				  ->onDelete( 'cascade' )
 				  ->onUpdate( 'cascade' );
 		});
@@ -34,7 +35,7 @@ class CreateFeedbacksTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop( 'feedbacks' );
+		Schema::dropIfExists( 'feedbacks' );
 	}
 
 }

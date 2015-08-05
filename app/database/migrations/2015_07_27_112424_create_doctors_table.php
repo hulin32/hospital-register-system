@@ -26,13 +26,15 @@ class CreateDoctorsTable extends Migration {
 
 			$table->index( 'title_id' );
 			$table->foreign( 'title_id' )
-				  ->references( 'id' )->on( 'titles' )
+				  ->references( 'id' )
+				  ->on( 'titles' )
 				  ->onDelete( 'cascade' )
 				  ->onUpdate( 'cascade' );
 
 			$table->index( 'department_id' );
 			$table->foreign( 'department_id' )
-				  ->references( 'id' )->on( 'departments' )
+				  ->references( 'id' )
+				  ->on( 'departments' )
 				  ->onDelete( 'cascade' )
 				  ->onUpdate( 'cascade' );
 		});
@@ -45,7 +47,7 @@ class CreateDoctorsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop( 'doctors' );
+		Schema::dropIfExists( 'doctors' );
 	}
 
 }

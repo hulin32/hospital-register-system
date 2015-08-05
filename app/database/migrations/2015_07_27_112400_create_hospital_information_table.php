@@ -24,7 +24,8 @@ class CreateHospitalInformationTable extends Migration {
 
 			$table->index( 'hospital_id' );
 			$table->foreign( 'hospital_id' )
-				  ->references( 'id' )->on( 'hospitals' )
+				  ->references( 'id' )
+				  ->on( 'hospitals' )
 				  ->onDelete( 'cascade' )
 				  ->onUpdate( 'cascade' );
 		}); 
@@ -37,7 +38,7 @@ class CreateHospitalInformationTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop( 'hospital_information' );
+		Schema::dropIfExists( 'hospital_information' );
 	}
 
 }

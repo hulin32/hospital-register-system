@@ -357,7 +357,7 @@ POST
             "resigter_account_id": 111
         }
 
-// 获取评论
+// 获取指定用户的评论
 GET
     /user/comment/get_comments: user_id
     request:
@@ -404,7 +404,7 @@ GET
 POST
     /user/comment/add_comment: user_id
     request:
-        doctor_id:
+        record_id:
         content:
     response:
         {
@@ -422,6 +422,26 @@ POST
         {
             "error_code": 0,
             "message": ""
+        }
+
+// 获取指定医生评论
+GET
+    /doctor/get_comments: user_id
+    request:
+        doctor_id:
+        page:
+        comments_per_page:
+    response:
+        {
+            "error_code": 0,
+            "total": 
+            "comments": [
+                {
+                    "id": 1,
+                    "content": ,
+                    "user_": ,
+                }
+            ]
         }
 
 // 获取医生信息
@@ -457,19 +477,9 @@ GET
             ]
         }
 
-// 获取指定医生的评论记录
-GET
-    /doctor/get_comments: user_id
-    request:
-        doctor_id:
-    response:
-        {
-            "error_code":
-        }
-
 // 获取可预约的时间段
 GET
-    /doctor/get_schedule: user_id
+    /doctor/get_schedules: user_id
     request:
         doctor_id: 
         latest: 7

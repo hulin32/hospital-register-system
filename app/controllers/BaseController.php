@@ -27,7 +27,8 @@ class BaseController extends Controller {
 		$this->preprocess_functions = array();
 
 		$this->template = '';
-		$this->return_type = Request::format(); //Input::get( 'return_type', self::$default_return_type );
+		$this->return_type = Input::get( 'return_type', self::$default_return_type ); // for test
+		//$this->return_type = Request::format(); 
 	}
 
 	public function is_status_ok(){

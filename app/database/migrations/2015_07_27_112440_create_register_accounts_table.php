@@ -32,7 +32,8 @@ class CreateRegisterAccountsTable extends Migration {
 			
 			$table->index( 'user_id' );
 			$table->foreign( 'user_id' )
-				  ->references( 'id' )->on( 'users' )
+				  ->references( 'id' )
+				  ->on( 'users' )
 				  ->onDelete( 'cascade' )
 				  ->onUpdate( 'cascade' );
 		});
@@ -45,7 +46,7 @@ class CreateRegisterAccountsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop( 'register_accounts' );
+		Schema::dropIfExists( 'register_accounts' );
 	}
 
 }

@@ -40,7 +40,7 @@ class CreateHospitalsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop( 'hospitals' );
+		Schema::dropIfExists( 'hospitals' );
 	}
 
 }

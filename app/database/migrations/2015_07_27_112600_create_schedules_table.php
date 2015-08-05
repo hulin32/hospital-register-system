@@ -20,9 +20,9 @@ class CreateSchedulesTable extends Migration {
 			$table->timestamps();
 
 			$table->index( 'doctor_id' );
-
 			$table->foreign( 'doctor_id' )
-				  ->references( 'id' )->on( 'doctors' )
+				  ->references( 'id' )
+				  ->on( 'doctors' )
 				  ->onDelete('cascade')
 				  ->onUpdate('cascade');
 		});
@@ -35,7 +35,7 @@ class CreateSchedulesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop( 'schedules' );
+		Schema::dropIfExists( 'schedules' );
 	}
 
 }

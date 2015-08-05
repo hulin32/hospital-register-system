@@ -12,72 +12,81 @@
 */
 
 // 医院模块
-Route::group(array('prefix' => 'hospital'), function()
+Route::group(array( 'prefix' => 'hospital' ), function()
 {
-	Route::get('introduction', 'HospitalController@introduction');
-    Route::get('traffic_guide', 'HospitalController@traffic_guide');
-    Route::get('usage', 'HospitalController@usage');
+	Route::get( 'introduction', 'HospitalController@introduction' );
+    Route::get( 'traffic_guide', 'HospitalController@traffic_guide' );
+    Route::get( 'usage', 'HospitalController@usage' );
 
     // 资讯模块
-    Route::group(array('prefix' => 'information'), function(){
-        Route::get('preview', 'HospitalInformationController@preview');
-        Route::get('detail', 'HospitalInformationController@detail');
+    Route::group(array( 'prefix' => 'information' ), function(){
+        Route::get( 'preview', 'HospitalInformationController@preview' );
+        Route::get( 'detail', 'HospitalInformationController@detail' );
     });
 
     // 诊室模块
-    Route::group(array('prefix' => 'department'), function(){
-        Route::get('overview', 'DepartmentController@overview');
-        Route::get('detail', 'DepartmentController@detail');
+    Route::group(array( 'prefix' => 'department' ), function(){
+        Route::get( 'overview', 'DepartmentController@overview' );
+        Route::get( 'detail', 'DepartmentController@detail' );
     });
 });
 
 //用户模块
-Route::group(array('prefix' => 'user'), function(){
+Route::group(array( 'prefix' => 'user' ), function(){
     
-    Route::get('check_phone', 'UserController@check_phone');
-    Route::get('check_verification_code', 'UserController@check_verification_code');
-    Route::post('send_verification_code', 'UserController@send_verification_code');
+    Route::get( 'check_phone', 'UserController@check_phone' );
+    Route::get( 'check_verification_code', 'UserController@check_verification_code' );
+    Route::post( 'send_verification_code', 'UserController@send_verification_code' );
 
-    Route::get('register', 'UserController@register_get');
-    Route::post('register', 'UserController@register_post');
-    Route::get('login', 'UserController@login_get');
-    Route::post('login', 'UserController@login_post');
+    Route::get( 'register', 'UserController@register_get' );
+    Route::post( 'register', 'UserController@register_post' );
+    Route::get( 'login', 'UserController@login_get' );
+    Route::post( 'login', 'UserController@login_post' );
 
-    Route::get('center', 'UserController@user_center');        // add to document
+    Route::get( 'center', 'UserController@user_center' );        // add to document
 
     // 挂号记录模块
-    Route::group(array('prefix' => 'record', 'before' => 'auth.user.is_in'), function(){
-        Route::get('get_records', 'RegisterRecordController@get_records');
-        Route::post('add_record', 'RegisterRecordController@add_record');
-        Route::post('add_return_date', 'RegisterRecordController@add_return_date');
-        Route::post('modify_status', 'RegisterRecordController@modify_status');
-        Route::post('cancel', 'RegisterRecordController@cancel');
+    Route::group(array( 'prefix' => 'record', 'before' => 'auth.user.is_in' ), function(){
+        Route::get( 'get_records', 'RegisterRecordController@get_records' );
+        Route::get( 'add_record', 'RegisterRecordController@add_record' );
+        Route::get( 'add_return_date', 'RegisterRecordController@add_return_date' );
+        Route::get( 'modify_status', 'RegisterRecordController@modify_status' );
+        Route::get( 'cancel', 'RegisterRecordController@cancel' );
     });
 
     // 挂号账户模块
-    Route::group(array('prefix' => 'register_account', 'before' => 'auth.user.is_in'), function(){
-        Route::get('get_accounts', 'RegisterAccountController@get_accounts');
-        Route::get('detail', 'RegisterAccountController@detail');
-        Route::get('modify_account', 'RegisterAccountController@modify_account');
-        Route::get('add_account', 'RegisterAccountController@add_account');
+    Route::group(array( 'prefix' => 'register_account', 'before' => 'auth.user.is_in' ), function(){
+        Route::get( 'get_accounts', 'RegisterAccountController@get_accounts' );
+        Route::get( 'detail', 'RegisterAccountController@detail' );
+        Route::get( 'modify_account', 'RegisterAccountController@modify_account' );
+        Route::get( 'add_account', 'RegisterAccountController@add_account' );
     });
 
     // 评论模块
-    Route::group(array('prefix' => 'comment', 'before' => 'auth.user.is_in'), function(){
-        Route::get('get_comments', 'CommentController@get_user_comments');
-        Route::post('add_comment', 'CommentController@add_comment');
+    Route::group(array( 'prefix' => 'comment', 'before' => 'auth.user.is_in' ), function(){
+        Route::get( 'get_comments', 'CommentController@get_user_comments' );
+        Route::get( 'add_comment', 'CommentController@add_comment' );
     });
 
     // 反馈模块
-    Route::group(array('prefix' => 'feedback', 'before' => 'auth.user.is_in'), function(){
-        Route::post('add_feedback', 'FeedbackController@add_feedback');
+    Route::group(array( 'prefix' => 'feedback', 'before' => 'auth.user.is_in' ), function(){
+        Route::get( 'add_feedback', 'FeedbackController@add_feedback' );
     });
 });
 
 // 医生模块
-Route::group(array('prefix' => 'doctor', 'before' => 'auth.user.is_in'), function(){
-    Route::get('get_comments', 'CommentController@get_doctor_comments');
-    Route::get('get_doctors', 'DoctorController@get_doctors');
-    Route::get('get_schedules', 'ScheduleController@get_schedules');
-    Route::get('get_periods', 'PeriodController@get_periods');
+Route::group(array( 'prefix' => 'doctor', 'before' => 'auth.user.is_in' ), function(){
+    Route::get( 'get_comments', 'CommentController@get_doctor_comments' );
+    Route::get( 'get_doctors', 'DoctorController@get_doctors' );
+    Route::get( 'get_schedules', 'ScheduleController@get_schedules' );
+    Route::get( 'get_periods', 'PeriodController@get_periods' );
+});
+
+// 挂号模块
+// for weixin
+Route::group(array( 'prefix' => 'register', 'before' => 'auth.user.is_in' ), function(){
+    Route::get( 'select_department', 'RegisterController@select_department'  );
+    Route::get( 'select_doctor', 'RegisterController@select_doctor' );
+    Route::get( 'select_schedule', 'RegisterController@select_schedule' );
+    Route::get( 'select_period', 'RegisterController@select_schedule' );
 });

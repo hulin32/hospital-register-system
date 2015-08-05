@@ -10,7 +10,7 @@ class HospitalTableSeeder extends Seeder {
             'name' => '海口市妇幼保健院',
             'address' => '海口市琼山区国兴大道文坛6号',
             'phone' => '0898-65222333',
-            'logo' => '/images/logo2.png',
+            'logo' => '/images/hospital/logo.png',
             'photo' => '/images/hospital/hospital_picture.png',
             'register_start' => '00:00',
             'register_stop' => '23:59',

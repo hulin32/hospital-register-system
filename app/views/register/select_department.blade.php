@@ -6,7 +6,7 @@
 
 @section('css')
     @parent
-    <link rel="stylesheet" type="text/css" href="/dist/css/register/index.css" />
+    <link rel="stylesheet" type="text/css" href="/dist/css/register/select_department.css" />
 @stop
 
 @section('js-lib')
@@ -27,7 +27,7 @@
         <div class="desc-name l-grey">{{{ $hospital['name'] }}}</div>
         <div class="desc-level">二级</div>
     </div>
-            
+
     <div class="desc-wrap">
         <div class="desc-body clearfix">
             <div class="desc-left">

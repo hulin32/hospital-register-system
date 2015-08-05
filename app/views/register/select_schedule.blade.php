@@ -6,7 +6,7 @@
 
 @section('css')
     @parent
-    <link rel="stylesheet" type="text/css" href="/dist/css/register/select_time.css" />
+    <link rel="stylesheet" type="text/css" href="/dist/css/register/select_schedule.css" />
 @stop
 
 @section('js-lib')
@@ -25,10 +25,10 @@
     <div class="doc-info-wrap clearfix">
         <img class="doc-pic float-left" src="icon/doc.png" alt="王磊" />
         <div class="doc-info-detail float-left">
-            <div class="doc-name">王磊</div>
-            <div class="doc-title">职称: 副主任医师</div>
-            <div class="doc-section">科室：妇科</div>
-            <div class="doc-hospital">医院：海口市妇幼保健院</div>
+            <div class="doc-name">{{{ $doctor['name'] }}}</div>
+            <div class="doc-title">职称: {{{ $doctor['title'] }}}</div>
+            <div class="doc-section">科室：{{{ $doctor['department'] }}}</div>
+            <div class="doc-hospital">医院：{{{ $doctor['hospital'] }}}</div>
         </div>
     </div>
 @stop
@@ -40,7 +40,7 @@
             <table class="schedule">
                 @foreach ( $schedules as $schedule )
                     <tr class="schedule-data">
-                        <th class="date">04月27日</th>
+                        <th class="date">{{{ $schedule['date'] }}}</th>
                         <td>
                             @if ( $schedule['morning']['current'] >= $schedule['morning']['total'] )
                                 <button class="btn-disabled" disabled="disabled">

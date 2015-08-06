@@ -52,14 +52,14 @@ GET
                     "title": "",
                     "image": "/image/1.jpg",
                     "is_new": true,
-                    "created_at":                       // 
+                    "created_at": "2015-07-02"
                 },
                 {
                     "id": 1,
                     "title": "",
                     "image": "",
                     "is_new": false,
-                    "created_at":                       // 
+                    "created_at": "2015-07-03"
                 }
             ]
         }
@@ -79,7 +79,7 @@ GET
                 "title": "",                    
                 "image": "",
                 "is_new": false,                        // 是否新发布
-                "created_at": ,                         // 
+                "created_at": "2015-07-03",   
                 "content":                              // 内容
             }
         }

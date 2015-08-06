@@ -120,7 +120,7 @@ GET
         }
 
 // 发送手机验证码
-GET 
+POST 
     /user/send_verification_code
     request:
         telephone: 13580501456

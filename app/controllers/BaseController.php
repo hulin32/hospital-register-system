@@ -18,9 +18,9 @@ class BaseController extends Controller {
 
 	protected static $default_return_type = 'html';
 
-	protected function get_return_type(){
+	protected function get_return_format(){
 
-		if ( Request::wantsJson() ){
+		if ( Request::format() == 'json' ){
 			return 'json';
 		}
 
@@ -37,7 +37,7 @@ class BaseController extends Controller {
 
 		$this->template = '';
 		//$this->return_type = Input::get( 'return_type', self::$default_return_type ); // for web test
-		$this->return_type = $this->get_return_type(); 
+		$this->return_type = $this->get_return_format(); 
 	}
 
 	public function is_status_ok(){

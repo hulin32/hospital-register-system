@@ -49,29 +49,29 @@ Route::group(array( 'prefix' => 'user' ), function(){
     // 挂号记录模块
     Route::group(array( 'prefix' => 'record', 'before' => 'auth.user.is_in' ), function(){
         Route::get( 'get_records', 'RegisterRecordController@get_records' );
-        Route::get( 'add_record', 'RegisterRecordController@add_record' );
-        Route::get( 'add_return_date', 'RegisterRecordController@add_return_date' );
-        Route::get( 'modify_status', 'RegisterRecordController@modify_status' );
-        Route::get( 'cancel', 'RegisterRecordController@cancel' );
+        Route::post( 'add_record', 'RegisterRecordController@add_record' );
+        Route::post( 'add_return_date', 'RegisterRecordController@add_return_date' );
+        Route::post( 'modify_status', 'RegisterRecordController@modify_status' );
+        Route::post( 'cancel', 'RegisterRecordController@cancel' );
     });
 
     // 挂号账户模块
     Route::group(array( 'prefix' => 'register_account', 'before' => 'auth.user.is_in' ), function(){
         Route::get( 'get_accounts', 'RegisterAccountController@get_accounts' );
         Route::get( 'detail', 'RegisterAccountController@detail' );
-        Route::get( 'modify_account', 'RegisterAccountController@modify_account' );
-        Route::get( 'add_account', 'RegisterAccountController@add_account' );
+        Route::post( 'modify_account', 'RegisterAccountController@modify_account' );
+        Route::post( 'add_account', 'RegisterAccountController@add_account' );
     });
 
     // 评论模块
     Route::group(array( 'prefix' => 'comment', 'before' => 'auth.user.is_in' ), function(){
         Route::get( 'get_comments', 'CommentController@get_user_comments' );
-        Route::get( 'add_comment', 'CommentController@add_comment' );
+        Route::post( 'add_comment', 'CommentController@add_comment' );
     });
 
     // 反馈模块
     Route::group(array( 'prefix' => 'feedback', 'before' => 'auth.user.is_in' ), function(){
-        Route::get( 'add_feedback', 'FeedbackController@add_feedback' );
+        Route::post( 'add_feedback', 'FeedbackController@add_feedback' );
     });
 });
 

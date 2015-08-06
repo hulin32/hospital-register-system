@@ -451,6 +451,7 @@ GET
                 {
                     "id": 1,
                     "content": ,
+                    "created_at": ,
                     "user": {
                         "real_name": ,
                         "gender": ,

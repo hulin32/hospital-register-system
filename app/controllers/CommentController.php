@@ -47,6 +47,8 @@ class CommentController extends BaseController{
         foreach ( $comments as $comment ){
             $doctor = Doctor::find( $comment['doctor_id'] );
 
+//            $comment['created_at'] = date_timestamp_get( date_create( $comment['created_at'] ) );
+
             $comment['doctor'] = array(
                 'id'            => $doctor->id,
                 'name'          => $doctor->name,
@@ -65,16 +67,24 @@ class CommentController extends BaseController{
     public function get_doctor_comments(){
         $comments_per_page = Input::get( 'comments_per_page', 10 );
 
-        $comments = Comment::select( 'comments.id', 'comments.content', 'users.real_name as user_name' )
-                           ->join( 'users', 'comments.user_id', '=', 'users.id' )
-                           ->where( 'doctor_id', Input::get( 'doctor_id' ) )
+        $comments = Comment::select( 'comments.id', 'comments.content', 'comments.created_at', 'users.real_name as user_name' )
+                           ->join( 'register_records', 'comments.record_id', '=', 'register_records.id' )
+                           ->join( 'register_accounts', 'register_records.account_id', '=', 'register_accounts.id' )
+                           ->join( 'doctors', 'register_records.doctor_id', '=', 'doctors.id' )
+                           ->join( 'users', 'register_accounts.user_id', '=', 'users.id' )
+                           ->where( 'users.id', Session::get( 'user.id' ) )
+                           ->where( 'doctors.id', Input::get( 'doctor_id' ) )
                            ->paginate( $comments_per_page );
 
         if ( !isset( $comments ) ){
             return Response::json(array( 'error_code' => 1, 'message' => '无评价记录' ));
         }
-
-        return Response::json(array( 'error_code' => 0, 'total' => $comments->count(), 'comments' => $comments ));
+/*
+        foreach ( $comments as $comment ){
+            $comment['created_at'] = date_timestamp_get( date_create( $comment['created_at'] ) );
+        }
+*/
+        return Response::json(array( 'error_code' => 0, 'total' => $comments->count(), 'comments' => $comments->toArray() ));
     }
 
     public function add_comment(){

@@ -19,13 +19,8 @@ class RegisterRecord extends \Eloquent {
         'advice',
         'return_date',
         'doctor_id',
-        'account_id',
-        'user_id'
+        'account_id'
     );
-
-    public function user(){
-        return $this->belongsTo( 'User' );
-    }
 
     public function doctor(){
         return $this->belongsTo( 'Doctor' );

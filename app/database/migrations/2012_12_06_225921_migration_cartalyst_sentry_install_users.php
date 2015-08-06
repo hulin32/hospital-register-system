@@ -33,11 +33,13 @@ class MigrationCartalystSentryInstallUsers extends Migration {
 		{
 			$table->increments('id');
 			
-			$table->string("account");
+			$table->string("nickname");
 			$table->string('password');
 			$table->string('phone');
 			$table->string('real_name');
-			$table->integer("gender")->nullable();
+			$table->integer("gender");
+			$table->string('photo')->nullable();
+			
 
 			$table->text('permissions')->nullable();
 			$table->boolean('activated')->default(0);
@@ -52,7 +54,6 @@ class MigrationCartalystSentryInstallUsers extends Migration {
 			// We'll need to ensure that MySQL uses the InnoDB engine to
 			// support the indexes, other engines aren't affected.
 			$table->engine = 'InnoDB';
-			$table->unique('account');
 			$table->unique('phone');
 			$table->index('activation_code');
 			$table->index('reset_password_code');

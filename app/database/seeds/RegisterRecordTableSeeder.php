@@ -15,8 +15,7 @@ class RegisterRecordTableSeeder extends Seeder {
             'advice' => '',
             'return_date' => '2015-08-02',
             'doctor_id' => 5,
-            'account_id' => 1,
-            'user_id' => 4
+            'account_id' => 1
         ));
 
         RegisterRecord::create(array(
@@ -28,8 +27,7 @@ class RegisterRecordTableSeeder extends Seeder {
             'advice' => '多喝水',
             'return_date' => '2015-07-20',
             'doctor_id' => 6,
-            'account_id' => 2,
-            'user_id' => 3
+            'account_id' => 2
         ));
 
         RegisterRecord::create(array(
@@ -41,8 +39,7 @@ class RegisterRecordTableSeeder extends Seeder {
             'advice' => '多吃药',
             'return_date' => '2015-08-20',
             'doctor_id' => 7,
-            'account_id' => 3,
-            'user_id' => 2
+            'account_id' => 3
         ));
 
         RegisterRecord::create(array(
@@ -54,8 +51,7 @@ class RegisterRecordTableSeeder extends Seeder {
             'advice' => '多运动',
             'return_date' => '2015-08-01',
             'doctor_id' => 8,
-            'account_id' => 4,
-            'user_id' => 1
+            'account_id' => 4
         ));
     }
 }

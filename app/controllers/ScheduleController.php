@@ -20,11 +20,14 @@ class ScheduleController extends BaseController{
         $current_date = date_create();
         $latest = (int)Input::get( 'latest' );
 
+        $default_latest = 7;
+        $latest = $latest >= $default_latest ? $default_latest : 
+
         foreach ( $schedules as $schedule ){
             $sd = date_create( $schedule->date );
             $diff = date_diff( $current_date, $sd );
 
-            if ( $diff->d >= 0 && $diff->d < 7 ){
+            if ( $diff->d >= 0 && $diff->d < $latest ){
                 $result[] = array(
                     'id'        => $schedule->id,
                     'date'      => $schedule->date,

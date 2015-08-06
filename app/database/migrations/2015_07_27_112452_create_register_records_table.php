@@ -23,15 +23,7 @@ class CreateRegisterRecordsTable extends Migration {
 			$table->date( 'return_date' )->nullable();
 			$table->integer( 'doctor_id' )->unsigned();
 			$table->integer( 'account_id' )->unsigned();
-			$table->integer( 'user_id' )->unsigned();
 			$table->timestamps();
-
-			$table->index( 'user_id' );
-			$table->foreign( 'user_id' )
-				  ->references( 'id' )
-				  ->on( 'users' )
-				  ->onDelete( 'cascade' )
-				  ->onUpdate( 'cascade' );
 
 			$table->index( 'doctor_id' );
 			$table->foreign( 'doctor_id' )

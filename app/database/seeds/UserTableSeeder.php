@@ -8,7 +8,7 @@ class UserTableSeeder extends Seeder {
         DB::table( 'users' )->delete();
 
         Sentry::createUser(array(
-            'account' => 'hyuyuan',
+            'nickname' => 'hyuyuan',
             'password' => '58085088',
             'real_name' => '黄裕源',
             'phone' => '13580501456',
@@ -17,7 +17,7 @@ class UserTableSeeder extends Seeder {
         ));
 
         Sentry::createUser(array(
-            'account' => 'Cobb',
+            'nickname' => 'Cobb',
             'password' => '123456',
             'real_name' => '李四',
             'phone' => '13512341234',
@@ -26,7 +26,7 @@ class UserTableSeeder extends Seeder {
         ));
 
         Sentry::createUser(array(
-            'account' => 'Alies',
+            'nickname' => 'Alies',
             'password' => '123123',
             'real_name' => '小李子',
             'phone' => '18511112222',
@@ -35,7 +35,7 @@ class UserTableSeeder extends Seeder {
         ));
 
         Sentry::createUser(array(
-            'account' => 'adeng',
+            'nickname' => 'adeng',
             'password' => '8888888',
             'real_name' => '阿登',
             'phone' => '18899990000',
@@ -44,7 +44,7 @@ class UserTableSeeder extends Seeder {
         ));
 
         Sentry::createUser(array(
-            'account' => 'hulin',
+            'nickname' => 'hulin',
             'password' => 'abcdefg',
             'real_name' => '胡琳',
             'phone' => '13250502288',
@@ -53,7 +53,7 @@ class UserTableSeeder extends Seeder {
         ));
 
         Sentry::createUser(array(
-            'account' => 'jiali',
+            'nickname' => 'jiali',
             'password' => 'bcd123',
             'real_name' => '袁嘉丽',
             'phone' => '13322225555',

@@ -25,10 +25,6 @@ class Doctor extends \Eloquent {
         return $this->hasMany( 'RegisterRecord' );
     }
 
-    public function comments(){
-        return $this->hasMany( 'Comment' );
-    }
-
     public function schedules(){
         return $this->hasMany( 'Schedule' );
     }

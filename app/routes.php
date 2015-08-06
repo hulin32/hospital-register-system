@@ -42,6 +42,7 @@ Route::group(array( 'prefix' => 'user' ), function(){
     Route::post( 'register', 'UserController@register_post' );
     Route::get( 'login', 'UserController@login_get' );
     Route::post( 'login', 'UserController@login_post' );
+    Route::post( 'reset_password', 'UserController@verify_and_reset_password' );
 
     Route::get( 'center', 'UserController@user_center' );        // add to document
 

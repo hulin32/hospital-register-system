@@ -170,6 +170,18 @@ POST
             "message": ""
         }
 
+// 重置密码
+// 调用前先调用验证码接口
+POST
+    /user/verify_and_reset_password
+    request:
+        new_password:
+    response:
+        {
+            "error_code": 0,
+            "message": 
+        }
+
 // 用户注册
 // web端用
 GET 
@@ -439,7 +451,11 @@ GET
                 {
                     "id": 1,
                     "content": ,
-                    "user_": ,
+                    "user": {
+                        "real_name": ,
+                        "gender": ,
+                        "photo": ,
+                    }
                 }
             ]
         }

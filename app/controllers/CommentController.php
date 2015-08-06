@@ -8,12 +8,37 @@ class CommentController extends BaseController{
         // 怎么改进
         $comments_per_page = Input::get( 'comments_per_page', 10 );
 
+/*
+        $records = User::find( Session::get( 'user.id' ) )
+                       ->register_accounts()->records()
+                       ->with( 'comment' )->with( 'doctor' )->paginate( $comments_per_page );
+
+        $comments = array();
+        foreach ( $records as $record ){
+            $comment = $record->comment;
+            $doctor  = $record->doctor;
+
+            $comments[] = array(
+                'id'            => $comment->id,
+                'content'       => $comment->content,
+                'created_at'    => $comment->created_at,
+                'doctor'        => array(
+                                    'id'         => $doctor->id,
+                                    'name'       => $doctor->name,
+                                    'photo'      => $doctor->photo,
+                                    'title'      => $doctor->title->name,
+                                    'department' => $doctor->department->name,
+                                    'hospital'   => $doctor->department->hospital->name )
+            );
+        }
+*/
+
         $comments = Comment::select( 'comments.id', 'comments.content', 'comments.created_at', 'register_records.doctor_id' )
                            ->join( 'register_records', 'comments.record_id', '=', 'register_records.id' )
-                           ->where( 'user_id', Session::get( 'user.id' ) )
+                           ->join( 'register_accounts', 'register_records.account_id', '=', 'register_accounts.id' )
+                           ->join( 'users', 'register_accounts.user_id', '=', 'users.id' )
+                           ->where( 'users.id', Session::get( 'user.id' ) )
                            ->paginate( $comments_per_page );
-
-        //return Response::json($comments->toArray());die();
 
         if ( !isset( $comments ) ){
             return Response::json(array( 'error_code' => 1, 'message' => '无评价记录' ));

@@ -18,6 +18,12 @@ class RegisterRecordController extends BaseController{
                                    ->register_accounts()
                                    ->with( 'records' )->get();
 
+        if ( !isset( $register_accounts ) ){
+            $this->set_error_code( 1 );
+            $this->set_error_message( 1, '无记录' );
+            return $this->response();
+        }
+
         $data = array( 'register_accounts' => array() );
 
         foreach( $register_accounts as $register_account ){
@@ -72,7 +78,7 @@ class RegisterRecordController extends BaseController{
         $schedule       = $period->schedule;
 
         if ( !isset( $period ) ){
-            return Response::json(array( 'error_code' => 1, 'message' => '无该时间段，请重新选择' ));
+            return Response::json(array( 'error_code' => 2, 'message' => '无该时间段，请重新选择' ));
         }
 
         $user_id = Session::get( 'user.id' );
@@ -90,21 +96,25 @@ class RegisterRecordController extends BaseController{
             $accounts = User::find( $user_id )->register_accounts();
 
             if ( !isset( $accounts ) ){
-                return Response::json(array( 'error_code' => 2, 'message' => '请先申请挂号账户' ));
+                return Response::json(array( 'error_code' => 4, 'message' => '请先申请挂号账户' ));
             }
             
             $account_id = $accounts->first()->id;
         }
 
-        RegisterRecord::create(array(
-            'status'        => 0,
-            'date'          => $schedule->date,
-            'start'         => $period->start,
-            'end'           => $period->end,
-            'period'        => $schedule->period,
-            'doctor_id'     => $schedule->doctor_id,
-            'account_id'    => $account_id
-        ));
+        try{
+            RegisterRecord::create(array(
+                'status'        => 0,
+                'date'          => $schedule->date,
+                'start'         => $period->start,
+                'end'           => $period->end,
+                'period'        => $schedule->period,
+                'doctor_id'     => $schedule->doctor_id,
+                'account_id'    => $account_id
+            ));
+        }catch( Exception $e ){
+            return Response::json(array( 'error_code' => 1, 'message' => '添加失败' ));
+        }
 
         return Response::json(array( 'error_code' => 0, 'message' => '添加成功' ));
     }
@@ -116,22 +126,22 @@ class RegisterRecordController extends BaseController{
 
         // 是否存在该记录
         if ( !isset( $record ) ){
-            return Response::json(array( 'error_code' => 1, 'message' => '不存在该挂号' ));
+            return Response::json(array( 'error_code' => 2, 'message' => '不存在该挂号' ));
         }
 
         // 检查该就诊记录是否该用户的
         if ( $record->register_account()->first()->user_id != Session::get( 'user.id' ) ){
-            return Response::json(array( 'error_code' => 2, 'message' => '无法取消该挂号' ));
+            return Response::json(array( 'error_code' => 3, 'message' => '无法取消该挂号' ));
         }
 
         // 检查就诊状态
         if ( $record->status ){
-            return Response::json(array( 'error_code' => 3, 'message' => '已就诊无法取消' ));
+            return Response::json(array( 'error_code' => 4, 'message' => '已就诊无法取消' ));
         }
 
         // 取消
         if ( !RegisterRecord::destroy( $record_id ) ){
-            return Response::json(array( 'error_code' => 4, 'message' => '取消失败' ));
+            return Response::json(array( 'error_code' => 1, 'message' => '取消失败' ));
         }
 
         return Response::json(array( 'error_code' => 0, 'message' => '取消成功' ));
@@ -171,25 +181,25 @@ class RegisterRecordController extends BaseController{
 
         // 是否存在该记录
         if ( !isset( $record ) ){
-            return Response::json(array( 'error_code' => 1, 'message' => '不存在该挂号记录' ));
+            return Response::json(array( 'error_code' => 2, 'message' => '不存在该挂号记录' ));
         }
 
         // 检查该就诊记录是否该用户的
         if ( $record->register_account->user_id != Session::get( 'user.id' ) ){
-            return Response::json(array( 'error_code' => 2, 'message' => '无法修改该挂号' ));
+            return Response::json(array( 'error_code' => 3, 'message' => '无法修改该挂号' ));
         }
 
         // 检查就诊状态
         if ( !(int)($record->status) ){
-            return Response::json(array( 'error_code' => 3, 'message' => '尚未就诊' ));
+            return Response::json(array( 'error_code' => 4, 'message' => '尚未就诊' ));
         }
 
         $record->return_date = Input::get( 'date' );
 
         if ( !$record->save() ){
-            return Response::json(array( 'error_code' => 4, 'message' => '添加失败' ));
+            return Response::json(array( 'error_code' => 1, 'message' => '设置失败' ));
         }
 
-        return Response::json(array( 'error_code' => 0, 'message' => '添加成功' ));
+        return Response::json(array( 'error_code' => 0, 'message' => '设置成功' ));
     }
 }

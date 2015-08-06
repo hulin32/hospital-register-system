@@ -122,6 +122,3 @@ class CommentController extends BaseController{
 
     }
 }
-/*
-
-*/

@@ -71,6 +71,7 @@ class UserController extends BaseController{
     }
 
     public function check_phone(){
+
         $user_telephone = Input::get( 'verification.telephone' );
 
         if ( User::where( 'phone', $user_telephone )->first() ){
@@ -134,7 +135,7 @@ class UserController extends BaseController{
 
         if ( !$this->is_verification_failed() ){
 
-            return Response::json(array( 'error_code' => 4, 'message' => '已验证' ));
+            return Response::json(array( 'error_code' => 4, 'message' => '您已验证过了' ));
         }
 
         $code_from_input = Input::get( 'verification_code' );
@@ -168,7 +169,52 @@ class UserController extends BaseController{
         } 
 
         $user = User::where( 'phone', Session::get( 'verification.telephone' ) )->first();
+
+        // 该手机号尚未注册
+        if ( !isset( $user ) ){
+
+            Session::forget( 'verification' );
+
+            return Response::json(array( 'error_code' => 5, 'message' => '该手机号尚未注册' ));
+        }
+
         $user->password = $new_password;
+
+        if ( !$user->save() ){
+            return Response::json(array( 'error_code' => 1, 'message' => '重置密码失败' ));
+        }
+
+        return Response::json(array( 'error_code' => 0, 'message' => '重置密码成功' ));
+    }
+
+    public function modify_user(){
+
+        $user         = User::find( Session::get( 'user.id' ) );
+        $new_password = Input::get( 'new_password' );
+        $old_password = Input::get( 'old_password' );
+        $nickname     = Input::get( 'nickname' );
+
+        if ( isset( $new_password ) && isset( $old_password ) ) {
+            
+            if ( $new_password == $old_password ){
+
+                return Response::json(array( 'error_code' => 2, 'message' => '新旧密码不能相同' ));
+            }else{
+
+                if ( $user->password == $old_password ){
+                
+                    $user->password = $new_password;
+                }else{
+                    return Response::json(array( 'error_code' => 3, 'message' => '旧密码不正确' ));
+                }
+            }
+        }else{
+            return Response::json(array( 'error_code' => 4, 'message' => '修改密码需同时输入新旧密码' ));
+        }
+
+        if ( isset( $nickname ) ){
+            $user->nickname = $nickname;
+        }
 
         if ( !$user->save() ){
             return Response::json(array( 'error_code' => 1, 'message' => '修改失败' ));

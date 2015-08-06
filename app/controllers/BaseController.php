@@ -36,7 +36,6 @@ class BaseController extends Controller {
 		$this->preprocess_functions = array();
 
 		$this->template = '';
-		//$this->return_type = Input::get( 'return_type', self::$default_return_type ); // for web test
 		$this->return_type = $this->get_return_format(); 
 	}
 

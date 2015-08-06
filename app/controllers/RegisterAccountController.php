@@ -5,8 +5,8 @@ class RegisterAccountController extends BaseController{
     public function get_accounts(){
 
         $accounts = RegisterAccount::select( 'id', 'name', 'phone' )
-                                     ->where( 'user_id', Session::get( 'user.id' ) )
-                                     ->get();
+                                   ->where( 'user_id', Session::get( 'user.id' ) )
+                                   ->get();
 
         if ( !isset( $accounts )){
             return Response::json(array( 'error_code' => 1, 'message' => '您还没有挂号账户' ));
@@ -18,7 +18,7 @@ class RegisterAccountController extends BaseController{
     public function detail(){
 
         $account = RegisterAccount::find( Input::get( 'account_id' ) )
-                                    ->where( 'user_id', Session::get( 'user.id' ) )->first();
+                                  ->where( 'user_id', Session::get( 'user.id' ) )->first();
 
         if ( !isset( $account ) ){
             return Response::json(array( 'error_code' => 1, 'message' => '不存在该账户' ));
@@ -31,7 +31,7 @@ class RegisterAccountController extends BaseController{
 
         $inputs = Input::all();
         $account = RegisterAccount::find( $inputs['account_id'] )
-                                    ->where( 'user_id', Session::get( 'user.id' ) )->first(); 
+                                  ->where( 'user_id', Session::get( 'user.id' ) )->first(); 
 
         if ( !isset( $account ) ){
             return Response::json(array( 'error_code' => 1, 'message' => '不存在该账户' ));

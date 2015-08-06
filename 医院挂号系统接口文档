@@ -7,7 +7,8 @@ GET
         hospital_id: 1                                  // default: 1
     response:
         {
-            "error_code": 0,
+            "error_code": 0,                            // 0 - ok
+                                                        // 不存在该医院信息
             "name": "海口妇幼保健院"
             "photo": "/image/1111.jpg",                 // 图片链接
             "description":   ""                         // 介绍
@@ -20,7 +21,8 @@ GET
         hospital_id: 1
     response:
         {
-            "error_code": 0,
+            "error_code": 0,                            // 0 - ok
+                                                        // 不存在该医院信息
             "longtitude": 113.1111，                    // 经度
             "latitude": 26.222,                         // 纬度
             "traffic_intro": "",    
@@ -113,7 +115,8 @@ GET
         department_id: 5
     response:
         {
-            "error_code": 0,
+            "error_code": 0,                             // 0 - ok
+                                                         // 1 - Not found
             "name": "",
             "photo": "",
             "content": ""
@@ -126,10 +129,9 @@ POST
         telephone: 13580501456
     response:
         {
-            "error_code": 0,                                // 0 - 验证码已经发送
-                                                            // 1 - 手机号码不正确
-                                                            // 2 - 该手机号已被注册
-                                                            // 3 - 验证码发送失败
+            "error_code": 0,                             // 0 - 验证码已经发送
+                                                         // 1 - 手机号码不正确
+                                                         // 2 - 验证码发送失败
             "message": ""
         }
 
@@ -142,8 +144,9 @@ POST
         {
             "error_code": 0,                                // 0 - 验证码正确
                                                             // 1 - 验证码错误
-                                                            // 2 - 验证码格式错误
+                                                            // 2 - 请先获取验证码
                                                             // 3 - 请重新获取验证码
+                                                            // 4 - 您已验证过了
             "message": ""
         }
 
@@ -170,18 +173,6 @@ POST
             "message": ""
         }
 
-// 重置密码
-// 调用前先调用验证码接口
-POST
-    /user/verify_and_reset_password
-    request:
-        new_password:
-    response:
-        {
-            "error_code": 0,
-            "message": 
-        }
-
 // 用户注册
 // web端用
 GET 
@@ -200,8 +191,48 @@ POST
         telephone: "",
     response:
         {
-            "error_code": 0,                                //
+            "error_code": 0,                                // 0 - 注册成功
+                                                            // 1 - 注册失败
+                                                            // 2 - 请先验证手机号
+                                                            // 3 - 尚未验证通过
+                                                            // 4 - 请输入昵称
+                                                            // 5 - 请输入密码
+                                                            // 6 - 请输入真实姓名
             "message": "" 
+        }
+
+// 修改用户信息
+POST
+    /user/modify_user: user_id
+    request:
+        new_password:
+        old_password:
+        nickname
+    response:
+        {
+            "error_code": 0,                                // 0 - 修改成功
+                                                            // 1 - 修改失败
+                                                            // 2 - 新旧密码不能相同
+                                                            // 3 - 旧密码不正确
+                                                            // 4 - 修改密码需同时输入新旧密码
+            "message": 
+        }
+
+// 重置密码
+// 调用前先调用验证码接口
+POST
+    /user/verify_and_reset_password
+    request:
+        new_password:
+    response:
+        {
+            "error_code": 0,                                // 0 - 重置密码成功
+                                                            // 1 - 重置密码失败
+                                                            // 2 - 请先验证手机号
+                                                            // 3 - 尚未验证通过
+                                                            // 4 - 请输入新密码
+                                                            // 5 - 该手机号尚未注册
+            "message": 
         }
 
 // 用户中心
@@ -253,11 +284,15 @@ GET
 POST
     /user/record/add_record: user_id
     request:
-        account_id:
+        account_id:         
         period_id: 
     response:
         {
-            "error_code": 0,
+            "error_code": 0,                                // 0 - 添加成功
+                                                            // 1 - 添加失败
+                                                            // 2 - 无该时间段
+                                                            // 3 - 不存在该挂号账户
+                                                            // 4 - 请先申请挂号账户
             "message": ""
         }
 
@@ -268,7 +303,11 @@ POST
         record_id: 111
     response:
         {
-            "error_code": 0,
+            "error_code": 0,                                // 0 - 取消成功
+                                                            // 1 - 取消失败
+                                                            // 2 - 不存在该挂号
+                                                            // 3 - 无法取消该挂号
+                                                            // 4 - 已就诊无法取消
             "message": ""
         }
 
@@ -277,10 +316,14 @@ POST
     /user/record/add_return_date: user_id
     request:
         record_id: 
-        date: 
+        date: "2015-07-02"
     response:
         {
-            "error_code": 0,
+            "error_code": 0,                                // 0 - 设置成功
+                                                            // 1 - 设置失败
+                                                            // 2 - 不存在该挂号记录
+                                                            // 3 - 无法修改该挂号
+                                                            // 4 - 尚未就诊
             "message": ""
         }
 
@@ -290,7 +333,8 @@ GET
     request:
     response:
         {
-            "error_code": 0,
+            "error_code": 0,                                // 0 - ok
+                                                            // 1 - 您还没有挂号账户
             "accounts":
             [
                 {
@@ -313,7 +357,8 @@ GET
         account_id:
     response:
         {
-            "error_code": 0,
+            "error_code": 0,                                // 0 - ok
+                                                            // 1 - 不存在该账户
             "account": {
                 "name": "张雨",
                 "gender": 1,
@@ -344,7 +389,9 @@ POST
         emergency_phone:
     response:
         {
-            "error_code": 0,
+            "error_code": 0,                                // 0 - 修改成功
+                                                            // 1 - 修改失败
+                                                            // 2 - <return array>
             "message": ""
         }
 
@@ -364,7 +411,9 @@ POST
         emergency_phone:
     response:
         {
-            "error_code": 0,
+            "error_code": 0,                                // 0 - 添加成功
+                                                            // 1 - 添加失败
+                                                            // 2 - <return array>
             "message": "",
             "resigter_account_id": 111
         }
@@ -377,7 +426,8 @@ GET
         comments_per_page: 20
     response:
     {
-        "error_code": 0,
+        "error_code": 0,                                    // 0 - ok
+                                                            // 1 - 无评价记录
         "total": 123
         comments:
         [
@@ -420,7 +470,11 @@ POST
         content:
     response:
         {
-            "error_code": 0,
+            "error_code": 0,                                // 0 - 添加成功
+                                                            // 1 - 添加失败
+                                                            // 2 - 无该记录
+                                                            // 3 - 无效记录
+                                                            // 4 - 请输入评价 
             "message": ""
         }
 
@@ -432,7 +486,10 @@ POST
         content:
     response:
         {
-            "error_code": 0,
+            "error_code": 0,                                // 0 - 反馈成功
+                                                            // 1 - 反馈失败
+                                                            // 2 - 请输入标题
+                                                            // 3 - 请输入反馈内容
             "message": ""
         }
 
@@ -445,7 +502,8 @@ GET
         comments_per_page:
     response:
         {
-            "error_code": 0,
+            "error_code": 0,                                // 0 - ok
+                                                            // 1 - 无评价记录
             "total": 
             "comments": [
                 {
@@ -468,7 +526,9 @@ GET
         department_id:
     response:
         {
-            "error_code": 0,
+            "error_code": 0,                                // 0 - ok
+                                                            // 1 - 不存在该诊室
+                                                            // 2 - 该诊室无医生
             "doctors":
             [
                 {
@@ -478,7 +538,6 @@ GET
                     "photo": "/images/...",
                     "specialty":                                    // 特长
                     "can_be_registered": true,
-                    "can_be_commented": true,
                     "is_consultable": false
                 },
                 {
@@ -488,7 +547,6 @@ GET
                     "specialty":                                    // 特长
                     "photo": "/images/...",
                     "can_be_register": false,
-                    "can_be_commented": true,
                     "is_consultable": false
                 }
             ]
@@ -502,7 +560,9 @@ GET
         latest: 7
     response:
         {
-            "error_code": 0,
+            "error_code": 0,                                // 0 - ok
+                                                            // 1 - 不存在该医生
+                                                            // 2 - 没有排班
             "schedules":
             [
                 {
@@ -527,7 +587,9 @@ GET
         schedule_id
     response:
         {
-            "error_code": 0,
+            "error_code": 0,                                // 0 - ok
+                                                            // 1 - 不存在该排班
+                                                            // 2 - 该排班无日期
             "periods":
             [
                 {

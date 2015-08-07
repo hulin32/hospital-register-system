@@ -2,13 +2,13 @@
 
 class UserController extends BaseController{
 
-    protected static $verification_code_expire = 60;
+    protected static $verification_code_expire = 3600;
 
     protected static $verification_expire = 3600;
 
     protected static $possible_charactors = 'abcdefghijklmnopqrstuvwxyz0123456789';
 
-    protected static $telephone_reg = "/^13[0-9]{1}[0-9]{8}$|15[0189]{1}[0-9]{8}$|189[0-9]{8}$|17[0-9]{1}[0-9]{8}/";
+    protected static $telephone_reg = "/^13[0-9]{1}[0-9]{8}$|15[0189]{1}[0-9]{8}$|189[0-9]{8}$|17[0-9]{1}[0-9]{8}$/";
 
     protected function send_message( $user_telephone, $message ){
         
@@ -47,11 +47,8 @@ class UserController extends BaseController{
 
     protected function is_verification_expired(){
 
-        if ( !Session::has( 'verification' ) ){
-            return false;
-        }
-
-        if ( Session::get( 'verification.expire' ) > time() ){
+        if ( Session::has( 'verification' ) && Session::get( 'verification.expire' ) > time() ){
+            
             return false;
         }
 
@@ -60,25 +57,32 @@ class UserController extends BaseController{
 
     protected function is_verification_code_expired(){
 
-        $expire = Session::get( 'verification.code.expire' );
+        $code_expire = Session::get( 'verification.code.expire' );
 
-        if ( !isset( $expire ) || $expire > time() ){
+        if ( isset( $code_expire ) && $code_expire > time() ){
 
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     public function check_phone(){
 
-        $user_telephone = Input::get( 'verification.telephone' );
+        try{
+            $user = Sentry::findUserByLogin( Input::get( 'telephone' ) );
 
-        if ( User::where( 'phone', $user_telephone )->first() ){
-            return Response::json(array( 'error_code' => 1, 'message' => '该手机号已被注册' ));
+            return Response::json(array( 'error_code' => 1, 'message' => '该手机号已被注册' ));            
+
+        }catch( Cartalyst\Sentry\Users\UserNotFoundException $e ){
+
+            return Response::json(array( 'error_code' => 0, 'message' => '该手机号尚未注册' ));
+
+        }catch( Exception $e ){
+
+            return Response::json(array( 'error_code' => -1, 'message' => 'Unknown Error' ));
         }
 
-        return Response::json(array( 'error_code' => 0, 'message' => '该手机号可注册' ));
     }
 
     public function send_verification_code(){
@@ -121,7 +125,9 @@ class UserController extends BaseController{
         /**
          * Check if call this method directly
          */
-        if ( !$this->is_verification_expired() ){
+        if ( $this->is_verification_expired() ){
+
+            Session::forget( 'verification' );
 
             return Response::json(array( 'error_code' => 2, 'message' => '请先获取验证码' ));
         }
@@ -168,28 +174,32 @@ class UserController extends BaseController{
             return Response::json(array( 'error_code' => 4, 'message' => '请输入新密码' ));
         } 
 
-        $user = User::where( 'phone', Session::get( 'verification.telephone' ) )->first();
+        // 
+        try{
+            $user = Sentry::findUserByLogin( Session::get( 'verification.telephone' ) );
 
-        // 该手机号尚未注册
-        if ( !isset( $user ) ){
+            if ( $user->attemptResetPassword( $user->getResetPasswordCode(), $new_password ) ){
+                
+                return Response::json(array( 'error_code' => 0, 'message' => '重置密码成功' ));
+            }else{
 
+                return Response::json(array( 'error_code' => 1, 'message' => '重置密码失败' ));    
+            }
+        }catch( Cartalyst\Sentry\Users\UserNotFoundException $e ){
+            
             Session::forget( 'verification' );
 
             return Response::json(array( 'error_code' => 5, 'message' => '该手机号尚未注册' ));
+            
+        }catch( Exception $e ){
+
+            return Response::json(array( 'error_code' => -1, 'message' => 'Unknown Error' ));
         }
-
-        $user->password = $new_password;
-
-        if ( !$user->save() ){
-            return Response::json(array( 'error_code' => 1, 'message' => '重置密码失败' ));
-        }
-
-        return Response::json(array( 'error_code' => 0, 'message' => '重置密码成功' ));
     }
 
     public function modify_user(){
 
-        $user         = User::find( Session::get( 'user.id' ) );
+        $user         = Sentry::findUserById( Session::get( 'user.id' ) );
         $new_password = Input::get( 'new_password' );
         $old_password = Input::get( 'old_password' );
         $nickname     = Input::get( 'nickname' );
@@ -201,7 +211,7 @@ class UserController extends BaseController{
                 return Response::json(array( 'error_code' => 2, 'message' => '新旧密码不能相同' ));
             }else{
 
-                if ( $user->password == $old_password ){
+                if ( $user->checkPassword( $old_password ) ){
                 
                     $user->password = $new_password;
                 }else{
@@ -251,6 +261,10 @@ class UserController extends BaseController{
         }catch( Cartalyst\Sentry\Users\WrongPasswordException $e ){
 
             return Response::json(array( 'error_code' => 4, 'message' => '密码错误' ));
+        
+        }catch( Exception $e ){
+
+            return Response::json(array( 'error_code' => -1, 'message' => 'Unknown Error' ));
         }
 
         Session::put( 'user.id', Sentry::getUser()->id );
@@ -285,19 +299,19 @@ class UserController extends BaseController{
             return Response::json(array( 'error_code' => 6, 'message' => '请输入真实姓名' ));
         }
 
-        $telephone = Session::get( 'verification.telephone' );
-        $nickname   = Input::get( 'nickname' );
-        $password  = Input::get( 'password' );
-        $real_name = Input::get( 'real_name' );
+        if ( !Input::has( 'gender' ) ){
+            return Response::json(array( 'error_code' => 7, 'message' => '请输入性别' ));
+        }
 
         try{
-            Sentry::create(array(
-                'nickname' => $nickname,
-                'password' => $password,
-                'real_name' => $real_name,
-                'phone' => $telephone,
-                'activated' => true
-            ));    
+            Sentry::createUser(array(
+                'nickname'      => Input::get( 'nickname' ),
+                'password'      => Input::get( 'password' ),
+                'real_name'     => Input::get( 'real_name' ),
+                'gender'        => Input::get( 'gender' ),
+                'phone'         => Session::get( 'verification.telephone' ),
+                'activated'     => true
+            ));   
         }catch( Exception $e ){
             return Response::json(array( 'error_code' => 1, 'message' => '注册失败' ));
         }

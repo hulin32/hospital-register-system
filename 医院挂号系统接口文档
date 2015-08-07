@@ -34,16 +34,16 @@ GET
 GET 
     /hospital/information/preview
     request:
-        hospital_id                                     // default: 1
-        page                                            // 1
-        news_per_page                                   // 10
+        hospital_id                                         // default: 1
+        page                                                // 1
+        news_per_page                                       // 10
     response:
         // return type must be json
         {
-            "error_code": 0,                            // 0 - ok
-                                                           1 - 无资讯
-                                                           2 - 页码从1开始
-                                                           3 - 页码超过最后一页
+            "error_code": 0,                                // 0 - ok
+                                                               1 - 无资讯
+                                                               2 - 页码从1开始
+                                                               3 - 页码超过最后一页
             "total": 123,
             "news_list":
             [
@@ -72,15 +72,15 @@ GET
         hospital_id: 1
     response:
         {
-            "error_code": 0,                            // 0 - ok
-                                                        // 1 - Not found
+            "error_code": 0,                                // 0 - ok
+                                                            // 1 - Not found
             "news":
             {
                 "title": "",                    
                 "image": "",
-                "is_new": false,                        // 是否新发布
+                "is_new": false,                            // 是否新发布
                 "created_at": "2015-07-03",   
-                "content":                              // 内容
+                "content":                                  // 内容
             }
         }
 
@@ -91,8 +91,8 @@ GET
         hospital_id: 1
     response:
         {
-            "error_code": 0,                            // 0 - ok
-                                                        // 1 - Not found
+            "error_code": 0,                                // 0 - ok
+                                                            // 1 - Not found
             "departments":
             [
                 {
@@ -115,8 +115,8 @@ GET
         department_id: 5
     response:
         {
-            "error_code": 0,                             // 0 - ok
-                                                         // 1 - Not found
+            "error_code": 0,                                // 0 - ok
+                                                            // 1 - Not found
             "name": "",
             "photo": "",
             "content": ""
@@ -129,14 +129,14 @@ POST
         telephone: 13580501456
     response:
         {
-            "error_code": 0,                             // 0 - 验证码已经发送
-                                                         // 1 - 手机号码不正确
-                                                         // 2 - 验证码发送失败
+            "error_code": 0,                                // 0 - 验证码已经发送
+                                                            // 1 - 手机号码不正确
+                                                            // 2 - 验证码发送失败
             "message": ""
         }
 
 // 验证手机验证码
-POST
+GET
     /user/check_verification_code
     request:
         verification_code: 123123
@@ -147,6 +147,18 @@ POST
                                                             // 2 - 请先获取验证码
                                                             // 3 - 请重新获取验证码
                                                             // 4 - 您已验证过了
+            "message": ""
+        }
+
+// 检查手机号是否被注册
+GET
+    /user/check_phone
+    request:
+        telephone: 13511223344
+    response:
+        {
+            "error_code": 0,                                // 0 - 该手机号尚未注册
+                                                            // 1 - 该手机号已被注册
             "message": ""
         }
 

@@ -19,12 +19,6 @@ class ScheduleTableSeeder extends Seeder {
         ));
 
         Schedule::create(array(
-            'date' => '2015-08-10',
-            'period' => 2,
-            'doctor_id' => 1,
-        ));
-
-        Schedule::create(array(
             'date' => '2015-08-11',
             'period' => 0,
             'doctor_id' => 1,
@@ -39,12 +33,6 @@ class ScheduleTableSeeder extends Seeder {
         Schedule::create(array(
             'date' => '2015-08-11',
             'period' => 1,
-            'doctor_id' => 2,
-        ));
-
-        Schedule::create(array(
-            'date' => '2015-08-11',
-            'period' => 2,
             'doctor_id' => 2,
         ));
 

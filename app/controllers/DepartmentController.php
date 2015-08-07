@@ -13,7 +13,7 @@ class DepartmentController extends HospitalBasedController {
 
     public function overview(){
         $departments = Department::select( 'id', 'name', 'icon' )
-                                   ->where( 'hospital_id', 2 )
+                                   ->where( 'hospital_id', $this->hospital_id )
                                    ->get();
 
         if ( $departments ){

@@ -9,7 +9,7 @@ class RegisterAccountController extends BaseController{
                                    ->get();
 
         if ( !isset( $accounts )){
-            return Response::json(array( 'error_code' => 1, 'message' => '您还没有挂号账户' ));
+            return Response::json(array( 'error_code' => 1, 'message' => 'Unkown Error' ));
         }
 
         return Response::json(array( 'error_code' => 0, 'accounts' => $accounts ));
@@ -140,8 +140,9 @@ class RegisterAccountController extends BaseController{
             $custom_attribute
         );
 
+        // $validator->messages()->all() ?
         if ( $validator->fails() ){
-            return Response::json(array( 'error_code' => 2, 'messages' => $validator->messages()->all() ));
+            return Response::json(array( 'error_code' => 2, 'message' => $validator->messages()->all() ));
         }
 
         $account = new RegisterAccount();

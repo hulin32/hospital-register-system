@@ -38,16 +38,9 @@ class HospitalInformationController extends HospitalBasedController{
         $news = HospitalInformation::find( $news_id );
 
         if ( $news ){
-            return Response::json(array(
-                       'error_code' => 0,
-                       'news' => array(
-                            'title' => $news->title,
-                            'image' => $news->iamge,
-                            'is_new' => $news->is_new,
-                            'created_at' => $news->created_at,
-                            'content' => $news->content
-                        )
-                   ));
+            return Response::json(array( 
+                'error_code' => 0, 
+                'news' => $news->select( 'title', 'image', 'is_new', 'created_at', 'content' )->first() ));
         }
 
         return Response::json(array( 'error_code' => 1, 'message' => 'Not found' ));

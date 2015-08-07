@@ -23,7 +23,7 @@
 
 @section('body-main')    
     <div class="doc-info-wrap clearfix">
-        <img class="doc-pic float-left" src="icon/doc.png" alt="王磊" />
+        <img class="doc-pic float-left" src="{{{ $doctor['photo'] }}}" alt="王磊" />
         <div class="doc-info-detail float-left">
             <div class="doc-name">{{{ $doctor['name'] }}}</div>
             <div class="doc-title">职称: {{{ $doctor['title'] }}}</div>
@@ -41,32 +41,41 @@
                 @foreach ( $schedules as $schedule )
                     <tr class="schedule-data">
                         <th class="date">{{{ $schedule['date'] }}}</th>
-                        <td>
-                            @if ( $schedule['morning']['current'] >= $schedule['morning']['total'] )
-                                <button class="btn-disabled" disabled="disabled">
-                                    已满
-                                </button>
-                            @else
-                                <button class="btn">
-                                    <a href="/register/select_period?schedule_id={{{ $schedule['id'] }}}">
-                                        挂号
-                                    </a>
-                                </button>
-                            @endif
-                        </td>
-                        <td>
-                            @if ( $schedule['afternoon']['current'] >= $schedule['afternoon']['total'] )
-                                <button class="btn-disabled" disabled="disabled">
-                                    已满
-                                </button>
-                            @else
-                                <button class="btn">
-                                    <a href="/register/select_period?schedule_id={{{ $schedule['id'] }}}">
-                                        挂号
-                                    </a>
-                                </button>
-                            @endif
-                        </td>
+                        @if ( array_key_exists( $schedule['date'], $schedules_map ) )
+                            <td>
+                                @if ( array_key_exists( 0, $schedules_map[ $schedule['date'] ] ) )
+                                    @if ( $schedules_map[ $schedule['date'] ][0] )
+                                        <button class="btn">
+                                            <a href="/register/select_period?schedule_id={{{ $schedules_map[ $schedule['date'] ]['id'] }}}">
+                                                挂号
+                                            </a>
+                                        </button>
+                                    @else
+                                        <button class="btn-disabled" disabled="disabled">
+                                            已满
+                                        </button>
+                                    @endif
+                                @endif
+                            </td>
+                            <td>
+                                @if ( array_key_exists( 1, $schedules_map[ $schedule['date'] ] ) )
+                                    @if ( $schedules_map[ $schedule['date'] ][1] )
+                                        <button class="btn">
+                                            <a href="/register/select_period?schedule_id={{{ $schedules_map[ $schedule['date'] ]['id'] }}}">
+                                                挂号
+                                            </a>
+                                        </button>
+                                    @else
+                                         <button class="btn-disabled" disabled="disabled">
+                                            已满
+                                        </button>
+                                    @endif
+                                @endif
+                            </td>
+                        @else
+                            <td></td>
+                            <td></td>
+                        @endif
                     </tr>
                 @endforeach
             </table>

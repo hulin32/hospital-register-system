@@ -55,20 +55,26 @@ class RegisterController extends BaseController{
 
         $schedules = $doctor->schedules()->with( 'periods' )->get();
 
+        if ( !isset( $schedules ) ){
+            // ..
+        }
+
         $schedules_map = array();
         foreach( $schedules as $schedule ){
             if ( !array_key_exists( $schedule->date , $schedules_map ) ){
                 $schedules_map[ $schedule->date ] = array();
             }
 
+            $schedules_map[ $schedule->date ]['id'] = $schedule->id;
+            $schedules_map[ $schedule->date ][ $schedule->period ] = false;
+
             foreach ( $schedule->periods as $period ){
                 if ( $period->current < $period->total ){
-                     $schedules_map[ $schedule->date ][ $schedule->period ] = true;
-                     break;
+                    $schedules_map[ $schedule->date ][ $schedule->period ] = true;
+                    break;
                 }
             }
 
-            $schedules_map[ $schedule->date ][ $schedule->period ] = false;
         }
 
         $schedules_all = array();
@@ -102,5 +108,28 @@ class RegisterController extends BaseController{
 
     public function select_period(){
 
+        $schedule = Schedule::find( Input::get( 'schedule_id' ) );
+
+        if ( !isset( $schedule ) ){
+            // ..
+        }
+
+        $doctor = $schedule->doctor;
+
+        return View::make(
+            'register.select_period',
+            array( 
+                'doctor' => array(
+                    'name'          => $doctor->name,
+                    'photo'         => $doctor->photo,
+                    'title'         => $doctor->title->name,
+                    'specialty'     => strip_tags( $doctor->specialty ),
+                    'department'    => $doctor->department->name,
+                    'hospital'      => $doctor->department->hospital->name
+                ),
+                'schedule'          => $schedule,
+                'periods'           => $schedule->periods
+            )
+        );
     }
 }

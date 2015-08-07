@@ -44,15 +44,15 @@
 @section('body-bottom')
     <div class="list-wrap">
         <div class="list-head l-grey">
-            {{{ $schedule['date'] }}} {{{ $schedule['period'] }}} 号源列表
+            {{{ $schedule['date'] }}} {{{ $schedule['period'] == 0 ? '上午' : '下午' }}} 号源列表
         </div>
         <ul class="regiter-list">
-            @foreach ( $periods as period )
+            @foreach ( $periods as $period )
                 <li class="register-item">
                     <span class="register-time">{{{ $period['start'] }}}-{{{ $period['end'] }}}</span>
                     <span class="register-total">总数：{{{ $period['total'] }}}</span>
                     <span class="register-remain">剩余：<span class="l-orange">{{{ $period['current'] }}}</span></span>
-                    <button class="btn"><a href="/register/success">挂号</a></button>
+                    <button class="btn"><a href="/user/record/add_record?period_id={{{ $period['id'] }}}">挂号</a></button>
                 </li>
             @endforeach
         </ul>

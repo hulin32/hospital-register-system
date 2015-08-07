@@ -89,5 +89,5 @@ Route::group(array( 'prefix' => 'register', 'before' => 'auth.user.is_in' ), fun
     Route::get( 'select_department', 'RegisterController@select_department'  );
     Route::get( 'select_doctor', 'RegisterController@select_doctor' );
     Route::get( 'select_schedule', 'RegisterController@select_schedule' );
-    Route::get( 'select_period', 'RegisterController@select_schedule' );
+    Route::get( 'select_period', 'RegisterController@select_period' );
 });

@@ -24,16 +24,6 @@ cp app/config/weixin.php.example app/config/weixin.php
 # edit weixin app_id and app_secret
 ```
 
-#### 清空数据库并运行迁移和数据填充
-重新建立数据库，注意这里数据库的名字要与app/config/database.php文件中设置的相同。
-``` ruby
-DROP DATABASE hospital_register_system;
-CREATE DATABASE `hospital_register_system` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-
-php artisan migrate
-php artisan db:seed
-```
-
 #### 配置虚拟主机
 在apache安装目录下的conf目录中，找到httpd.conf文件，确保已经成功在该文件中引入了配置虚拟主机的httpd-vhosts.conf文件
 ``` php
@@ -73,6 +63,16 @@ laravel的依赖包采用composer进行管理，在项目跟目录下运行以�
 注意：composer install 之前要先删除项目根目录下的composer.lock文件，否则会导致命令运行失败
 ``` php
 composer install
+```
+
+#### 清空数据库并运行迁移和数据填充
+重新建立数据库，注意这里数据库的名字要与app/config/database.php文件中设置的相同。
+``` ruby
+DROP DATABASE hospital_register_system;
+CREATE DATABASE `hospital_register_system` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+php artisan migrate
+php artisan db:seed
 ```
 
 ### 修改Sentry配置

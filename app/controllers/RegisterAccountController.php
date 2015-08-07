@@ -74,6 +74,8 @@ class RegisterAccountController extends BaseController{
             $custom_attribute
         );
 
+        //return Response::json( Input::all() );
+
         if ( $validator->fails() ){
             return Response::json(array( 'error_code' => 2, 'messages' => $validator->messages()->all() ));
         }

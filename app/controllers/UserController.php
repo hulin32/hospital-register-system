@@ -42,7 +42,9 @@ class UserController extends BaseController{
 
     protected function is_verification_failed(){
 
-        return empty( Session::get( 'verification.passed' ) );
+        $passed = Session::get( 'verification.passed' );
+
+        return empty( $passed );
     }
 
     protected function is_verification_expired(){

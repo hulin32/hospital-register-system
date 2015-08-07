@@ -45,7 +45,6 @@ class RegisterAccountController extends BaseController{
             'blood_type'        => '',
             'type'              => '',
             'phone'             => 'telephone',
-            'id_card'           => 'id_card|unique:register_accounts,id_card',
             'emergency_name'    => '',
             'emergency_phone'   => 'telephone'
         );
@@ -53,9 +52,7 @@ class RegisterAccountController extends BaseController{
         $messages = array(
             'min'               => ':attribute不能小于:min',
             'in'                => ':attribute错误',
-            'unique'            => '该:attribute已经被注册',
             'telephone'         => ':attribute格式不正确',
-            'id_card'           => '身份证号格式不正确'
         );
 
         $custom_attribute = array(
@@ -65,7 +62,6 @@ class RegisterAccountController extends BaseController{
             'gender'            => '性别',
             'blood_type'        => '血型',
             'phone'             => '手机号',
-            'id_card'           => '身份证号',
             'type'              => '患者类型',
             'emergency_name'    => '紧急联系名',
             'emergency_phone'   => '紧急联系电话'

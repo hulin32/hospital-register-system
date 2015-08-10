@@ -80,10 +80,6 @@ class RegisterController extends BaseController{
 
         }
 
-        die();
-
-        //var_dump( $schedules_map );die();
-
         $schedules_all = array();
 
         $date_from = 0;
@@ -96,7 +92,6 @@ class RegisterController extends BaseController{
                 'date' => date_format( date_create( '@'.strtotime( '+'.$i.' day' ) ), 'Y-m-d' ),
             );
         }
-
         return View::make( 
             'register.select_schedule',
             array( 
@@ -123,7 +118,12 @@ class RegisterController extends BaseController{
 
         $doctor = $schedule->doctor;
 
-        //var_dump( $schedule->periods->toArray() );die();
+        $periods = $schedule->periods;
+
+        foreach( $periods as $period ){
+            $period->start = date( 'H:i', strtotime( $period->start ) );
+            $period->end   = date( 'H:i', strtotime( $period->end ) );
+        }
 
         return View::make(
             'register.select_period',
@@ -137,7 +137,7 @@ class RegisterController extends BaseController{
                     'hospital'      => $doctor->department->hospital->name
                 ),
                 'schedule'          => $schedule,
-                'periods'           => $schedule->periods->toArray()
+                'periods'           => $periods->toArray()
             )
         );
     }

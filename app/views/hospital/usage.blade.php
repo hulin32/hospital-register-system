@@ -44,6 +44,6 @@
     </ul>
     
     <button id="register" class="btn">
-        <a href="register.php">开始预约挂号</a>
+        <a href="/register/select_department">开始预约挂号</a>
     </button>
 @stop

@@ -17,6 +17,35 @@
     @parent
 @stop
 
+@section('js-specify')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.btn').on( 'click', function( event ){
+                event.preventDefault();
+
+                $.ajax({
+                    url: '/user/record/add_record',//$(this).children('a').first().prop('href'),
+                    type: 'POST',
+                    dataType: 'json',
+                    data: { 
+                        period_id: $(this).attr('period_id')
+                    },
+                    success: function( json ){
+
+                        if ( json.error_code ) {
+                            alert( json.message );
+                        }
+                        else{
+                            window.location.href = '/register/success';
+                        }
+                    }
+                })
+                
+            });
+        });
+    </script>
+@stop
+
 @section('body-title')
     挂号
 @stop
@@ -52,7 +81,7 @@
                     <span class="register-time">{{{ $period['start'] }}}-{{{ $period['end'] }}}</span>
                     <span class="register-total">总数：{{{ $period['total'] }}}</span>
                     <span class="register-remain">剩余：<span class="l-orange">{{{ $period['current'] }}}</span></span>
-                    <button class="btn"><a href="/user/record/add_record?period_id={{{ $period['id'] }}}">挂号</a></button>
+                    <button class="btn" period_id="{{{ $period['id'] }}}"><a href="/user/record/add_record">挂号</a></button>
                 </li>
             @endforeach
         </ul>

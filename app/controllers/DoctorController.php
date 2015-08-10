@@ -29,7 +29,7 @@ class DoctorController extends BaseController {
             );
         }
 
-        return Response::json( $result );
+        return Response::json(array( 'error_code' => 0, 'doctors' => $result ));
     }
 
     protected function can_be_registered( $doctor_id ){

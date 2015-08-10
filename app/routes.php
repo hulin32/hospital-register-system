@@ -71,6 +71,7 @@ Route::group(array( 'prefix' => 'user' ), function(){
 
     // 反馈模块
     Route::group(array( 'prefix' => 'feedback', 'before' => 'auth.user.is_in' ), function(){
+        Route::get( 'index', 'FeedbackController@index' );
         Route::post( 'add_feedback', 'FeedbackController@add_feedback' );
     });
 });
@@ -81,6 +82,7 @@ Route::group(array( 'prefix' => 'doctor', 'before' => 'auth.user.is_in' ), funct
     Route::get( 'get_doctors', 'DoctorController@get_doctors' );
     Route::get( 'get_schedules', 'ScheduleController@get_schedules' );
     Route::get( 'get_periods', 'PeriodController@get_periods' );
+    Route::get( 'success', 'RegisterController@' );
 });
 
 // 挂号模块
@@ -90,4 +92,5 @@ Route::group(array( 'prefix' => 'register', 'before' => 'auth.user.is_in' ), fun
     Route::get( 'select_doctor', 'RegisterController@select_doctor' );
     Route::get( 'select_schedule', 'RegisterController@select_schedule' );
     Route::get( 'select_period', 'RegisterController@select_period' );
+    Route::get( 'success', 'RegisterController@success' );
 });

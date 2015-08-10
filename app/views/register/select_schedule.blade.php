@@ -44,9 +44,9 @@
                         @if ( array_key_exists( $schedule['date'], $schedules_map ) )
                             <td>
                                 @if ( array_key_exists( 0, $schedules_map[ $schedule['date'] ] ) )
-                                    @if ( $schedules_map[ $schedule['date'] ][0] )
+                                    @if ( $schedules_map[ $schedule['date'] ][0]['status'] )
                                         <button class="btn">
-                                            <a href="/register/select_period?schedule_id={{{ $schedules_map[ $schedule['date'] ]['id'] }}}">
+                                            <a href="/register/select_period?schedule_id={{{ $schedules_map[ $schedule['date'] ][0]['id'] }}}">
                                                 挂号
                                             </a>
                                         </button>
@@ -59,9 +59,9 @@
                             </td>
                             <td>
                                 @if ( array_key_exists( 1, $schedules_map[ $schedule['date'] ] ) )
-                                    @if ( $schedules_map[ $schedule['date'] ][1] )
+                                    @if ( $schedules_map[ $schedule['date'] ][1]['status'] )
                                         <button class="btn">
-                                            <a href="/register/select_period?schedule_id={{{ $schedules_map[ $schedule['date'] ]['id'] }}}">
+                                            <a href="/register/select_period?schedule_id={{{ $schedules_map[ $schedule['date'] ][1]['id'] }}}">
                                                 挂号
                                             </a>
                                         </button>

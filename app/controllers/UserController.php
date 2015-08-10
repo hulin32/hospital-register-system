@@ -321,6 +321,12 @@ class UserController extends BaseController{
         return Response::json(array( 'error_code' => 0, 'message' => '注册成功' ));
     }
 
+
+    public function register_success(){
+        
+        return View::make( 'register.success' );
+    }
+
     public function user_center(){
 
         $register_account = RegisterAccount::where( 'user_id', Session::get( 'user.id' ) )->first();

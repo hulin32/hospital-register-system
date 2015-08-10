@@ -9,7 +9,7 @@ class RegisterRecordController extends BaseController{
     public function __construct(){
         parent::__construct();
         $this->possible_status = array( '未就诊', '已就诊', '需复诊' );
-        $this->possible_period = array( '下午', '上午' );
+        $this->possible_period = array( '上午', '下午' );
     }
 
     public function get_records(){
@@ -21,50 +21,76 @@ class RegisterRecordController extends BaseController{
         if ( !isset( $register_accounts ) ){
             $this->set_error_code( 1 );
             $this->set_error_message( 1, '无记录' );
-            return $this->response();
         }
 
-        $data = array( 'register_accounts' => array() );
+        $this->set_postprocess_function( 'html', function( $result, $status ) use ( $register_accounts ) {
+            
+            $data = array( 'register_accounts' => array() );
 
-        foreach( $register_accounts as $register_account ){
-            $origin_records = $register_account->records;
+            foreach( $register_accounts as $register_account ){
+                $origin_records = $register_account->records;
 
-            foreach ( $origin_records as $record ){
-                $doctor     = RegisterRecord::find( $record->id )->doctor()->first();
-                $department = $doctor->department()->first();
-                $result_records[]  = array(
-                    'id'            =>  $record->id,
-                    'status'        =>  $this->possible_status[ $record->status ],
-                    'advice'        =>  $record->advice,
-                    'date'          =>  $record->date,
-                    'start'         =>  $record->start_time,
-                    'end'           =>  $record->end_time,
-                    'period'        =>  $this->possible_period[ $record->period ],
-                    'return_time'   =>  $record->return_time,
-                    'department'    =>  $department->name,
-                    'doctor'        =>  array( 'id' => $doctor->id, 
-                                               'name' => $doctor->name, 
-                                               'title' => $doctor->title()->first()->name 
-                                        )
+                foreach ( $origin_records as $record ){
+                    $doctor     = RegisterRecord::find( $record->id )->doctor()->first();
+                    $department = $doctor->department()->first();
+                    $result_records[]  = array(
+                        'id'            =>  $record->id,
+                        'status'        =>  $this->possible_status[ $record->status ],
+                        'advice'        =>  $record->advice,
+                        'date'          =>  $record->date,
+                        'start'         =>  $record->start,
+                        'end'           =>  $record->end,
+                        'period'        =>  $this->possible_period[ $record->period ],
+                        'return_date'   =>  $record->return_date,
+                        'department'    =>  $department->name,
+                        'doctor'        =>  array( 'id' => $doctor->id, 
+                                                   'name' => $doctor->name, 
+                                                   'title' => $doctor->title()->first()->name 
+                                            )
+                    );
+                }
+
+                $data['register_accounts'][] = array(
+                    'id' => $register_account->id,
+                    'name' => $register_account->name,
+                    'records' => $result_records
                 );
             }
 
-            $data['register_accounts'][] = array(
-                'id' => $register_account->id,
-                'name' => $register_account->name,
-                'records' => $result_records
-            );
-        }
+            $result[ 'register_accounts' ] = $data;
 
-        $this->set_data( $data );
-
-        $this->set_postprocess_function( 'json', function( $result, $status ){
             return $result;
         });
 
         $this->set_template( 'user.record' );
-        $this->set_postprocess_function( 'html', function( $result, $status ){
+        $this->set_postprocess_function( 'html', function( $result, $status ) use ( $register_accounts ) {
 
+            $data = array( 'records' => array() );
+
+            foreach( $register_accounts as $register_account ){
+
+                $origin_records = $register_account->records;
+
+                foreach ( $origin_records as $record ){
+                    $doctor     = RegisterRecord::find( $record->id )->doctor()->first();
+                    $department = $doctor->department()->first();
+                    $data['records'][] = array(
+                        'id'                =>  $record->id,
+                        'status'            =>  $this->possible_status[ $record->status ],
+                        'can_be_canceled'   =>  $record->status == 0,
+                        'date'              =>  $record->date,
+                        'start'             =>  $record->start,
+                        'end'               =>  $record->end,
+                        'period'            =>  $this->possible_period[ $record->period ],
+                        'department'        =>  $department->name,
+                        'doctor'            =>  array( 'id' => $doctor->id, 
+                                                       'name' => $doctor->name, 
+                                                       'title' => $doctor->title()->first()->name )
+                    );
+                }
+            }
+
+            return $data;
         });
 
         return $this->response();
@@ -91,6 +117,7 @@ class RegisterRecordController extends BaseController{
                 return Response::json(array( 'error_code' => 3, 'message' => '不存在该挂号账户' ));
             }
         }
+        
         // 无 account_id 参数，则选择该用户默认挂号账户
         else{
             $accounts = User::find( $user_id )->register_accounts();

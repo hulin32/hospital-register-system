@@ -35,5 +35,8 @@
         @section('js-common')
             <script src="/dist/js/base.js" type="text/javascript"></script>
         @show
+
+        @section('js-specify')
+        @show
     </body>
 </html>

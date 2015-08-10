@@ -21,7 +21,7 @@ class ScheduleController extends BaseController{
         $latest = (int)Input::get( 'latest' );
 
         $default_latest = 7;
-        $latest = $latest >= $default_latest ? $default_latest : 
+        $latest = $latest >= isset( $latest ) ? $latest : $default_latest;
 
         foreach ( $schedules as $schedule ){
             $sd = date_create( $schedule->date );
@@ -43,11 +43,11 @@ class ScheduleController extends BaseController{
     protected function is_full( $schedule ){
         foreach ( $schedule->periods as $period ){
             if ( $period->current < $period->total ){
-                return true;
+                return false;
             }
         }
 
-        return false;
+        return true;
     }
 
     public function add_schedule(){

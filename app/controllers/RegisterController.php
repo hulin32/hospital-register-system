@@ -65,17 +65,22 @@ class RegisterController extends BaseController{
                 $schedules_map[ $schedule->date ] = array();
             }
 
-            $schedules_map[ $schedule->date ]['id'] = $schedule->id;
-            $schedules_map[ $schedule->date ][ $schedule->period ] = false;
+            //$schedules_map[ $schedule->date ]['id'] = ;
+            $schedules_map[ $schedule->date ][ $schedule->period ] = array(
+                'id' => $schedule->id,
+                'status' => false
+            );
 
             foreach ( $schedule->periods as $period ){
                 if ( $period->current < $period->total ){
-                    $schedules_map[ $schedule->date ][ $schedule->period ] = true;
+                    $schedules_map[ $schedule->date ][ $schedule->period ]['status'] = true;
                     break;
                 }
             }
 
         }
+
+        //var_dump( $schedules_map );die();
 
         $schedules_all = array();
 
@@ -116,6 +121,8 @@ class RegisterController extends BaseController{
 
         $doctor = $schedule->doctor;
 
+        //var_dump( $schedule->periods->toArray() );die();
+
         return View::make(
             'register.select_period',
             array( 
@@ -128,8 +135,12 @@ class RegisterController extends BaseController{
                     'hospital'      => $doctor->department->hospital->name
                 ),
                 'schedule'          => $schedule,
-                'periods'           => $schedule->periods
+                'periods'           => $schedule->periods->toArray()
             )
         );
+    }
+
+    public function success(){
+        return View::make( 'register.success' );
     }
 }

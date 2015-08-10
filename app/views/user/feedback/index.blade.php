@@ -22,7 +22,7 @@
 @stop
 
 @section('body-main')
-    <form method="post" class="feedback-form" action="/user/feedback/index.php">
+    <form method="post" class="feedback-form" action="/user/feedback/add_feedback.php">
         <div class="input-title-wrap clearfix">
             <textarea class="input-value" placeholder="请输入主题" name="title"></textarea>
             <span class="input-key">主题：</span>

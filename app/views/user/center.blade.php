@@ -28,8 +28,8 @@
                 $('.btn-look-rec').hide();
                 $('.btn-save').show();
 
-                $('.input-box').prop('disabled', false);
-                $('.gender-select').prop('disabled', false);
+                $('.input-box').prop('readonly', false);
+                $('.gender-select').prop('readonly', false);
             });
 
             $('.account-form').on('submit', function( event ){
@@ -74,11 +74,11 @@
         <input type="text" style="display:none" name="account_id" value="{{{ $account['id'] }}}">
         <div class="form-blk clearfix">
             <span class="input-key">姓 名：</span>
-            <input class="input-box" id="name" name="name" type="text" value="{{{ $account['name'] }}}" disabled="disabled">
+            <input class="input-box" id="name" name="name" type="text" value="{{{ $account['name'] }}}" readonly="readonly">
         </div>
         <div class="form-blk clearfix">
             <span class="input-key">性 别：</span>
-            <select class="gender-select" name="gender" disabled="disabled">
+            <select class="gender-select" name="gender" readonly="readonly">
                 @if ( $account['gender'] )
                 <option value="0">&nbsp&nbsp&nbsp&nbsp男</option>
                 <option value="1" selected>&nbsp&nbsp&nbsp&nbsp女</option>
@@ -90,31 +90,31 @@
         </div>
         <div class="form-blk clearfix">
             <span class="input-key">年 龄：</span>
-            <input class="input-box" id="age" name="age" type="text" value="{{{ $account['age'] }}}" disabled="disabled">
+            <input class="input-box" id="age" name="age" type="text" value="{{{ $account['age'] }}}" readonly="readonly">
         </div>
         <div class="form-blk clearfix">
             <span class="input-key">体 重：</span>
-            <input class="input-box" name="weight" type="text" value="{{{ $account['weight'] }}}" disabled="disabled">
+            <input class="input-box" name="weight" type="text" value="{{{ $account['weight'] }}}kg" readonly="readonly">
         </div>
         <div class="form-blk clearfix">
             <span class="input-key">血 型：</span>
-            <input class="input-box" id="blood_type" name="blood_type" type="text" value="{{{ $account['blood_type'] }}}" disabled="disabled">
+            <input class="input-box" id="blood_type" name="blood_type" type="text" value="{{{ $account['blood_type'] }}}" readonly="readonly">
         </div>
         <div class="form-blk clearfix">
             <span class="input-key">手机号码：</span>
-            <input class="input-box" id="phone" name="phone" type="text" value="{{{ $account['phone'] }}}" disabled="disabled">
+            <input class="input-box" id="phone" name="phone" type="text" value="{{{ $account['phone'] }}}" readonly="readonly">
         </div>
         <div class="form-blk clearfix">
             <span class="input-key">身份证号码：</span>
-            <input class="input-box" id="id_card" name="id_card" type="text" value="{{{ $account['id_card'] }}}" disabled="disabled">
+            <input class="input-box" id="id_card" name="id_card" type="text" value="{{{ $account['id_card'] }}}" readonly="readonly">
         </div>
         <div class="form-blk clearfix">
             <span class="input-key">紧急联系人姓名：</span>
-            <input class="input-box" id="emergency_name" name="emergency_name" value="{{{ $account['emergency_name'] }}}" disabled="disabled">
+            <input class="input-box" id="emergency_name" name="emergency_name" value="{{{ $account['emergency_name'] }}}" readonly="readonly">
         </div>
         <div class="form-blk clearfix">
             <span class="input-key">紧急联系人号码：</span>
-            <input class="input-box" id="emergency_phone" name="emergency_phone" value="{{{ $account['emergency_phone'] }}}" disabled="disabled">
+            <input class="input-box" id="emergency_phone" name="emergency_phone" value="{{{ $account['emergency_phone'] }}}" readonly="readonly">
         </div>
         <button class="btn btn-look-rec">
             <a href="/user/record/get_records">查看我的挂号</a>
@@ -129,7 +129,7 @@
         </div>
         <div class="form-blk clearfix">
             <span class="input-key">性 别：</span>
-            <select class="gender-select" name="gender" disabled="disabled">
+            <select class="gender-select" name="gender" readonly="readonly">
                 <option value="0">&nbsp&nbsp&nbsp&nbsp男</option>
                 <option value="1">&nbsp&nbsp&nbsp&nbsp女</option>
             </select>

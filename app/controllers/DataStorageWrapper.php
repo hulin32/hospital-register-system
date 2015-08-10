@@ -10,7 +10,7 @@ class DataStorageWrapper{
         return Cache::get( $key, self::$default_value ); 
     }
 
-    public function set( $key, $value, $expire_time = self::$expire_time ){
+    public function set( $key, $value, $expire_time = 60 ){
         return Cache::put( $key, $value, $expire_time );
     }
 

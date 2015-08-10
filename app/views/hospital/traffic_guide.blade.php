@@ -20,6 +20,21 @@
         $(document).ready(function(){
             var map_width = parseInt( $("#baidu-map").css( "width" ) );
             $("#baidu-map").css( "height", map_width * 0.65 + "px" );
+
+            var get_location_callback = function( response ){
+                var map_level = 16;
+                var map = new BMap.Map("baidu-map");
+                map.centerAndZoom( new BMap.Point( response.longitude, response.latitude ), map_level );
+                var my_geo = new BMap.Geocoder();
+                my_geo.getLocation( 
+                    new BMap.Point( response.longitude, response.latitude ),
+                    function( result ){
+                        if ( result ){
+                            $("#current-pos").html( result.address );
+                        }
+                    }
+                );
+            }
             
             wx.config( {
                 debug: false,
@@ -35,20 +50,7 @@
             wx.ready(function(){
                 wx.getLocation({
                     type: 'wgs84',
-                    success: function( response ){
-                        var map_level = 16;
-                        var map = new BMap.Map("baidu-map");
-                        map.centerAndZoom( new BMap.Point( response.longitude, response.latitude ), map_level );
-                        var my_geo = new BMap.Geocoder();
-                        my_geo.getLocation( 
-                            new BMap.Point( response.longitude, response.latitude ),
-                            function( result ){
-                                if ( result ){
-                                    $("#current-pos").html( result.address );
-                                }
-                            }
-                        );
-                    }
+                    success: get_location_callback
                 });
             });
         });
@@ -62,6 +64,11 @@
 
 @section('body-main')
     <div class="para-wrap">
+
+        <div id="baidu-map">
+            加载中...
+        </div>
+
         {{{ $traffice_intro }}}
         {{{ $traffic_guide }}}
         <p>

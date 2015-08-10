@@ -156,8 +156,10 @@ class RegisterRecordController extends BaseController{
             return Response::json(array( 'error_code' => 2, 'message' => '不存在该挂号' ));
         }
 
+        $register_account = RegisterAccount::find( $record->account_id );
+
         // 检查该就诊记录是否该用户的
-        if ( $record->register_account()->first()->user_id != Session::get( 'user.id' ) ){
+        if ( $register_account->user_id != Session::get( 'user.id' ) ){
             return Response::json(array( 'error_code' => 3, 'message' => '无法取消该挂号' ));
         }
 
@@ -181,25 +183,27 @@ class RegisterRecordController extends BaseController{
 
         // 是否存在该记录
         if ( !isset( $record ) ){
-            return Response::json(array( 'error_code' => 1, 'message' => '不存在该挂号' ));
+            return Response::json(array( 'error_code' => 2, 'message' => '不存在该挂号' ));
         }
 
+        $register_account = RegisterAccount::find( $record->account_id );
+
         // 检查该就诊记录是否该用户的
-        if ( $record->register_account()->first()->user_id != Session::get( 'user.id' ) ){
-            return Response::json(array( 'error_code' => 2, 'message' => '无法修改该挂号' ));
+        if ( $register_account->user_id != Session::get( 'user.id' ) ){
+            return Response::json(array( 'error_code' => 3, 'message' => '无法修改该挂号' ));
         }
 
         $status = (int)Input::get( 'status' );
         if ( $status > 2 || $status < 0 ){
-            return Response::json(array( 'error_code' => 3, 'message' => '参数错误' ));
+            return Response::json(array( 'error_code' => 4, 'message' => '参数错误' ));
         }
 
         $record->status = $status;
         if ( !$record->save() ){
-            return Response::json(array( 'error_code' => 4, 'message' => '修改失败' ));
+            return Response::json(array( 'error_code' => 1, 'message' => '修改失败' ));
         }
 
-        return Response::json(array( 'error_code' => 5, 'message' => '修改成功' ));
+        return Response::json(array( 'error_code' => 0, 'message' => '修改成功' ));
     }
 
     public function add_return_date(){
@@ -211,15 +215,19 @@ class RegisterRecordController extends BaseController{
             return Response::json(array( 'error_code' => 2, 'message' => '不存在该挂号记录' ));
         }
 
+        $register_account = RegisterAccount::find( $record->account_id );
+
         // 检查该就诊记录是否该用户的
-        if ( $record->register_account->user_id != Session::get( 'user.id' ) ){
+        if ( $register_account->user_id != Session::get( 'user.id' ) ){
             return Response::json(array( 'error_code' => 3, 'message' => '无法修改该挂号' ));
         }
 
         // 检查就诊状态
+        /*
         if ( !(int)($record->status) ){
             return Response::json(array( 'error_code' => 4, 'message' => '尚未就诊' ));
         }
+        */
 
         $record->return_date = Input::get( 'date' );
 

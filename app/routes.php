@@ -44,7 +44,7 @@ Route::group(array( 'prefix' => 'user' ), function(){
     Route::post( 'login', 'UserController@login_post' );
     Route::post( 'reset_password', 'UserController@verify_and_reset_password' );
 
-    Route::get( 'center', 'UserController@user_center' );        // add to document
+	Route::get('center', array('before' => 'auth.user.is_in', 'uses' => 'UserController@user_center'));
 
     // 挂号记录模块
     Route::group(array( 'prefix' => 'record', 'before' => 'auth.user.is_in' ), function(){

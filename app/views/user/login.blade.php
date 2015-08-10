@@ -40,7 +40,7 @@
 @stop
 
 @section('body-title')
-    <a class="register" href="/user/register.php">注册</a>
+    <a class="register" href="/user/register">注册</a>
 @stop
 
 @section('body-main')

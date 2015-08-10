@@ -1,18 +1,22 @@
-@extend('layouts.master')
+@extends('layouts.master')
 
 @section('title')
     查看地图
 @stop
 
 @section('css')
-    <link rel="stylesheet" type="text/css" href="dist/css/common.css" />
-    <link rel="stylesheet" type="text/css" href="dist/css/map.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="/dist/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/dist/css/hospital/traffic_guide.css" />
 @stop
 
 @section('js-lib')
     @parent
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/api?type=quick&v=1.0&ak=iG2mRPwyHcIDiYc25f1PudGC"></script>
+@stop
+
+@section('js-common')
 @stop
 
 @section('js-specify')
@@ -63,14 +67,15 @@
 @stop
 
 @section('body-main')
+
+	<div class="map-wrap">
+	    <div id="baidu-map"></div>
+	</div>
+
     <div class="para-wrap">
 
-        <div id="baidu-map">
-            加载中...
-        </div>
-
-        {{{ $traffice_intro }}}
-        {{{ $traffic_guide }}}
+        {{ $traffic_intro }}
+        {{ $traffic_guide }}
         <p>
             联系电话：{{{ $phone }}}
         </p>

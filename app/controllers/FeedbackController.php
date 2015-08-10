@@ -4,7 +4,7 @@ class FeedbackController extends BaseController{
 
     public function index(){
 
-        return View::make( 'feedback.index' );
+        return View::make( 'user.feedback.index' );
     }
 
     public function add_feedback(){
@@ -38,6 +38,6 @@ class FeedbackController extends BaseController{
 
     public function success(){
 
-        return View::make( 'feedback.success' );
+        return View::make( 'user.feedback.success' );
     }
 }

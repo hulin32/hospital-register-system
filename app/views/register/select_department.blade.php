@@ -41,7 +41,7 @@
                     地址：{{{ $hospital['address'] }}}
                 </p>
                 <p>
-                    预约时间：{{{ $hospital['register_start'] }}}～{{{ $hospital['end'] }}}
+                    预约时间：{{{ $hospital['register_start'] }}}～{{{ $hospital['register_end'] }}}
                 </p>
                 <p>
                     电话：{{{ $hospital['phone'] }}}

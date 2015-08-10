@@ -328,10 +328,14 @@ class UserController extends BaseController{
         return Response::json(array( 'error_code' => 0, 'message' => '注册成功' ));
     }
 
+    public function pay_record(){
+
+        return View::make( 'user.pay_record' );
+    }
 
     public function register_success(){
         
-        return View::make( 'register.success' );
+        return View::make( 'user.register.success' );
     }
 
     public function user_center(){

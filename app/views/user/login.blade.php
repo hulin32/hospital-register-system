@@ -19,7 +19,9 @@
 
 @section('js-specify')
     <script type="text/javascript">
+
         $(document).ready(function() {
+
             $('.login-form').on( 'submit', function( event ){
                 event.preventDefault();
                 $.ajax({
@@ -45,10 +47,10 @@
 
 @section('body-main')
     <form class="login-form" method="post" action="/user/login">
-        <input class="input-blk form-blk" placeholder="手机号码" name="phone" type="text">
-        <input class="input-blk form-blk" placeholder="密码" name="password" type="password">
+        <input class="input-blk form-blk" placeholder="手机号码" id="phone" name="phone" type="text">
+        <input class="input-blk form-blk" placeholder="密码" id="password" name="password" type="password">
         <div class="form-mdl form-blk clearfix">
-            <input class="checkbox" type="checkbox">
+            <input id="rem-check" class="checkbox" type="checkbox">
             <span class="checkbox-text">记住用户名</span>
             <a class="recover-pwd" href="recover_password.php">找回密码 ></a>
         </div>

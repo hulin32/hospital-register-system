@@ -7,14 +7,14 @@
     position: relative;
     overflow: auto;
     *zoom: 1;
-}
 
-.title .setting-btn{
-    display: block;
-    position: absolute;
-    height: 15px * @scale;
-    top: 0px;
-    right: 0px;
+    .setting-btn{
+        display: block;
+        position: absolute;
+        height: 15px * @scale;
+        top: 0px;
+        right: 0px;
+    }
 }
 
 .setting-btn img{
@@ -31,33 +31,83 @@
     border: @border-style #adadad @border-size;
     border-radius: 5px * @scale;
     margin-top: 4px * @scale;
+    margin-left: 25px * @scale;
     padding: 6px * @scale;
+
+    .head-portrait{
+        display: block;
+        width: 100%;
+    }
 }
 
-.head-portrait{
-    display: block;
-    width: 100%;
-}
-
-.info-item{
-    font-size: @font-size;
-    line-height: 28px * @scale;
-    margin-top: 12px * @scale;
+.form-blk{
+    position: relative;
+    padding-top: 16px * @scale;    
+    text-align: justify;
     border-bottom: @border-style #dbdbdb @border-size;
+    font-size: @font-size;
+    line-height: 24px * @scale;
+
+    .input-key{
+        display: inline-block;
+        float: left;
+        height: 24px * @scale;
+        color: #787878;
+    }
+
+    .input-box{
+        float: left;
+        border: none;
+        width: 50%;
+        height: 24px * @scale;
+        font-size: 14px * @scale;
+        padding-left: 3px * @scale;
+        color: #adadad;
+        background: none;
+
+        &:focus{
+            outline: none;
+            border: none;
+        }
+    }
+
+    .gender-select{
+        border: none;
+        color: #a5a5a5;
+        width: 45px * @scale;
+        height: 23px * @scale;
+        font-size: 14px * @scale;
+        line-height: 23px * @scale;
+        border-radius: 12px * @scale;
+        margin-left: 3px * @scale;
+        margin-bottom: 3px * @scale;
+        background-color: #f0edf0;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;    
+    }
+
+    .fucking-colon{
+        display: inline-block;
+        float: left;
+        font-size: @font-size;
+        color: #787878;    
+    }
 }
 
-.info-item .key{
-    color: #787878;
+.btn-save{
+    width: 30%;
+    margin-top: 24px * @scale;
+    margin-left: 70%;
 }
 
-.info-item .value{
-    color: #adadad;
+.btn-look-rec{
+    margin: 24px * @scale auto;
+    width: 90%;
 }
 
-.user-info-wrap .user-info-left{
-    float: left;
-}
-
-.user-info-wrap .user-info-bottom{
-    clear: both;
+.account-form .btn{
+    display: block;
+    font-size: 14px * @scale;
+    line-height: 24px * @scale;
 }

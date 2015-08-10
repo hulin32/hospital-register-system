@@ -61,11 +61,11 @@ class RegisterController extends BaseController{
 
         $schedules_map = array();
         foreach( $schedules as $schedule ){
+
             if ( !array_key_exists( $schedule->date , $schedules_map ) ){
                 $schedules_map[ $schedule->date ] = array();
             }
 
-            //$schedules_map[ $schedule->date ]['id'] = ;
             $schedules_map[ $schedule->date ][ $schedule->period ] = array(
                 'id' => $schedule->id,
                 'status' => false
@@ -79,6 +79,8 @@ class RegisterController extends BaseController{
             }
 
         }
+
+        die();
 
         //var_dump( $schedules_map );die();
 

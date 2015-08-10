@@ -19,9 +19,36 @@
         line-height: 32px * @scale;
         color: #42874f;
     }
+
+    .captcha-wrap{
+        border-bottom: solid #dbdbdb 1px;
+
+        .form-blk{
+            border: none;
+            .input-box{
+                width: 44%;
+                border: solid #dbdbdb 1px;
+                border-radius: 8px * @scale;
+            }
+        }
+
+        .btn{
+            display: block;
+            margin-left: 25%;
+            margin-top: 15px * @scale;
+            margin-bottom: 10px * @scale;
+            width: 25%;
+            color: #42874f;
+            height: 25px * @scale;  
+            font-size: 13px * @scale;
+            line-height: 25px * @scale;
+            border-radius: 15px;
+        }
+    }
 }
 
 .form-blk{
+    position: relative;
     padding-top: 16px * @scale;    
     text-align: justify;
     border-bottom: @border-style #dbdbdb @border-size;
@@ -100,23 +127,3 @@
     }
 }
 
-.captcha-wrap{
-    border-bottom: solid #dbdbdb 1px;
-
-    .form-blk{
-        border: none;
-        .input-box{
-            width: 44%;
-            border: solid #dbdbdb 1px;
-            border-radius: 8px * @scale;
-        }
-    }
-
-    .captcha{
-        display: block;
-        margin-left: 26%;
-        margin-top: 15px * @scale;
-        margin-bottom: 10px * @scale;
-        width: 46%;
-    }
-}

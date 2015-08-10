@@ -40,6 +40,7 @@ Route::group(array( 'prefix' => 'user' ), function(){
 
     Route::get( 'register', 'UserController@register_get' );
     Route::post( 'register', 'UserController@register_post' );
+    Route::get( 'register/success', 'UserController@register_success' );
     Route::get( 'login', 'UserController@login_get' );
     Route::post( 'login', 'UserController@login_post' );
     Route::post( 'reset_password', 'UserController@verify_and_reset_password' );

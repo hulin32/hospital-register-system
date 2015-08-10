@@ -52,7 +52,7 @@ class WeixinSDK{
         $ticket = $this->dataWrapper->get( 'jsapi_ticket' );
 
         if ( empty( $ticket ) ){
-            $ticket = $this->getJsApiTicketFromWx();s
+            $ticket = $this->getJsApiTicketFromWx();
         } 
 
         return $ticket;

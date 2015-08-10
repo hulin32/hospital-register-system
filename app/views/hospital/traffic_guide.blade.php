@@ -15,7 +15,7 @@
     <script type="text/javascript" src="http://api.map.baidu.com/api?type=quick&v=1.0&ak=iG2mRPwyHcIDiYc25f1PudGC"></script>
 @stop
 
-@section('js-common')
+@section('js-specify')
     <script type="text/javascript">
         $(document).ready(function(){
             var map_width = parseInt( $("#baidu-map").css( "width" ) );
@@ -59,7 +59,7 @@
 @stop
 
 @section('body-title')
-    <img src="icon/location_flag.png">当前定位：<span id="current-pos">无</span>
+    <img src="/images/icons/location_flag.png">当前定位：<span id="current-pos">无</span>
 @stop
 
 @section('body-main')

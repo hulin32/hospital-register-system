@@ -67,7 +67,7 @@ class CommentController extends BaseController{
     public function get_doctor_comments(){
         $comments_per_page = Input::get( 'comments_per_page', 10 );
 
-        $comments = Comment::select( 'comments.id', 'comments.content', 'comments.created_at', 'users.real_name as user_name' )
+        $comments = Comment::select( 'comments.id', 'comments.content', 'comments.created_at', 'users.nickname', 'users.gender', 'users.photo' )
                            ->join( 'register_records', 'comments.record_id', '=', 'register_records.id' )
                            ->join( 'register_accounts', 'register_records.account_id', '=', 'register_accounts.id' )
                            ->join( 'doctors', 'register_records.doctor_id', '=', 'doctors.id' )
@@ -79,12 +79,8 @@ class CommentController extends BaseController{
         if ( !isset( $comments ) ){
             return Response::json(array( 'error_code' => 1, 'message' => '无评价记录' ));
         }
-/*
-        foreach ( $comments as $comment ){
-            $comment['created_at'] = date_timestamp_get( date_create( $comment['created_at'] ) );
-        }
-*/
-        return Response::json(array( 'error_code' => 0, 'total' => $comments->count(), 'comments' => $comments->toArray() ));
+
+        return Response::json(array( 'error_code' => 0, 'total' => $comments->count(), 'comments' => $comments->getItems() ));
     }
 
     public function add_comment(){

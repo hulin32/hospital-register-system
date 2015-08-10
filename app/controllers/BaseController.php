@@ -20,7 +20,7 @@ class BaseController extends Controller {
 
 	protected function get_return_format(){
 
-		if ( Request::format() == 'json' ){
+		if ( Request::wantsJson() ){
 			return 'json';
 		}
 

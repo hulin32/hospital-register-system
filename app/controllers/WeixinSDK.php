@@ -49,7 +49,7 @@ class WeixinSDK{
 
     private function getJsApiTicket() {
 
-        $ticket = $this->dataWrapper->get( 'jsapi_ticket_expire_time' );
+        $ticket = $this->dataWrapper->get( 'jsapi_ticket' );
 
         if ( empty( $ticket ) ){
             $ticket = $this->getJsApiTicketFromWx();s
@@ -88,11 +88,12 @@ class WeixinSDK{
 
     private function getAccessTokenFromWx(){
         $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$this->appId&secret=$this->appSecret";
-        $res = json_decode( $this->httpGet( $url ) );
-        $access_token = $res->access_token;
+        $response = json_decode( $this->httpGet( $url ) );
+
+        $access_token = $response->access_token;
         
         if ( $access_token ) {
-            $this->dataWrapper->set( "access_token", $access_token );
+            $this->dataWrapper->set( "access_token", $access_token, $response->expires_in / 60 );
         }
 
         return $access_token;

@@ -17,6 +17,28 @@
     @parent
 @stop
 
+@section('js-specify')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.login-form').on( 'submit', function( event ){
+                event.preventDefault();
+                $.ajax({
+                    url: '/user/login',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: $(this).serialize(),
+                    success: function ( json ){
+                        alert( json.message );
+                        if ( json.error_code == 0 ){
+                            window.location.href = json.uri_before ? json.uri_before : '/user/center';    
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+@stop
+
 @section('body-title')
     <a class="register" href="/user/register.php">注册</a>
 @stop

@@ -17,6 +17,14 @@
     @parent
 @stop
 
+@section('js-specify')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            
+        });
+    </script>
+@stop
+
 @section('body-title')
 @stop
 
@@ -48,10 +56,6 @@
         <div class="form-blk clearfix">
             <span class="input-key">手机号码</span><span class="fucking-colon">：</span>
             <input class="input-box" placeholder="手机联系号码" name="phone" type="text">
-        </div>
-        <div class="form-blk clearfix">
-            <span class="input-key">电子邮箱</span><span class="fucking-colon">：</span>
-            <input class="input-box" placeholder="邮箱地址，用于密码找回" name="email" type="text">
         </div>
         <div class="captcha-wrap">
             <div class="form-blk clearfix">

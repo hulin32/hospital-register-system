@@ -271,7 +271,14 @@ class UserController extends BaseController{
 
         Session::put( 'user.id', Sentry::getUser()->id );
 
-        return Response::json(array( 'error_code' => 0, 'message' => '登陆成功' ));
+        $response = array( 'error_code' => 0, 'message' => '登陆成功' );
+
+        if ( !Request::wantsJson() ){
+
+            $response['uri_before'] = Session::pull( 'uri.before_login' );
+        }
+
+        return Response::json( $response );
     }
 
     public function register_get(){

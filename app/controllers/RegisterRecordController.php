@@ -23,9 +23,9 @@ class RegisterRecordController extends BaseController{
             $this->set_error_message( 1, '无记录' );
         }
 
-        $this->set_postprocess_function( 'html', function( $result, $status ) use ( $register_accounts ) {
+        $this->set_postprocess_function( 'json', function( $result, $status ) use ( $register_accounts ) {
             
-            $data = array( 'register_accounts' => array() );
+            $data = array();
 
             foreach( $register_accounts as $register_account ){
                 $origin_records = $register_account->records;
@@ -50,7 +50,7 @@ class RegisterRecordController extends BaseController{
                     );
                 }
 
-                $data['register_accounts'][] = array(
+                $data[] = array(
                     'id' => $register_account->id,
                     'name' => $register_account->name,
                     'records' => $result_records

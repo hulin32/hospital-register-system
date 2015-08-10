@@ -91,13 +91,14 @@ Route::filter('csrf', function()
 
 Route::filter('auth.user.is_in',function()
 {
-	Session_start();
 	if ( !Sentry::check() ){
-		$return_type = Input::get( 'return_type', '' );
 		
-		if ( $return_type == 'json' ){
+		if ( Request::wantsJson() ){
 			return Response::json(array('error_code' => 10, 'message' => '请登陆！'));
 		}else{
+
+			Session::put( 'uri.before_login', Request::path() );
+
 			return Redirect::guest('user/login');
 		}
 	}

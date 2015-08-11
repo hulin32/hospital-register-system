@@ -36,8 +36,14 @@
 @section('body-bottom')   
     <div class="list-wrap">
         <div class="list-head l-grey">导源列表</div>
-            
             <table class="schedule">
+                
+                <tr class="schedule-head">
+                    <th>日期</th>
+                    <th>上午</th>
+                    <th>下午</th>
+                </tr>
+
                 @foreach ( $schedules as $schedule )
                     <tr class="schedule-data">
                         <th class="date">{{{ $schedule['date'] }}}</th>

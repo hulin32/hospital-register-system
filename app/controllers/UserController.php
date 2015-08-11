@@ -273,7 +273,8 @@ class UserController extends BaseController{
 
         $response = array( 'error_code' => 0, 'message' => '登陆成功' );
 
-        if ( !Request::wantsJson() ){
+        // 通过ajax请求，则返回之前的uri，前端进行跳转
+        if ( Request::ajax() ){
 
             $response['uri_before'] = Session::pull( 'uri.before_login' );
         }
@@ -285,6 +286,7 @@ class UserController extends BaseController{
         
         if( Sentry::check() ){
             Sentry::logout();
+            Session::pull( 'user.id' );
             return Response::json(array('error_code' => 0,'message' => '退出成功!'));
         } else {
             return Response::json(array('error_code' => 1,'message' => '用户未登录'));

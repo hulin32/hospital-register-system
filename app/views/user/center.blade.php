@@ -45,7 +45,7 @@
                             alert( '保存成功' );
                             window.location.reload();
                         }else{
-                            alert( json.message );
+                            alert( json.messages[0] );
                         }
                     }
                 });

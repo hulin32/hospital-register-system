@@ -53,6 +53,8 @@ class RegisterAccountController extends BaseController{
             'min'               => ':attribute不能小于:min',
             'in'                => ':attribute错误',
             'telephone'         => ':attribute格式不正确',
+            'numeric'           => ':attribute需为数字',
+            'integer'           => ':attribute需为整数'
         );
 
         $custom_attribute = array(

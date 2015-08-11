@@ -32,7 +32,7 @@
                     success: function ( json ){
                         alert( json.message );
                         if ( json.error_code == 0 ){
-                            window.location.href = json.uri_before ? json.uri_before : '/user/center';    
+                            window.location.href = json.uri_before ? '/' + json.uri_before : '/user/center';    
                         }
                     }
                 });

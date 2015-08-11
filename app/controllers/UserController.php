@@ -304,12 +304,16 @@ class UserController extends BaseController{
             return Response::json(array( 'error_code' => 5, 'message' => '请输入密码'));
         }
 
+        if ( !preg_match( '/^[_0-9a-z]{6,16}$/', Input::get( 'password' ) ) ){
+            return Response::json(array( 'error_code' => 6, 'message' => '密码格式不正确' ));
+        }
+
         if ( !Input::has( 'real_name' ) ){
-            return Response::json(array( 'error_code' => 6, 'message' => '请输入真实姓名' ));
+            return Response::json(array( 'error_code' => 7, 'message' => '请输入真实姓名' ));
         }
 
         if ( !Input::has( 'gender' ) ){
-            return Response::json(array( 'error_code' => 7, 'message' => '请输入性别' ));
+            return Response::json(array( 'error_code' => 8, 'message' => '请输入性别' ));
         }
 
         try{

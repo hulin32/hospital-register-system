@@ -6,6 +6,8 @@ class UserController extends BaseController{
 
     protected static $verification_expire = 3600;
 
+    protected static $remember_expire = 60 * 24 * 7; // 记住用户名密码七天
+
     protected static $possible_charactors = 'abcdefghijklmnopqrstuvwxyz0123456789';
 
     protected static $telephone_reg = "/^13[0-9]{1}[0-9]{8}$|15[0189]{1}[0-9]{8}$|189[0-9]{8}$|17[0-9]{1}[0-9]{8}$/";
@@ -237,15 +239,23 @@ class UserController extends BaseController{
 
     public function login_get(){
         
-        return View::make( 'user.login' );
+        return View::make( 
+            'user.login', 
+            array( 
+                'remember'          => Cookie::get( 'remember' ),
+                'remember_phone'    => Cookie::get( 'phone' ),
+                'remember_password' => Cookie::get( 'password' ) ) );
     }
 
     public function login_post(){
 
+        $phone = Input::get( 'phone' );
+        $password = Input::get( 'password' );
+
         try{
             Sentry::authenticate(array(
-                'phone' => Input::get( 'phone' ),
-                'password' => Input::get( 'password' )
+                'phone' => $phone,
+                'password' => $password
             ), false);
 
         }catch( Cartalyst\Sentry\Users\LoginRequiredException $e ){
@@ -271,15 +281,28 @@ class UserController extends BaseController{
 
         Session::put( 'user.id', Sentry::getUser()->id );
 
-        $response = array( 'error_code' => 0, 'message' => '登陆成功' );
+        $error_message = array( 'error_code' => 0, 'message' => '登陆成功' );
 
         // 通过ajax请求，则返回之前的uri，前端进行跳转
         if ( Request::ajax() ){
 
-            $response['uri_before'] = Session::pull( 'uri.before_login' );
+            $error_message['uri_before'] = Session::pull( 'uri.before_login' );
+            $response = Response::json( $error_message );
+
+            if ( ( $remember = Input::get( 'remember' ) ) == 'true' ){
+                $response->headers->setCookie( Cookie::make( 'remember', true, self::$remember_expire ) );
+                $response->headers->setCookie( Cookie::make( 'phone', $phone, self::$remember_expire ) );
+                $response->headers->setCookie( Cookie::make( 'password', $password, self::$remember_expire ) );
+            }else{
+                $response->headers->setCookie( Cookie::forget( 'remember' ) );
+                $response->headers->setCookie( Cookie::forget( 'phone' ) );
+                $response->headers->setCookie( Cookie::forget( 'password' ) );
+            }
+
+            return $response;
         }
 
-        return Response::json( $response );
+        return Response::json( $error_message );
     }
 
     public function logout(){

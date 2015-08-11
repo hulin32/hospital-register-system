@@ -94,7 +94,7 @@
         </div>
         <div class="form-blk clearfix">
             <span class="input-key">体 重：</span>
-            <input class="input-box" name="weight" type="text" value="{{{ $account['weight'] }}}kg" readonly="readonly">
+            <input class="input-box" name="weight" type="text" value="{{{ $account['weight'] }}}" readonly="readonly">
         </div>
         <div class="form-blk clearfix">
             <span class="input-key">血 型：</span>

@@ -73,7 +73,6 @@ class CommentController extends BaseController{
                            ->join( 'register_accounts', 'register_records.account_id', '=', 'register_accounts.id' )
                            ->join( 'doctors', 'register_records.doctor_id', '=', 'doctors.id' )
                            ->join( 'users', 'register_accounts.user_id', '=', 'users.id' )
-                           ->where( 'users.id', Session::get( 'user.id' ) )
                            ->where( 'doctors.id', Input::get( 'doctor_id' ) )
                            ->paginate( (int)$comments_per_page );
 

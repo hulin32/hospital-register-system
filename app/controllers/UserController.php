@@ -222,8 +222,6 @@ class UserController extends BaseController{
                     return Response::json(array( 'error_code' => 3, 'message' => '旧密码不正确' ));
                 }
             }
-        }else{
-            return Response::json(array( 'error_code' => 4, 'message' => '修改密码需同时输入新旧密码' ));
         }
 
         if ( isset( $nickname ) ){

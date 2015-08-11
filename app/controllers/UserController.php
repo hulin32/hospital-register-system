@@ -281,6 +281,17 @@ class UserController extends BaseController{
         return Response::json( $response );
     }
 
+    public function logout(){
+        
+        if( Sentry::check() ){
+            Sentry::logout();
+            return Response::json(array('error_code' => 0,'message' => '退出成功!'));
+        } else {
+            return Response::json(array('error_code' => 1,'message' => '用户未登录'));
+        }
+
+    }
+
     public function register_get(){
 
         return View::make( 'user.register.index' );

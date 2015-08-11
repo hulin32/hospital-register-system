@@ -43,6 +43,7 @@ Route::group(array( 'prefix' => 'user' ), function(){
     Route::get( 'register/success', 'UserController@register_success' );
     Route::get( 'login', 'UserController@login_get' );
     Route::post( 'login', 'UserController@login_post' );
+    Route::post( 'logout', 'UserController@logout' );
     Route::post( 'reset_password', 'UserController@verify_and_reset_password' );
 
     Route::get( 'pay_record', 'UserController@pay_record' );

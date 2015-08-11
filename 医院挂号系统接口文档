@@ -280,6 +280,7 @@ GET
                             "return_date": "2015-08-01",
                             "doctor":
                             {
+                                "id"
                                 "name",
                                 "title"
                             }

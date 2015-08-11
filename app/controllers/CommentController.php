@@ -54,6 +54,7 @@ class CommentController extends BaseController{
                 'name'          => $doctor->name,
                 'photo'         => $doctor->photo,
                 'title'         => $doctor->title->name,
+                'specialty'     => strip_tags( $doctor->specialty ),
                 'department'    => $doctor->department->name,
                 'hospital'      => $doctor->department->hospital->name
             );
@@ -84,13 +85,16 @@ class CommentController extends BaseController{
     }
 
     public function add_comment(){
+
         $record = RegisterRecord::find( Input::get( 'record_id' ) );
 
         if ( !isset( $record ) ){
             return Response::json(array( 'error_code' => 2, 'message' => '无该记录' ));
         }
 
-        if ( $record->user_id != Session::get( 'user.id' ) ){
+        $user_id = RegisterAccount::find( $record->account_id )->user_id;
+
+        if ( $user_id != Session::get( 'user.id' ) ){
             return Response::json(array( 'error_code' => 3, 'message' => '无效记录' ));
         }
 
@@ -98,10 +102,9 @@ class CommentController extends BaseController{
             return Response::json(array( 'error_code' => 4, 'message' => '请输入评价' ));
         }
 
-        $comment = new Comment();
+        $comment            = new Comment();
         $comment->record_id = $record->id;
-        $comment->doctor_id = $record->doctor_id;
-        $comment->user_id = $record->user_id;
+        $comment->content   = Input::get( 'content' );
 
         if ( !$comment->save() ){
             return Response::json(array( 'error_code' => 1, 'message' => '添加失败' ));

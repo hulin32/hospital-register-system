@@ -6,7 +6,7 @@ class UserController extends BaseController{
 
     protected static $verification_expire = 3600;
 
-    protected static $remember_expire = 60 * 24 * 7; // 记住用户名密码七天
+    protected static $remember_expire = 10800; // 记住用户名密码七天
 
     protected static $possible_charactors = 'abcdefghijklmnopqrstuvwxyz0123456789';
 
@@ -364,6 +364,10 @@ class UserController extends BaseController{
         }
 
         return Response::json(array( 'error_code' => 0, 'message' => '注册成功' ));
+    }
+
+    public function upload_portrait(){
+
     }
 
     public function pay_record(){
